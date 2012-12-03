@@ -7,4 +7,4 @@ Created by:
 Matthew Cowan
 Cole Diamond
 Curtis Cooper
-Jurvis Muindi
+Jervis Muindi
