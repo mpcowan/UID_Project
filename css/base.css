@@ -4,6 +4,16 @@ body {
     height: 100%;
 }
 
+.pin-align {
+    position: relative;
+}
+
+.pin {
+    position:absolute;
+    top:0;
+    left:0;
+}
+
 #search_panel {
     float: left;
     height: 100%;
