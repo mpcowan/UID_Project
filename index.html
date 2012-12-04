@@ -7,30 +7,30 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/extruder.css">
-        <script src="js/jquery-1.8.2.min" type="text/javascript"></script>        
-        <script src="js/bootstrap.js" type="text/javascript"></script>
+        <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/extruder.js" type="text/javascript"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
         <script type="text/javascript" src="https://raw.github.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
     </head>
     <body>
-        
+
         <div id="logo" align="center">
             <img src="imgs/logo_med.png" alt="Good Eats Logo" />
         </div>
 
         <div id="content" class="draggable">
-            <div id="extruderLeft" class="a {title:'Search...', url:'extruderLeft.html'}"></div>            
+            <div id="extruderLeft" class="a {title:'Search...', url:'extruderLeft.html'}"></div>
         </div>
-       
+
 
         <script>
             $("#extruderLeft").buildMbExtruder({
                         position:"left",
                         width:300,
                         extruderOpacity:.8,
-                        
+
                         hidePanelsOnClose:false,
                         accordionPanels:false,
                         onExtOpen:function(){},
