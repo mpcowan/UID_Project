@@ -1,3 +1,5 @@
+//go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
+
 function YelpListing () {
     /*
      * Example creation of a new listing object
