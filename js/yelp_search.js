@@ -25,7 +25,7 @@ function YelpListing () {
     };
 }
 
-//our prelimary authentication info from yelp
+//our authentication info from yelp, Matt's Keys
 var auth = {
   consumerKey: "pcHhvaUcNovVPNbgYGpjAg",
   consumerSecret: "GePUUz4H8LjdAi_yC1mq61nEPDo",
@@ -38,21 +38,6 @@ var auth = {
 
 var debug_location = "New York";
 var debug_query = "pizza"
-
-/*
- * Construct the URL to call for the API request
- */
-/*
-function constructYelpURL() {
-    var URL = "http://api.yelp.com/v2/" +
-        "search?"+
-        "callback=" + "handleResults" +
-        "&term=" + debug_query +
-        "&location=" + debug_location +
-        "&limit=10";
-    return encodeURI(URL);
-}
-*/
 
 function searchYelp() {
     var accessor = {
