@@ -50,8 +50,8 @@ function searchYelp() {
     OAuth.setTimestampAndNonce(message);
     OAuth.SignatureMethod.sign(message, accessor);
     var parameterMap = OAuth.getParameterMap(message.parameters);
-    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
-    console.log(parameterMap);
+    //added a semicolon on the next line, not sure why it wasn't there
+    parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
     $.ajax({
       'url': message.action,
       'data': parameterMap,
@@ -59,7 +59,6 @@ function searchYelp() {
       'dataType': 'jsonp',
       'jsonpCallback': 'handleResults',
       'success': function(data, textStats, XMLHttpRequest) {
-        console.log(data);
         var output = prettyPrint(data);
         alert(output);
       }
