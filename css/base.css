@@ -10,17 +10,6 @@ body {
 
 .pin {
     position:absolute;
-    top:0;
-    left:0;
-}
-
-#search_panel {
-    float: left;
-    height: 100%;
-    background: rgb(38,38,38);
-    margin: 0px;
-}
-
-.search_collapsed {
-    width: 50px;
+    top:-17px;
+    left:-10px;
 }
