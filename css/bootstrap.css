@@ -5893,9 +5893,16 @@ a.badge:hover {
 }
 
 .bs-docs-example {
-    background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
+    # background-color: #FFFFFF;
+    # border: 1px solid #DDDDDD;
     border-radius: 4px 4px 4px 4px;
     padding: 15px 19px 14px;
     position: relative;
 }
+
+.bs-docs-example-popover .popover {
+    display: block;
+    float: left;
+    margin: 20px;
+    position: relative;
+    width: 260px;
