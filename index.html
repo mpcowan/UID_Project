@@ -28,10 +28,24 @@
                     <a style="color:#0088CC;" class="brand" href="/">good<span style="color: #06f;">eats</span></a>
                     <div class="nav-collapse collapse">
 
+                        <ul class="nav pull-right">
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sort <b class="caret"></b></a>
+                                <ul class="dropdown-menu" id="sort-by">
+                                  <li><a href="#name">Name</a></li>
+                                  <li><a href="#">Another action</a></li>
+                                  <li><a href="#">Something else here</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
                         <form class="navbar-search pull-right">
                             <div class="input-append">
-                                <input type="text" class="search-query span3" placeholder="Enter query..." style="margin-right: 20px;">
-                                <input type="text" class="search-query span3" placeholder="Enter Zipcode or City..." style="margin-right: 20px;">
+                                <input type="text" class="search-query span2" placeholder="Enter query..." style="margin-right: 20px;">
+                                <input type="text" class="search-query span2" placeholder="Enter Zipcode or City..." style="margin-right: 20px;">
                                 <button type="submit" class="btn">Search</button>
                             </div>
                         </form>
@@ -49,7 +63,7 @@
 
                         <div class="popover top pin-align">
                             <div class="pin"><img src="imgs/pin_small.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title">Eleven Madison Park</h3>
+                            <h3 class="popover-title" name>Eleven Madison Park</h3>
                             <div class="popover-content">
                                 <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
                             </div>
@@ -57,7 +71,7 @@
 
                          <div class="popover top pin-align">
                             <div class="pin"><img src="imgs/pin_small.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title">Gramercy Tavern</h3>
+                            <h3 class="popover-title" name>Gramercy Tavern</h3>
                             <div class="popover-content">
                                 <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
                             </div>
@@ -65,7 +79,7 @@
 
                          <div class="popover top pin-align">
                             <div class="pin"><img src="imgs/pin_small.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title">Graham Avenue Meats And Deli</h3>
+                            <h3 class="popover-title" name>Graham Avenue Meats And Deli</h3>
                             <div class="popover-content">
                                 <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
                             </div>
@@ -73,7 +87,7 @@
 
                          <div class="popover top pin-align">
                             <div class="pin"><img src="imgs/pin_small.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title">Trader Joe's Wine Shop</h3>
+                            <h3 class="popover-title" name>Trader Joe's Wine Shop</h3>
                             <div class="popover-content">
                                 <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
                             </div>
@@ -102,9 +116,24 @@
 
             $('#bs-docs-example-popover').isotope({
                 itemSelector : '.popover',
-                sortBy : 'name',
-                sortAscending : false 
+                getSortData : {
+                    name : function( $elem ) {
+                        return $elem.attr('name').text();
+                    },
+                }
             });
+
+            $('#sort-by a').click(function(){
+                
+
+                // get href attribute, minus the '#'
+                var sortName = $(this).attr('href').slice(1);
+                alert(sortName);
+                $('#bs-docs-example-popover').isotope({ sortBy : sortName });
+                return false;
+            });
+
+
 
             $(".media").draggable({});
         </script>
