@@ -5204,7 +5204,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .popover-content {
-  padding: 9px 14px;
+  padding: 7px;
 }
 
 .popover-content p,
@@ -5905,4 +5905,4 @@ a.badge:hover {
     float: left;
     margin: 20px;
     position: relative;
-    width: 260px;
+    width: 300px;
