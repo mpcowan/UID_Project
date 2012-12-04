@@ -13,3 +13,7 @@ body {
     top:-17px;
     left:-10px;
 }
+
+.popover-title {
+    font-weight: bold;
+}
