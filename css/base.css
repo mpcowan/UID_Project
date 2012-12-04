@@ -17,3 +17,7 @@ body {
 .popover-title {
     font-weight: bold;
 }
+
+.show-hand {
+    cursor: pointer;
+}

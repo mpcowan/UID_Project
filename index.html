@@ -16,6 +16,7 @@
         <script type="text/javascript" src="https://raw.github.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
         <script type="text/javascript" src="js/isotope.js"></script>
         <script type="text/javascript" src="js/yelp_search.js"></script>
+        <script type="text/javascript" src="js/default.js"></script>
     </head>
     <body>
 
@@ -46,7 +47,7 @@
                             <div class="input-append">
                                 <input type="text" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-right: 20px;">
                                 <input type="text" class="search-query span3" placeholder="Enter Zipcode or City..." style="margin-right: 20px;">
-                                <button type="submit" class="btn">Search</button>
+                                <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
 
@@ -61,7 +62,7 @@
                 <div class="row">
                     <div class="bs-docs-example bs-docs-example-popover">
 
-                        <div class="popover top pin-align">
+                        <div class="popover top pin-align show-hand" onClick="showModal()">
                             <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
                             <h3 class="popover-title" name>Eleven Madison Park</h3>
                             <div class="popover-content">
@@ -83,16 +84,11 @@
                                             <p>Phone: +1-415-908-3801</p>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td colspan=2>
-                                            <a href="#myModal" role="button" class="btn btn-mini" data-toggle="modal">Launch demo modal</a>
-                                        </td>
-                                    </tr>
                                 </table>
                             </div>
                         </div>
 
-                         <div class="popover top pin-align">
+                         <div class="popover top pin-align show-hand">
                             <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
                             <h3 class="popover-title" name>Gramercy Tavern</h3>
                             <div class="popover-content">
@@ -118,7 +114,7 @@
                             </div>
                         </div>
 
-                         <div class="popover top pin-align">
+                         <div class="popover top pin-align show-hand">
                             <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
                             <h3 class="popover-title" name>Graham Avenue Meats And Deli</h3>
                             <div class="popover-content">
@@ -144,7 +140,7 @@
                             </div>
                         </div>
 
-                         <div class="popover top pin-align">
+                         <div class="popover top pin-align show-hand">
                             <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
                             <h3 class="popover-title" name>Trader Joe's Wine Shop</h3>
                             <div class="popover-content">
@@ -221,7 +217,7 @@
         <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Modal header</h3>
+            <h3 id="myModalLabel">Eleven Madison Park</h3>
           </div>
           <div class="modal-body">
             <p>One fine body…</p>
