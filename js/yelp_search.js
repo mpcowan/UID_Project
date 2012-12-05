@@ -29,14 +29,12 @@ function YelpListing () {
     this.yelp_categories   = [];
     this.custom_categories = [];
     this.notes             = [];
-    this.asString = function() {
-        return this.name + ' ' + this.id + ' testing';
-    };
     this.toCard = function() {
       var cardString = "<div class=\"card\" rating=\"";
       cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
-      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\"";
+      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin(" + this.id + ")\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      cardString += ""
     }
     this.toModal = function() {
 
