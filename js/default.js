@@ -1,5 +1,7 @@
+var pinnedCards = [];
+
 $(document).ready(function () {
-    var pinnedCards = [];
+    pinnedCards = [];
 });
 
 function showModal(cardID) {
@@ -32,7 +34,8 @@ function pin(pinID, mapUnique, lat, lon) {
     //remove it from the results list
     $('#master' + pinID.toString()).remove();
     //add the card to the isotope class with pin in
-    $(".isotope").append(toAdd_Cards[pinID]);
+    $(".isotope").isotope('insert', toAdd_Cards[pinID]);
+    //$(".isotope").append(toAdd_Cards[pinID]);
     //add the modal bit to the body
     $('body').append(toAdd_Modals[pinID]);
     //init the map for the modal

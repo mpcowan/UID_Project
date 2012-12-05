@@ -34,9 +34,9 @@ function YelpListing () {
     this.toSearchResult = function(num) {
       var cardString = "<div id=\"master" + num.toString() + "\" class=\"card well\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div draggable=\"\" class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
-      //cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
-      //cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
-      //cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
+      cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
       cardString += "<h3 class=\"popover-title\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" >\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
