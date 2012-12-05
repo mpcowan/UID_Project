@@ -5157,8 +5157,8 @@ input[type="submit"].btn.btn-mini {
   top: 0;
   left: 0;
   z-index: 1010;
-  display: none;
-  width: 236px;
+  /*display: none;*/
+  width: 300px;
   padding: 1px;
   background-color: #ffffff;
   border: 1px solid #ccc;

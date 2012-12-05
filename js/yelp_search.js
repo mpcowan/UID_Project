@@ -27,15 +27,32 @@ function YelpListing () {
     this.yelp_categories   = [];
     this.custom_categories = [];
     this.notes             = [];
-    this.asString = function() {
-        return this.name + ' ' + this.id + ' testing';
+    this.toSearchResult = function() {
+      var cardString = "<div class=\"card well\" draggable=\"\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
+      cardString += "<h3 class=\"popover-title\" name>" + this.name + "</h3>\n";
+      cardString += "<div class=\"popover-content\" >\n";
+      cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
+      cardString += "</td>\n<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n";
+      cardString += "<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n<tr>\n<td style=\"padding-top: 7px;\">\n";
+      cardString += "<img src=\"" + this.rating_img_url + "\" alt=\"Rating Image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n";
+      cardString += "</td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n";
+      return cardString;
     };
     this.toCard = function() {
-
-    }
-    this.toModal = function() {
-
-    }
+      var cardString = "<div class=\"card\" rating=\"";
+      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
+      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin(\"" + this.id + "\")\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      cardString += "<h3 class=\"popover-title\" onClick=\"showModal(\"" + this.id + "\")\" name>" + this.name + "</h3>\n";
+      cardString += "<div class=\"popover-content\" onClick=\"showModal(\"" + this.id + "\")\">\n";
+      cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
+      cardString += "</td>\n<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n";
+      cardString += "<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n<tr>\n<td style=\"padding-top: 7px;\">\n";
+      cardString += "<img src=\"" + this.rating_img_url + "\" alt=\"Rating Image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n";
+      cardString += "</td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n";
+      return cardString;
+    };
 }
 
 //our authentication info from yelp, Matt's Keys
@@ -169,6 +186,8 @@ function handleResults(data) {
 
 function getResults(query, zipcode) {
 
+  search_results = [];
+  var search_cards = [];
 
   var accessor = {
     consumerSecret: auth.consumerSecret,
@@ -226,7 +245,7 @@ function getResults(query, zipcode) {
                     result.snippet = data["businesses"][itemnum][key];
                   }
                   else if (key == "image_url") {
-                    result.image_url = data["businesses"][itemnum][key];
+                    result.img_url = data["businesses"][itemnum][key];
                   }
                   else if (key == "url") {
                     result.yelp_url = data["businesses"][itemnum][key];
@@ -238,26 +257,44 @@ function getResults(query, zipcode) {
                     result.id = data["businesses"][itemnum][key];
                   }
                   else if (key == "location") {
-                    result.latitude   = data["businesses"][itemnum][key]["coordinate"]["latitude"];
-                    result.longitude  = data["businesses"][itemnum][key]["coordinate"]["longitude"];
-                    result.state_code = data["businesses"][itemnum][key]["coordinate"]["state_code"];
-                    result.zip        = data["businesses"][itemnum][key]["coordinate"]["postal_code"];
-                    result.city       = data["businesses"][itemnum][key]["coordinate"]["city"];
-                    if (data["businesses"][itemnum][key]["coordinate"]["display_address"].length == 4) {
-                      result.address1 = data["businesses"][itemnum][key]["coordinate"]["display_address"][0];
-                      result.address2 = data["businesses"][itemnum][key]["coordinate"]["display_address"][3];
+                    try { result.latitude = data["businesses"][itemnum][key]["coordinate"]["latitude"]; }
+                    catch(err) { }
+                    try { result.longitude = data["businesses"][itemnum][key]["coordinate"]["longitude"]; }
+                    catch(err) { }
+                    try { result.state_code = data["businesses"][itemnum][key]["state_code"]; }
+                    catch(err) { }
+                    try { result.zip = data["businesses"][itemnum][key]["postal_code"]; }
+                    catch(err) { }
+                    try { result.city = data["businesses"][itemnum][key]["city"]; }
+                    catch(err) { }
+                    try {
+                      if (data["businesses"][itemnum][key]["display_address"].length == 4) {
+                        try { result.address1 = data["businesses"][itemnum][key]["display_address"][0]; }
+                        catch(err) { }
+                        try { result.address2 = data["businesses"][itemnum][key]["display_address"][3]; }
+                        catch(err) { }
+                      }
                     }
+                    catch(err) { }
                   }
                 }
               }
+
+              search_results.push(result);
+              search_cards.push(result.toSearchResult());
             }
           }
         } else {
           alert("No results");
         }
-      console.log(data);
-      var output = prettyPrint(data);
-      $("body").append(output);
+      //console.log(data);
+      //var output = prettyPrint(data);
+      //$("body").append(output);
+      $("#results_panel").empty();
+      $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
+      for (var tmp in search_cards) {
+        $("#results_panel").append(search_cards[tmp]);
+      }
     }
   });
 
