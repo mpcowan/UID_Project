@@ -102,6 +102,12 @@ textarea {
 
 }
 
+.media-container {
+	margin-bottom: 20px;
+    min-height: 20px;
+    padding: 19px;
+}
+
 .custom-label-cube {
     height: 30px;
     padding: 1px 5px;

@@ -70,7 +70,10 @@ function pin(pinID, mapUnique, lat, lon) {
     var marker = new nokia.maps.map.StandardMarker([lat, lon]);
     map.objects.add(marker);
     //add the card to the isotope class with pin in
-    $(".isotope").isotope('insert', toAdd_Cards[pinID]);
+    
     //$(".isotope").append(toAdd_Cards[pinID]);
+    $(".isotope").isotope( 'insert', toAdd_Cards[pinID]);
+    var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
+    setTimeout(function(){n.close(); }, 3000);
 }
 
