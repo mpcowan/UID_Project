@@ -32,8 +32,8 @@ function YelpListing () {
     this.custom_categories = [];
     this.notes             = [];
     this.toSearchResult = function(num) {
-      var cardString = "<div id=\"master" + num.toString() + "\" class=\"card well\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div draggable=\"\" class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
       cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -85,10 +85,10 @@ function YelpListing () {
 
 //our authentication info from yelp, Matt's Keys
 var auth = {
-  consumerKey: "pcHhvaUcNovVPNbgYGpjAg",
-  consumerSecret: "GePUUz4H8LjdAi_yC1mq61nEPDo",
-  accessToken: "nB4-uHNGRrIipZCpNka6uMt5MoNFkVxl",
-  accessTokenSecret: "FvIpS9FAx_zJAru9XJ_1wU4qGT4",
+  consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
+  consumerSecret: "Tr7k1th2pJRCL8QOh686DkVlSqk",
+  accessToken: "7ZC4hwGaez9yL9Bm4tZyNHBDlgzQIfnU",
+  accessTokenSecret: "EiUowROXZHlu4_zRvS0SjcrVG70",
   serviceProvider: {
     signatureMethod: "HMAC-SHA1"
   }
@@ -362,8 +362,11 @@ function getResults(query, zipcode) {
 
       $("#results_panel").empty();
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
+
+
+
       for (var tmp in search_cards) 
-        $("#results_panel").append(search_cards[tmp]);
+        $("#results_panel").append("<div class='well'>" + search_cards[tmp] + "</div>");
 
       var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
       $("[draggable]").draggable(draggableArguments);
@@ -374,9 +377,22 @@ function getResults(query, zipcode) {
 
 }
 
+function storeCards(cards_array) {
+  if(typeof(Storage)!=="undefined")
+    sessionStorage.cardsArray=cards_array;
+  else
+    return "Sorry, your browser does not support web storage...";
+
+}
+
+function loadCards() {
+    return sessionStorage.cardsArray;
+}
+
 $(document).ready(function(){
 
   //filerInit();
+  $(".isotope").html(loadCards());
 
   $("button#search").click(function(){
     var query = $("input#query").val();

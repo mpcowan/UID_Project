@@ -70,14 +70,3 @@ function pin(pinID, mapUnique, lat, lon) {
     map.objects.add(marker);
 }
 
-function storeCards(cards_array) {
-  if(typeof(Storage)!=="undefined")
-    sessionStorage.cardsArray=cards_array;
-  else
-    return "Sorry, your browser does not support web storage...";
-
-}
-
-function loadCards() {
-    return sessionStorage.cardsArray;
-}
