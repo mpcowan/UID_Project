@@ -101,7 +101,7 @@ function handleResults(data) {
     }
 }
 
-
+ 
 function getResults(query, zipcode) {
 
 
