@@ -107,11 +107,15 @@ function searchYelp(query, location) {
                     result.id = listing[key];
                   }
                   else if (key == "location") {
-                    this.latitude = listing[key]["coordinate"]["latitude"];
-                    this.longitude = listing[key]["coordinate"]["longitude"];
-                    this.state_code = listing[key]["coordinate"]["state_code"];
-                    this.zip = listing[key]["coordinate"]["postal_code"];
-                    this.city = listing[key]["coordinate"]["city"];
+                    result.latitude = listing[key]["coordinate"]["latitude"];
+                    result.longitude = listing[key]["coordinate"]["longitude"];
+                    result.state_code = listing[key]["coordinate"]["state_code"];
+                    result.zip = listing[key]["coordinate"]["postal_code"];
+                    result.city = listing[key]["coordinate"]["city"];
+                    if (listing[key]["coordinate"]["display_address"].length == 4) {
+                      result.address1 = listing[key]["coordinate"]["display_address"][0];
+                      result.address2 = listing[key]["coordinate"]["display_address"][3];
+                    }
                   }
                 }
               }
@@ -131,7 +135,7 @@ function searchYelp(query, location) {
  */
 function handleResults(data) {
     console.log(data);
-    if(data !== undefined) {        
+    if(data !== undefined) {
         if (data.businesses.length == 0) {
             alert("Error: No businesses were found near that location");
             return;
@@ -147,7 +151,7 @@ function handleResults(data) {
     }
 }
 
- 
+
 function getResults(query, zipcode) {
 
 
