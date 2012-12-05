@@ -17,10 +17,10 @@
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
         <script type="text/javascript" src="https://raw.github.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
         <script type="text/javascript" src="http://api.maps.nokia.com/2.2.1/jsl.js?with=all" charset="utf-8"></script>
-        <script type="text/javascript" src="js/isotope.js"></script>
         <script type="text/javascript" src="js/yelp_search.js"></script>
         <script type="text/javascript" src="js/geo.js"></script>
         <script type="text/javascript" src="js/noty.js"></script>
+        <script type="text/javascript" src="js/isotope.js"></script>
         <script type="text/javascript" src="js/default.js"></script>
     </head>
     <body>
@@ -48,12 +48,18 @@
                         <ul class="nav pull-right">
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sort <b class="caret"></b></a>
-                                <ul class="dropdown-menu" id="sort-by">
-                                  <li><a href="#name">Name</a></li>
-                                  <li><a href="#">Rating</a></li>
-                                  <li><a href="#">Popularity</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#">Separated link</a></li>
+                                <ul class="dropdown-menu option-set" id="sort-by" data-option-key="sortBy">
+                                  <li><a href="#sortBy=weight" data-option-value="name">Name</a></li>
+                                  <li><a href="#sortBy=rating" data-option-value="rating">Rating</a></li>
+                                  <li><a href="#sortBy=popularity" data-option-value="popularity">Popularity</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Filter <b class="caret"></b></a>
+                                <ul class="dropdown-menu option-set" id="filter-by" data-option-key="sortBy">
+                                  <li><a href="#filterBy=weight" data-option-value="name">Name</a></li>
+                                  <li><a href="#filterBy=rating" data-option-value="rating">Rating</a></li>
+                                  <li><a href="#filterBy=popularity" data-option-value="popularity">Popularity</a></li>
                                 </ul>
                             </li>
                             <li class="divider-vertical"></li>
@@ -66,117 +72,149 @@
 
         <div id="content" class="draggable" style="z-index:999;">
 
+
             <div style="padding:73px 50px 50px 113px;">
+  
+
                 <div class="row">
                     <div class="bs-docs-example bs-docs-example-popover">
 
-                        <div class="popover top pin-align show-hand" id="card1">
-                            <div class="pin-in" id="pin1" onClick="unPin(1)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" onClick="showModal(1)" name>Eleven Madison Park</h3>
-                            <div class="popover-content" onClick="showModal(1)">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
-                                        </td>
-                                        <td style="padding-left: 5px;">
-                                            <p>706 Mission St.</p>
-                                            <p>San Francisco, CA, 94103</p>
-                                            <p>Phone: +1-415-908-3801</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-top: 7px;">
-                                            <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png" alt="Rating image" />
-                                        </td>
-                                        <td>
-                                            <p>Reviews: 126</p>
-                                        </td>
-                                    </tr>
-                                </table>
+
+
+                    <div id="isotope">
+
+                        <div class="card" rating="3" popularity="126" name="Eleven Madison Park">
+                            <div class="popover top pin-align show-hand" id="card1">
+                            
+                                <div class="pin-in" id="pin1" onClick="unPin(1)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                                <h3 class="popover-title" onClick="showModal(1)" name>Eleven Madison Park</h3>
+                                <div class="popover-content" onClick="showModal(1)">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <p>706 Mission St.</p>
+                                                <p>San Francisco, CA, 94103</p>
+                                                <p>Phone: +1-415-908-3801</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 7px;">
+                                                <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_3.png" alt="Rating image" />
+                                            </td>
+                                            <td>
+                                                <p>Reviews: 126</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
-                         <div class="popover top pin-align show-hand" id="card2">
-                            <div class="pin-in" id="pin2" onClick="unPin(2)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" onClick="showModal(2)" name>Gramercy Tavern</h3>
-                            <div class="popover-content" onClick="showModal(2)">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
-                                        </td>
-                                        <td style="padding-left: 5px;">
-                                            <p>706 Mission St.</p>
-                                            <p>San Francisco, CA, 94103</p>
-                                            <p>Phone: +1-415-908-3801</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-top: 7px;">
-                                            <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_5.png" alt="Rating image" />
-                                        </td>
-                                        <td>
-                                            <p>Reviews: 1008</p>
-                                        </td>
-                                    </tr>
-                                </table>
+     
+                        <div class="card" rating="5" popularity="1008" name="Gramercy Tavern">
+                              <div class="popover top pin-align show-hand" id="card2">
+                                <div class="pin-in" id="pin2" onClick="unPin(2)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                                <h3 class="popover-title" onClick="showModal(2)" name>Gramercy Tavern</h3>
+                                <div class="popover-content" onClick="showModal(2)">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <p>706 Mission St.</p>
+                                                <p>San Francisco, CA, 94103</p>
+                                                <p>Phone: +1-415-908-3801</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 7px;">
+                                                <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_5.png" alt="Rating image" />
+                                            </td>
+                                            <td>
+                                                <p>Reviews: 1008</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
-                         <div class="popover top pin-align show-hand" id="card3">
-                            <div class="pin-in" id="pin3" onClick="unPin(3)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" onClick="showModal(3)" name>Graham Avenue Meats And Deli</h3>
-                            <div class="popover-content" onClick="showModal(3)">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
-                                        </td>
-                                        <td style="padding-left: 5px;">
-                                            <p>706 Mission St.</p>
-                                            <p>San Francisco, CA, 94103</p>
-                                            <p>Phone: +1-415-908-3801</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-top: 7px;">
-                                            <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_1.png" alt="Rating image" />
-                                        </td>
-                                        <td>
-                                            <p>Reviews: 69</p>
-                                        </td>
-                                    </tr>
-                                </table>
+
+
+                        <div class="card" rating="11" popularity="69" name="Graham Avenue Meats And Deli">
+                            <div class="popover top pin-align show-hand" id="card3">
+                                <div class="pin-in" id="pin3" onClick="unPin(3)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                                <h3 class="popover-title" onClick="showModal(3)" name>Graham Avenue Meats And Deli</h3>
+                                <div class="popover-content" onClick="showModal(3)">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
+                                            </td>
+                                            <td style="padding-left: 5px;">
+                                                <p>706 Mission St.</p>
+                                                <p>San Francisco, CA, 94103</p>
+                                                <p>Phone: +1-415-908-3801</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-top: 7px;">
+                                                <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_1.png" alt="Rating image" />
+                                            </td>
+                                            <td>    
+                                                <p>Reviews: 69</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
+
                         </div>
 
-                         <div class="popover top pin-align show-hand" id="card4">
-                            <div class="pin-in" id="pin4" onClick="unPin(4)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" onClick="showModal(4)" name>Trader Joe's Wine Shop</h3>
-                            <div class="popover-content" onClick="showModal(4)">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
-                                        </td>
-                                        <td style="padding-left: 5px;">
-                                            <p>706 Mission St.</p>
-                                            <p>San Francisco, CA, 94103</p>
-                                            <p>Phone: +1-415-908-3801</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-top: 7px;">
-                                            <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_5.png" alt="Rating image" />
-                                        </td>
-                                        <td>
-                                            <p>Reviews: 2</p>
-                                        </td>
-                                    </tr>
-                                </table>
+
+                        <div class="card" rating="5" popularity="2" name="Trader Joe's Wine Shop">
+                            <div class="popover top pin-align show-hand" id="card4">
+                                    <div class="pin-in" id="pin4" onClick="unPin(4)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                                    <h3 class="popover-title" onClick="showModal(4)" name>Trader Joe's Wine Shop</h3>
+                                    <div class="popover-content" onClick="showModal(4)">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <img src="http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg" alt="Business Picture" />
+                                                </td>
+                                                <td style="padding-left: 5px;">
+                                                    <p>706 Mission St.</p>
+                                                    <p>San Francisco, CA, 94103</p>
+                                                    <p>Phone: +1-415-908-3801</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-top: 7px;">
+                                                    <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_5.png" alt="Rating image" />
+                                                </td>
+                                                <td>
+                                                    <p>Reviews: 2</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                             </div>
                         </div>
+                    </div>
+
+
+
+                        
+
+                         
+
+                         
+
+                
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -214,27 +252,7 @@
                         onExtOpen:function(){},
                         onExtContentLoad:function(){$("#extruderRight").openPanel();},
                         onExtClose:function(){}
-                    });
-
-            $('#bs-docs-example-popover').isotope({
-                itemSelector : '.popover',
-                getSortData : {
-                    name : function( $elem ) {
-                        return $elem.attr('name').text();
-                    },
-                }
-            });
-
-            $('#sort-by a').click(function(){
-
-
-                // get href attribute, minus the '#'
-                var sortName = $(this).attr('href').slice(1);
-                alert(sortName);
-                $('#bs-docs-example-popover').isotope({ sortBy : sortName });
-                return false;
-            });
-
+                    });    
 
             $(".media").draggable({});
 
@@ -306,5 +324,62 @@
           </div>
         </div>
 
+
+
+  <script>
+    $(function(){
+      
+      var $container = $('#isotope');
+      
+      $container.isotope({
+        itemSelector : '.card',
+        getSortData : {
+          rating : function( $elem ) {
+            return $elem.attr('rating');
+          },
+          popularity : function( $elem ) {
+            return $elem.attr('popularity');
+          },
+          name : function ( $elem ) {
+            return $elem.attr('name');
+          }
+        }
+      });
+      
+      
+      var $optionSets = $('.option-set'),
+          $optionLinks = $optionSets.find('a');
+
+      $optionLinks.click(function(){
+        var $this = $(this);
+        // don't proceed if already selected
+        if ( $this.hasClass('selected') ) {
+          return false;
+        }
+        var $optionSet = $this.parents('.option-set');
+        $optionSet.find('.selected').removeClass('selected');
+        $this.addClass('selected');
+  
+        // make option object dynamically, i.e. { filter: '.my-filter-class' }
+        var options = {},
+            key = $optionSet.attr('data-option-key'),
+            value = $this.attr('data-option-value');
+        // parse 'false' as false boolean
+        value = value === 'false' ? false : value;
+        options[ key ] = value;
+        if ( key === 'layoutMode' && typeof changeLayoutMode === 'function' ) {
+          // changes in layout modes need extra logic
+          changeLayoutMode( $this, options )
+        } else {
+          // otherwise, apply new options
+          $container.isotope( options );
+        }
+        
+        return false;
+      });
+
+      
+    });
+  </script>
     </body>
 </html>
