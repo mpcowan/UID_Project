@@ -73,7 +73,7 @@
 
 
             <div style="padding:73px 50px 50px 113px;">
-  
+
 
                 <div class="row">
                     <div class="bs-docs-example bs-docs-example-popover">
@@ -84,7 +84,7 @@
 
                         <div class="card" rating="3" popularity="126" name="Eleven Madison Park">
                             <div class="popover top pin-align show-hand" id="card1">
-                            
+
                                 <div class="pin-in" id="pin1" onClick="unPin(1)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
                                 <h3 class="popover-title" onClick="showModal(1)" name>Eleven Madison Park</h3>
                                 <div class="popover-content" onClick="showModal(1)">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
 
-     
+
                         <div class="card" rating="5" popularity="1008" name="Gramercy Tavern">
                               <div class="popover top pin-align show-hand" id="card2">
                                 <div class="pin-in" id="pin2" onClick="unPin(2)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
@@ -164,7 +164,7 @@
                                             <td style="padding-top: 7px;">
                                                 <img src="http://media1.ak.yelpcdn.com/static/201012161694360749/img/ico/stars/stars_1.png" alt="Rating image" />
                                             </td>
-                                            <td>    
+                                            <td>
                                                 <p>Reviews: 69</p>
                                             </td>
                                         </tr>
@@ -207,13 +207,13 @@
 
 
 
-                        
 
-                         
 
-                         
 
-                
+
+
+
+
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -231,7 +231,7 @@
                         onExtOpen:function(){},
                         onExtContentLoad:function(){$("#extruderRight").openPanel();},
                         onExtClose:function(){}
-                    });    
+                    });
 
 
             $(function() {
@@ -297,8 +297,8 @@
                 </div>
                 <div class="modal-sidebar">
                     <p class="modal-title">Social</p class="modal-title">
-                        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.yelp.com/biz/eleven-madison-park-new-york" data-text="Good Eats:" data-size="large" data-count="none">Tweet</a>
-                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Good Eats:" data-size="large" data-count="none" data-dnt="true" data-url="http://www.yelp.com/biz/eleven-madison-park-new-york">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                     <p class="modal-title">Custom Categories</p class="modal-title">
                         <div class="editable-labels">
                             <div class="editable-label">
@@ -395,9 +395,9 @@
 
   <script>
     $(function(){
-      
+
       var $container = $('#isotope');
-      
+
       $container.isotope({
         itemSelector : '.card',
         getSortData : {
@@ -412,8 +412,8 @@
           }
         }
       });
-      
-      
+
+
       var $optionSets = $('.option-set'),
           $optionLinks = $optionSets.find('a');
 
@@ -426,7 +426,7 @@
         var $optionSet = $this.parents('.option-set');
         $optionSet.find('.selected').removeClass('selected');
         $this.addClass('selected');
-  
+
         // make option object dynamically, i.e. { filter: '.my-filter-class' }
         var options = {'sortAscending' : false},
             key = $optionSet.attr('data-option-key'),
@@ -441,11 +441,11 @@
           // otherwise, apply new options
           $container.isotope( options );
         }
-        
+
         return false;
       });
 
-      
+
     });
   </script>
 
