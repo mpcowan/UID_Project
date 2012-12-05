@@ -50,14 +50,14 @@ body {
     overflow-y: auto;
     margin: 0px;
     min-height: 20px;
-    padding: 6px 12px 12px 0px;
+    padding-bottom: 7px;
     width: 430px;
 }
 
 .modal-sidebar {
     float: right;
-    padding: 6px 12px 12px 0px;
-    width: 170px;
+    padding-bottom: 7px;
+    width: 180px;
     overflow: hidden;
 }
 
