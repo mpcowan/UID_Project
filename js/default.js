@@ -28,6 +28,7 @@ function rePin(pinNum) {
 }
 
 function pin(pinID, mapUnique, lat, lon) {
+    pinnedCards.push(search_results[pinID]);
     //remove it from the results list
     $('#master' + pinID.toString()).remove();
     //add the card to the isotope class with pin in
