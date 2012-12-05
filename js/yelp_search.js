@@ -130,7 +130,7 @@ function getResults(query, zipcode) {
   OAuth.SignatureMethod.sign(message, accessor);
 
   var parameterMap = OAuth.getParameterMap(message.parameters);
-  parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
+  parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
   
 
   $.ajax({
