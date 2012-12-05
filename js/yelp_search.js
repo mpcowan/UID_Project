@@ -1,5 +1,7 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
+var search_results = [];
+
 function YelpListing () {
     /*
      * Example creation of a new listing object
@@ -31,7 +33,10 @@ function YelpListing () {
         return this.name + ' ' + this.id + ' testing';
     };
     this.toCard = function() {
-
+      var cardString = "<div class=\"card\" rating=\"";
+      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
+      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\"";
     }
     this.toModal = function() {
 
@@ -109,6 +114,7 @@ function handleResults(data) {
 
 function getResults(query, zipcode) {
 
+  search_results = [];
 
   var accessor = {
     consumerSecret: auth.consumerSecret,
@@ -190,6 +196,7 @@ function getResults(query, zipcode) {
                   }
                 }
               }
+              search_results.append(result);
             }
           }
         } else {
