@@ -50,8 +50,8 @@ body {
     overflow-y: auto;
     margin: 0px;
     min-height: 20px;
-    padding: 6px 12px 12px;
-    width: 470px;
+    padding: 6px 12px 12px 0px;
+    width: 430px;
 }
 
 .modal-sidebar {
