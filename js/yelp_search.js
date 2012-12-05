@@ -51,6 +51,27 @@ function YelpListing () {
       cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" >\n";
       cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
       cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin('" + this.id + "')\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      cardString += "<div class=\"card-categories\">\n"
+      if (this.custom_categories.length > 0) {
+        for (var ind = 0; ind < this.custom_categories.length; ind++) {
+          if (this.custom_categories[ind] == 1) {
+            cardString += "<div class=\"card-label green-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 2) {
+            cardString += "<div class=\"card-label orange-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 3) {
+            cardString += "<div class=\"card-label purple-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 4) {
+            cardString += "<div class=\"card-label red-label\"></div>";
+          }
+          else {
+            cardString += "<div class=\"card-label blue-label\"></div>";
+          }
+        }
+      }
+      cardString += "</div>\n";
       cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + this.id + "')\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" onClick=\"showModal('" + this.id + "')\">\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
