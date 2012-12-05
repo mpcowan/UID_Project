@@ -1,5 +1,6 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
+var search_results = [];
 
 
 function YelpListing () {
@@ -29,11 +30,12 @@ function YelpListing () {
     this.yelp_categories   = [];
     this.custom_categories = [];
     this.notes             = [];
-    this.asString = function() {
-        return this.name + ' ' + this.id + ' testing';
-    };
     this.toCard = function() {
-
+      var cardString = "<div class=\"card\" rating=\"";
+      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
+      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin(" + this.id + ")\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      cardString += ""
     }
     this.toModal = function() {
 
@@ -111,6 +113,7 @@ function handleResults(data) {
 
 function getResults(query, zipcode) {
 
+  search_results = [];
 
   var accessor = {
     consumerSecret: auth.consumerSecret,
@@ -136,7 +139,7 @@ function getResults(query, zipcode) {
   OAuth.SignatureMethod.sign(message, accessor);
 
   var parameterMap = OAuth.getParameterMap(message.parameters);
-  parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
+  parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
 
 
   $.ajax({
@@ -192,6 +195,7 @@ function getResults(query, zipcode) {
                   }
                 }
               }
+              search_results.append(result);
             }
           }
         } else {
