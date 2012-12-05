@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    var pinnedCards = [];
+
     nokia.Settings.set("appId", "tS3F6tL4Vw-6Mz4o7F7s");
     nokia.Settings.set("authenticationToken", "wW7onlgkAti0wUGXo8Y5Tw");
     var map = new nokia.maps.map.Display(document.getElementById("map"),
