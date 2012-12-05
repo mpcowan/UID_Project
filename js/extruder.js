@@ -360,7 +360,7 @@ $.fn.metadata = function( opts ){
 						}
 					})
 				}else{
-					var container=$("<div>").addClass("text").css({width:extruder.get(0).options.width-20, height:extruder.height()-20, overflowY:"auto"});
+					var container=$("<div>").addClass("text").css({width:extruder.get(0).options.width-20, height:extruder.height()-20, overflowY:"scroll"});
 					c.wrapInner(container);
 					extruder.setExtruderVoicesAction();
 				}
@@ -570,7 +570,7 @@ $.fn.metadata = function( opts ){
 							content.children().not(".text")
 									.addClass("panelVoice")
 									.click(function(){
-								extruder.closeMbExtruder();
+								// extruder.closeMbExtruder();
 							});
 							content.slideDown(400);
 						}
@@ -588,8 +588,8 @@ $.fn.metadata = function( opts ){
 
 			if ((!voice.attr("panel") ||voice.attr("panel")=="false" ) && (!voice.attr("setDisabled") || voice.attr("setDisabled")!="true")){
 				voice.find(".label").click(function(){
-					extruder.hidePanelsOnClose();
-					extruder.closeMbExtruder();
+					// extruder.hidePanelsOnClose();
+					// extruder.closeMbExtruder();
 				});
 			}
 		});

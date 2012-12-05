@@ -32,8 +32,8 @@ function YelpListing () {
     this.custom_categories = [];
     this.notes             = [];
     this.toSearchResult = function(num) {
-      var cardString = "<div id=\"master" + num.toString() + "\" class=\"card well\" draggable=\"\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      var cardString = "<div id=\"master" + num.toString() + "\" class=\"card well\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div draggable=\"\" class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
       cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -359,11 +359,16 @@ function getResults(query, zipcode) {
       //console.log(data);
       //var output = prettyPrint(data);
       //$("body").append(output);
+
       $("#results_panel").empty();
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
-      for (var tmp in search_cards) {
+      for (var tmp in search_cards) 
         $("#results_panel").append(search_cards[tmp]);
-      }
+
+      var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
+      $("[draggable]").draggable(draggableArguments);
+      $(".content").css("overflow-y", "scroll");
+      
     }
   });
 
@@ -376,7 +381,8 @@ $(document).ready(function(){
   $("button#search").click(function(){
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
+    $("#results_panel").html("<br/><br/><h4 style='text-align:center;'>Loading results from Yelp...&nbsp; <img src='imgs/load.gif'></h4>");
     getResults(query, zipcode);
-    $(".flap").click();
+    if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
   });
 });

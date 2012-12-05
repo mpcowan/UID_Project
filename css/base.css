@@ -127,3 +127,7 @@ textarea {
 .blue-label {
     background-color: rgb(77,119,203);
 }
+
+[draggable]:hover {
+	cursor: pointer;	
+}
