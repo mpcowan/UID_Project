@@ -19,6 +19,8 @@
         <script type="text/javascript" src="http://api.maps.nokia.com/2.2.1/jsl.js?with=all" charset="utf-8"></script>
         <script type="text/javascript" src="js/isotope.js"></script>
         <script type="text/javascript" src="js/yelp_search.js"></script>
+        <script type="text/javascript" src="js/geo.js"></script>
+        <script type="text/javascript" src="js/noty.js"></script>
         <script type="text/javascript" src="js/default.js"></script>
     </head>
     <body>
@@ -35,8 +37,8 @@
 
                         <form class="navbar-search pull-right">
                             <div class="input-append">
-                                <a href="#" class="btn btn-info btn-small" style="padding: 7px; margin-left: 7px; position:relative; right: 8px;" rel="tooltip" title="Use my current location"><i class="icon-white icon-screenshot"></i></a>
-                                <input type="text" class="search-query span3 zip-search" placeholder="Enter Zipcode or City..." style="margin-right: 7px;">
+                                <a href="#" class="btn btn-info btn-small" style="padding: 7px; margin-left: 7px; position:relative; right: 8px;" rel="tooltip" title="Use my current location"><i class="icon-white icon-screenshot" id="locale_button"></i></a>
+                                <input type="text" class="search-query span3 zip-search" id="locale" placeholder="Enter Zipcode or City..." style="margin-right: 7px;">
                                 <span style="color: #06f; font-size: 20px; padding: 10px 3px; position:relative; top: 3px;">&</span>
                                 <input type="text" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-left: 7px; margin-right: 20px;">
                                 <button type="submit" class="btn btn-primary">Search</button>
@@ -184,6 +186,23 @@
 
 
 
+
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel">Eleven Madison Park</h3>
+          </div>
+          <div class="modal-body">
+            <p>One fine body…</p>
+            <div align="center" id="map" style="z-index: -1; left:0px; top:0px; width: 650px; height: 400px;"></div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+
         <script>
             $("#extruderRight").buildMbExtruder({
                         position:"right",
@@ -217,26 +236,22 @@
             });
 
 
-
-
-
             $(".media").draggable({});
-        </script>
 
-        <!-- Modal -->
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Eleven Madison Park</h3>
-          </div>
-          <div class="modal-body">
-            <p>One fine body…</p>
-            <div align="center" id="map" style="z-index: -1; left:0px; top:0px; width: 650px; height: 400px;"></div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
+            var geocoder;
+
+            $("#locale_button").click(function(){
+                if (navigator.geolocation ) {
+                    initialize();
+                    navigator.geolocation.getCurrentPosition(successFunction, handle_errors);
+                }   
+                else
+                    yqlgeo.get('visitor', normalize_yql_response);  
+            });
+            
+            
+
+</script>
+
     </body>
 </html>
