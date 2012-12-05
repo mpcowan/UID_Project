@@ -1,11 +1,11 @@
 .isotope,
 .isotope .card {
   /* change duration value to whatever you like */
-  -webkit-transition-duration: 0.8s;
-     -moz-transition-duration: 0.8s;
-      -ms-transition-duration: 0.8s;
-       -o-transition-duration: 0.8s;
-          transition-duration: 0.8s;
+  -webkit-transition-duration: 1.0s;
+     -moz-transition-duration: 1.0s;
+      -ms-transition-duration: 1.0s;
+       -o-transition-duration: 1.0s;
+          transition-duration: 1.0s;
 }
 
 .isotope {

@@ -509,7 +509,7 @@ $.fn.metadata = function( opts ){
 				zi = cur > zi ? parseInt($(this).css('zIndex')) : zi;
 			}
 		});
-		$(this).css('zIndex',zi+=1);
+		$(this).css('zIndex',100);
 		return zi;
 	};
 
