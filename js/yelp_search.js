@@ -85,13 +85,14 @@ function searchYelp(query, location) {
  * the result cards to the user
  */
 function handleResults(data) {
-    if(data.message.text == "OK") {
+    console.log(data);
+    if(data !== undefined) {        
         if (data.businesses.length == 0) {
             alert("Error: No businesses were found near that location");
             return;
         }
         for(var i=0; i<data.businesses.length; i++) {
-            alert(data.dusinesses[i]);
+            alert(data.businesses[i]);
             //biz = data.businesses[i];
             //createMarker(biz, new GLatLng(biz.latitude, biz.longitude), i);
         }
