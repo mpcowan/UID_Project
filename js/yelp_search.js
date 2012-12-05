@@ -30,6 +30,12 @@ function YelpListing () {
     this.asString = function() {
         return this.name + ' ' + this.id + ' testing';
     };
+    this.toCard = function() {
+
+    }
+    this.toModal = function() {
+
+    }
 }
 
 //our authentication info from yelp, Matt's Keys
