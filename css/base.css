@@ -50,14 +50,14 @@ body {
     overflow-y: auto;
     margin: 0px;
     min-height: 20px;
-    padding: 6px 12px 12px 0px;
-    width: 430px;
+    padding-bottom: 7px;
+    width: 340px;
 }
 
 .modal-sidebar {
     float: right;
-    padding: 6px 12px 12px 0px;
-    width: 170px;
+    padding-bottom: 7px;
+    width: 290px;
     overflow: hidden;
 }
 
@@ -95,4 +95,35 @@ textarea {
     color: rgb(57,57,57);
     min-height: 18px;
     font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.label-title {
+
+}
+
+.custom-label-cube {
+    height: 30px;
+    padding: 1px 5px;
+    width: 24px;
+}
+
+.green-label {
+    background-color: rgb(52,178,125);
+}
+
+.orange-label {
+    background-color: rgb(224,153,82);
+}
+
+.purple-label {
+    background-color: rgb(153,51,204);
+}
+
+.red-label {
+    background-color: rgb(203,77,77);
+}
+
+.blue-label {
+    background-color: rgb(77,119,203);
 }

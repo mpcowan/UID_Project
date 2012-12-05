@@ -585,7 +585,7 @@ a:hover {
 }
 
 p {
-  margin: 0 0 10px;
+  margin: 0px; /* was 0 0 10px */
 }
 
 .lead {
