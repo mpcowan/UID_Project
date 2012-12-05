@@ -32,11 +32,34 @@ function YelpListing () {
     this.custom_categories = [];
     this.note              = "";
     this.toSearchResult = function(num) {
-      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " mapid='map" + this.id + "'" + " searchInd=" + num.toString();
+      cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
-      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
-      cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
+      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
+      cardString += " onClick=\"unPin('" + this.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "<div class=\"card-categories\">\n"
+      if (this.custom_categories.length > 0) {
+        for (var ind = 0; ind < this.custom_categories.length; ind++) {
+          if (this.custom_categories[ind] == 1) {
+            cardString += "<div class=\"card-label green-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 2) {
+            cardString += "<div class=\"card-label orange-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 3) {
+            cardString += "<div class=\"card-label purple-label\"></div>";
+          }
+          else if (this.custom_categories[ind] == 4) {
+            cardString += "<div class=\"card-label red-label\"></div>";
+          }
+          else {
+            cardString += "<div class=\"card-label blue-label\"></div>";
+          }
+        }
+      }
+      cardString += "</div>\n";
       cardString += "<h3 class=\"popover-title\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" >\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";

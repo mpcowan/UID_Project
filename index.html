@@ -110,11 +110,15 @@
                         ui.helper.fadeOut();
                         var elem = globalElement.detach().draggable( "disable" );
                         $(".isotope").isotope( 'insert', elem);
-                        //ToDo unhide pin
+                        $(elem).find(".pin-hidden").removeClass("pin-hidden");
                         var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                         $(elem).find(".pin-out").removeClass( "pin-out", 2000);
                         setTimeout(function(){n.close(); }, 3000);
-                        //call pin method
+                        var pinID = parseInt($(elem).attr("searchind"));
+                        var mapUnique = $(elem).attr("mapid");
+                        var lat = parseFloat($(elem).attr("lat"));
+                        var lon = parseFloat($(elem).attr("lon"));
+                        pin(pinID, mapUnique, lat, lon);
                     }
                 });
             });
