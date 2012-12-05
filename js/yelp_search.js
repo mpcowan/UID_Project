@@ -1,10 +1,13 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
+<<<<<<< HEAD
 var search_results = [];
 var toAdd_Cards = [];
 var toAdd_Modals = [];
 
 
+=======
+>>>>>>> e8dcc3f0be08711e5e0ead6e007cdc4a732784b4
 function YelpListing () {
     /*
      * Example creation of a new listing object
@@ -95,7 +98,103 @@ var auth = {
   }
 };
 
+<<<<<<< HEAD
 /*
+=======
+var filer; 
+var DATA_FILE = "listings.txt"; // Caches Yelp Listings. 
+
+function onError(e) {
+  console.log('File Error: ' + e.name);
+}
+
+function filerInit() {
+   filer = new Filer(); 
+   filer.init({persistent: true, size: 2*1024 * 1024}, function(fs) {  
+      }, onError);
+   filer.init();
+}
+
+
+/*
+ * Saves the given array of Yelp listings (@listings_array) to disk. 
+ */
+function saveListings(listings_array) {
+    /* false says don't throw error if file already exists. */
+    filer.create(DATA_FILE, false, function(fileEntry) {    
+    }, onError);
+
+    var my_data = JSON.stringify(listings_array);
+    filer.write(DATA_FILE, {data: my_data, type: 'text/plain'},
+      function(fileEntry, fileWriter) {
+        console.log('wrote to data file');  
+      },
+      onError
+    );
+}
+
+/*
+ * Loads the Yelp listing array that was saved to disk. 
+ */
+function getListings() {
+  
+  filer.open(DATA_FILE, function(file) {
+      // Use FileReader to read file.
+      var reader = new FileReader();
+      reader.onload= function(e) {
+          // console.log('Read Text = ' + this.result);
+          return this.result;
+      }
+      reader.readAsText(file);
+    }, onError);
+}
+
+function testWrite() {
+
+
+    var alisting = new YelpListing();
+    alisting.name = "Changing the name";    
+
+  var alisting2 = new YelpListing();
+    alisting2.name = "New NAMEE HAHA";        
+
+var data_arr = [alisting, alisting2];
+    /* false says don't throw error if file already exists. */
+    filer.create('myFile.txt', false, function(fileEntry) {
+    // fileEntry.name == 'myFile.txt'
+    }, onError);
+
+    
+    //var blob = new Blob(['body { color: red; }'], {type: 'text/css'});    
+    var my_data = JSON.stringify(data_arr);
+    filer.write('myfile.txt', {data: my_data, type: 'text/plain'},
+      function(fileEntry, fileWriter) {
+        console.log('tested writing to dest');  
+      },
+      onError
+    );
+    
+}
+
+
+function testRead() {
+
+  console.log('testing reading...');
+  filer.open('myfile.txt', function(file) {
+      // Use FileReader to read file.
+      var reader = new FileReader();
+      reader.onload= function(e) {
+          console.log('Read Text = ' + this.result);
+      }
+      reader.readAsText(file);
+    }, onError);
+
+    
+}
+
+
+
+>>>>>>> e8dcc3f0be08711e5e0ead6e007cdc4a732784b4
 function searchYelp(query, location) {
     var accessor = {
       consumerSecret: auth.consumerSecret,
@@ -254,6 +353,7 @@ function getResults(query, zipcode) {
                   }
                 }
               }
+
               search_results.push(result);
               search_cards.push(result.toSearchResult(itemnum));
               toAdd_Cards.push(result.toCard());
@@ -278,6 +378,8 @@ function getResults(query, zipcode) {
 
 
 $(document).ready(function(){
+
+  filerInit();
 
   $("button#search").click(function(){
     var query = $("input#query").val();
