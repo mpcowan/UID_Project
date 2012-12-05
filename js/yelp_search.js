@@ -67,6 +67,7 @@ var auth = {
 };
 
 var filer; 
+var DATA_FILE = "listings.txt"; // Caches Yelp Listings. 
 
 function onError(e) {
   console.log('File Error: ' + e.name);
@@ -80,6 +81,38 @@ function filerInit() {
 }
 
 
+/*
+ * Saves the given array of Yelp listings (@listings_array) to disk. 
+ */
+function saveListings(listings_array) {
+    /* false says don't throw error if file already exists. */
+    filer.create(DATA_FILE, false, function(fileEntry) {    
+    }, onError);
+
+    var my_data = JSON.stringify(listings_array);
+    filer.write(DATA_FILE, {data: my_data, type: 'text/plain'},
+      function(fileEntry, fileWriter) {
+        console.log('wrote to data file');  
+      },
+      onError
+    );
+}
+
+/*
+ * Loads the Yelp listing array that was saved to disk. 
+ */
+function getListings() {
+  
+  filer.open(DATA_FILE, function(file) {
+      // Use FileReader to read file.
+      var reader = new FileReader();
+      reader.onload= function(e) {
+          // console.log('Read Text = ' + this.result);
+          return this.result;
+      }
+      reader.readAsText(file);
+    }, onError);
+}
 
 function testWrite() {
 
@@ -302,6 +335,8 @@ function getResults(query, zipcode) {
 
 
 $(document).ready(function(){
+
+  filerInit();
 
   $("button#search").click(function(){
     var query = $("input#query").val();
