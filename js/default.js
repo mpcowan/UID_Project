@@ -70,3 +70,7 @@ function storeCards(cards_array) {
     return "Sorry, your browser does not support web storage...";
 
 }
+
+function loadCards() {
+    return sessionStorage.cardsArray;
+}
