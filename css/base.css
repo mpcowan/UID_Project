@@ -51,7 +51,7 @@ body {
     margin: 0px;
     min-height: 20px;
     padding: 6px 12px 12px;
-    width: 472px;
+    width: 470px;
 }
 
 .modal-sidebar {
@@ -61,14 +61,21 @@ body {
     overflow: hidden;
 }
 
-.new-comment-input {
-    height: 90px;
-    color: rgb(57, 57, 57);
-    cursor: text;
+textarea {
+    resize: vertical;
+    min-height: 30px;
 }
 
-.new-comment-input:hover,
+.new-comment-input {
+    position: relative;
+    height: 47px;
+    color: rgb(57, 57, 57);
+    cursor: text;
+    width: 95%;
+}
+
 .new-comment-input:focus {
+    height: 90px;
     background-color: rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
@@ -79,4 +86,13 @@ body {
     -moz-border-left-colors: none;
     border-image: none;
     box-shadow: 0px 1px 3px rgb(211, 211, 211);
+}
+
+.modal-title {
+    font-size: 16px;
+    line-height: 1.25em;
+    font: 14px/18px "Helvetica Neue",Arial,Helvetica,sans-serif;
+    color: rgb(57,57,57);
+    min-height: 18px;
+    font-weight: bold;
 }
