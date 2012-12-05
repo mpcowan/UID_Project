@@ -1,5 +1,7 @@
+var pinnedCards = [];
+
 $(document).ready(function () {
-    var pinnedCards = [];
+    pinnedCards = [];
 });
 
 function showModal(cardID) {
@@ -28,10 +30,9 @@ function rePin(pinNum) {
 }
 
 function pin(pinID, mapUnique, lat, lon) {
+    pinnedCards.push(search_results[pinID]);
     //remove it from the results list
     $('#master' + pinID.toString()).remove();
-    //add the card to the isotope class with pin in
-    $(".isotope").append(toAdd_Cards[pinID]);
     //add the modal bit to the body
     $('body').append(toAdd_Modals[pinID]);
     //init the map for the modal
@@ -68,5 +69,8 @@ function pin(pinID, mapUnique, lat, lon) {
         });
     var marker = new nokia.maps.map.StandardMarker([lat, lon]);
     map.objects.add(marker);
+    //add the card to the isotope class with pin in
+    $(".isotope").isotope('insert', toAdd_Cards[pinID]);
+    //$(".isotope").append(toAdd_Cards[pinID]);
 }
 

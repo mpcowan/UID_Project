@@ -30,7 +30,7 @@ function YelpListing () {
     //[["Local Flavor", "localflavor"], ["Active Life", "active"], ["Mass Media", "massmedia"]]
     this.yelp_categories   = [];
     this.custom_categories = [];
-    this.notes             = [];
+    this.note              = "";
     this.toSearchResult = function(num) {
       var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
@@ -48,7 +48,7 @@ function YelpListing () {
     };
     this.toCard = function() {
       var cardString = "<div class=\"card isotope-item\" rating=\"";
-      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" style=\"position: absolute; left: 0px; top: 0px; transform: translate(0px, 0px);\">\n";
+      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" >\n";
       cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
       cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin('" + this.id + "')\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
       cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + this.id + "')\" name>" + this.name + "</h3>\n";
@@ -67,7 +67,7 @@ function YelpListing () {
       modalString += "<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
       modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
       modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + this.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n</td>\n</tr>\n";
-      modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Notes: </p class=\"modal-title\">\n<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n";
+      modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p class=\"modal-title\">\n<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n";
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + this.yelp_url + "\">Tweet</a>\n";
       modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
@@ -341,6 +341,16 @@ function getResults(query, zipcode) {
                         try { result.address2 = data["businesses"][itemnum][key]["display_address"][1]; }
                         catch(err) { }
                       }
+                      else if (data["businesses"][itemnum][key]["display_address"].length == 3) {
+                        try { result.address1 = data["businesses"][itemnum][key]["display_address"][0]; }
+                        catch(err) { }
+                        try { result.address2 = data["businesses"][itemnum][key]["display_address"][2]; }
+                        catch(err) { }
+                      }
+                      else if (data["businesses"][itemnum][key]["display_address"].length == 1) {
+                        try { result.address1 = data["businesses"][itemnum][key]["display_address"][0]; }
+                        catch(err) { }
+                      }
                     }
                     catch(err) { }
                   }
@@ -363,15 +373,13 @@ function getResults(query, zipcode) {
       $("#results_panel").empty();
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
 
-
-
       for (var tmp in search_cards) 
         $("#results_panel").append("<div class='well'>" + search_cards[tmp] + "</div>");
 
       var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
       $("[draggable]").draggable(draggableArguments);
       $(".content").css("overflow-y", "scroll");
-      
+
     }
   });
 
