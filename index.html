@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Good Eats</title>
+        <link rel="shortcut icon" href="favicon.png" />
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/extruder.css">
         <link rel="stylesheet" href="css/base.css">
@@ -11,9 +12,11 @@
         <script src="js/jquery-ui.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/extruder.js" type="text/javascript"></script>
+        <script type="text/javascript" src="js/bootbox.min.js"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
         <script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
         <script type="text/javascript" src="https://raw.github.com/padolsey/prettyPrint.js/master/prettyprint.js"></script>
+        <script type="text/javascript" src="http://api.maps.nokia.com/2.2.1/jsl.js?with=all" charset="utf-8"></script>
         <script type="text/javascript" src="js/isotope.js"></script>
         <script type="text/javascript" src="js/yelp_search.js"></script>
         <script type="text/javascript" src="js/default.js"></script>
@@ -32,8 +35,10 @@
 
                         <form class="navbar-search pull-right">
                             <div class="input-append">
-                                <input type="text" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-right: 20px;">
-                                <input type="text" class="search-query span3" placeholder="Enter Zipcode or City..." style="margin-right: 20px;">
+                                <a href="#" class="btn btn-info btn-small" style="padding: 7px; margin-left: 7px;"><i class="icon-white icon-screenshot"></i></a>
+                                <input type="text" class="search-query span3 zip-search" placeholder="Enter Zipcode or City..." style="margin-right: 7px;">
+                                <span style="color: #06f; font-size: 20px; padding: 10px 3px;">&</span>
+                                <input type="text" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-left: 7px; margin-right: 20px;">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
                         </form>
@@ -63,10 +68,10 @@
                 <div class="row">
                     <div class="bs-docs-example bs-docs-example-popover">
 
-                        <div class="popover top pin-align show-hand" onClick="showModal()">
-                            <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" name>Eleven Madison Park</h3>
-                            <div class="popover-content">
+                        <div class="popover top pin-align show-hand" id="card1">
+                            <div class="pin-in" id="pin1" onClick="unPin(1)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                            <h3 class="popover-title" onClick="showModal(1)" name>Eleven Madison Park</h3>
+                            <div class="popover-content" onClick="showModal(1)">
                                 <table>
                                     <tr>
                                         <td>
@@ -90,10 +95,10 @@
                             </div>
                         </div>
 
-                         <div class="popover top pin-align show-hand" onClick="showModal()">
-                            <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" name>Gramercy Tavern</h3>
-                            <div class="popover-content">
+                         <div class="popover top pin-align show-hand" id="card2">
+                            <div class="pin-in" id="pin2" onClick="unPin(2)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                            <h3 class="popover-title" onClick="showModal(2)" name>Gramercy Tavern</h3>
+                            <div class="popover-content" onClick="showModal(2)">
                                 <table>
                                     <tr>
                                         <td>
@@ -117,10 +122,10 @@
                             </div>
                         </div>
 
-                         <div class="popover top pin-align show-hand" onClick="showModal()">
-                            <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" name>Graham Avenue Meats And Deli</h3>
-                            <div class="popover-content">
+                         <div class="popover top pin-align show-hand" id="card3">
+                            <div class="pin-in" id="pin3" onClick="unPin(3)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                            <h3 class="popover-title" onClick="showModal(3)" name>Graham Avenue Meats And Deli</h3>
+                            <div class="popover-content" onClick="showModal(3)">
                                 <table>
                                     <tr>
                                         <td>
@@ -144,10 +149,10 @@
                             </div>
                         </div>
 
-                         <div class="popover top pin-align show-hand" onClick="showModal()">
-                            <div class="pin"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
-                            <h3 class="popover-title" name>Trader Joe's Wine Shop</h3>
-                            <div class="popover-content">
+                         <div class="popover top pin-align show-hand" id="card4">
+                            <div class="pin-in" id="pin4" onClick="unPin(4)"><img src="imgs/pin_blue.png" alt="Pin overlay"/></div>
+                            <h3 class="popover-title" onClick="showModal(4)" name>Trader Joe's Wine Shop</h3>
+                            <div class="popover-content" onClick="showModal(4)">
                                 <table>
                                     <tr>
                                         <td>
@@ -226,6 +231,7 @@
           </div>
           <div class="modal-body">
             <p>One fine body…</p>
+            <div align="center" id="map" style="z-index: -1; left:0px; top:0px; width: 650px; height: 400px;"></div>
           </div>
           <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

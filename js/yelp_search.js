@@ -19,6 +19,8 @@ function YelpListing () {
     this.zip            = "";   //Postal code for this business
     this.state_code     = "";   //State code for this business Ex: "NY"
     this.snippet        = "";   //Snippet text associated with this business
+    this.latitude       = 0.0   //latitude of business for mapping
+    this.longitude      = 0.0   //longitude of business for mapping
     //Provides a list of category name, alias pairs that this business is associated with. For example,
     //[["Local Flavor", "localflavor"], ["Active Life", "active"], ["Mass Media", "massmedia"]]
     this.categories     = [];
