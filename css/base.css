@@ -51,13 +51,13 @@ body {
     margin: 0px;
     min-height: 20px;
     padding-bottom: 7px;
-    width: 430px;
+    width: 360px;
 }
 
 .modal-sidebar {
     float: right;
     padding-bottom: 7px;
-    width: 180px;
+    width: 270px;
     overflow: hidden;
 }
 
@@ -95,6 +95,10 @@ textarea {
     color: rgb(57,57,57);
     min-height: 18px;
     font-weight: bold;
+}
+
+.label-title {
+    width: 150px;
 }
 
 .custom-label-cube {
