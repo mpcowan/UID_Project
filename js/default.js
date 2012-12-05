@@ -7,9 +7,9 @@ $(document).ready(function () {
         {
             'components': [
                 // ZoomBar provides a UI to zoom the map in & out
-                new nokia.maps.map.component.ZoomBar(),
+                //new nokia.maps.map.component.ZoomBar(),
                 // We add the behavior component to allow panning / zooming of the map
-                new nokia.maps.map.component.Behavior(),
+                //new nokia.maps.map.component.Behavior(),
                 // Creates UI to easily switch between street map satellite and terrain mapview modes
                 new nokia.maps.map.component.TypeSelector(),
                 // Creates a toggle button to show/hide public transport lines on the map
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 // Add ContextMenu component so we get context menu on right mouse click / long press tap
                 //new nokia.maps.map.component.ContextMenu()
                 ],
-                'zoomLevel': 14,
+                'zoomLevel': 15,
                 'center': [37.786138600000001, -122.40262130000001]
         });
     var marker = new nokia.maps.map.StandardMarker([37.786138600000001, -122.40262130000001]);
