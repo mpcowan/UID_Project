@@ -4343,7 +4343,7 @@ input[type="submit"].btn.btn-mini {
   position: fixed;
   right: 0;
   left: 0;
-  z-index: 1030;
+  z-index: 9999999;
   margin-bottom: 0;
 }
 
@@ -5362,6 +5362,11 @@ a.thumbnail:hover {
 .media .media {
   margin-top: 15px;
   padding: 7px 22px 13px 8px;
+  width: 282px;
+}
+
+.media:hover {
+  cursor:pointer;
 }
 
 .media:first-child {

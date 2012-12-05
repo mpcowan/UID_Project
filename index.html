@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" href="css/extruder.css">
         <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/isotope.css">
         <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
@@ -25,7 +26,7 @@
         <script type="text/javascript" src="js/default.js"></script>
     </head>
     <body>
-        <div id="extruderRight" class="a {title:'Search...', url:'extruderRight.html'}"></div>
+        <div id="extruderRight" class="a {title:'Results...', url:'extruderRight.html'}"></div>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
@@ -70,7 +71,7 @@
             </div>
         </div>
 
-        <div id="content" class="draggable" style="z-index:999;">
+        <div id="content" style="z-index:999;" droppable>
 
 
             <div style="padding:73px 50px 50px 113px;">
@@ -81,7 +82,7 @@
 
 
 
-                    <div id="isotope">
+                    <div class="isotope">
 
                         <div class="card" rating="3" popularity="126" name="Eleven Madison Park">
                             <div class="popover top pin-align show-hand" id="card1">
@@ -235,7 +236,21 @@
                     });
 
 
-            $(".media").draggable({});
+            $(function() {
+                var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: false}
+                $("[draggable]").draggable(draggableArguments);
+                $( "[droppable]" ).droppable({
+                    accept: "[draggable]",
+                    activeClass: "ui-state-hover",
+                    hoverClass: "ui-state-active",
+                    drop: function( event, ui ) {
+                        alert("asdf");
+                        $( this ).addClass( "ui-state-highlight" )
+
+
+                    }
+                });
+            });
 
             var geocoder;
 
@@ -385,7 +400,7 @@
   <script>
     $(function(){
 
-      var $container = $('#isotope');
+      var $container = $('.isotope');
 
       $container.isotope({
         itemSelector : '.card',
@@ -417,7 +432,7 @@
         $this.addClass('selected');
 
         // make option object dynamically, i.e. { filter: '.my-filter-class' }
-        var options = {},
+        var options = {'sortAscending' : false},
             key = $optionSet.attr('data-option-key'),
             value = $this.attr('data-option-value');
         // parse 'false' as false boolean

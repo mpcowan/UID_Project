@@ -6,27 +6,36 @@ function YelpListing () {
      *      var alisting = new YelpListing();
      *      alisting.name = "Changing the name";
     */
-    this.name           = "";   //Name of this business
-    this.id             = "";   //Yelp ID for this business
-    this.img_url        = "";   //URL of photo for this business
-    this.yelp_url       = "";   //URL for business page on Yelp
-    this.phone          = "";   //Phone number for this business formatted
-    this.review_count   = 0;    //Number of reviews for this business
-    this.rating         = 5;    //Rating for this business (0-5)
-    this.rating_img_url = "";   //url to starts rating for this business
-    this.address        = "";   //location.display_address from yelp
-    this.city           = "";   //City for this business
-    this.zip            = "";   //Postal code for this business
-    this.state_code     = "";   //State code for this business Ex: "NY"
-    this.snippet        = "";   //Snippet text associated with this business
-    this.latitude       = 0.0   //latitude of business for mapping
-    this.longitude      = 0.0   //longitude of business for mapping
+    this.name              = "";   //Name of this business
+    this.id                = "";   //Yelp ID for this business
+    this.img_url           = "";   //URL of photo for this business
+    this.yelp_url          = "";   //URL for business page on Yelp
+    this.phone             = "";   //Phone number for this business formatted
+    this.review_count      = 0;    //Number of reviews for this business
+    this.rating            = 5;    //Rating for this business (0-5)
+    this.rating_img_url    = "";   //url to starts rating for this business
+    this.address1          = "";   //first line of address
+    this.address2          = "";   //second line of address
+    this.city              = "";   //City for this business
+    this.zip               = "";   //Postal code for this business
+    this.state_code        = "";   //State code for this business Ex: "NY"
+    this.snippet           = "";   //Snippet text associated with this business
+    this.latitude          = 0.0   //latitude of business for mapping
+    this.longitude         = 0.0   //longitude of business for mapping
     //Provides a list of category name, alias pairs that this business is associated with. For example,
     //[["Local Flavor", "localflavor"], ["Active Life", "active"], ["Mass Media", "massmedia"]]
-    this.categories     = [];
+    this.yelp_categories   = [];
+    this.custom_categories = [];
+    this.notes             = [];
     this.asString = function() {
         return this.name + ' ' + this.id + ' testing';
     };
+    this.toCard = function() {
+
+    }
+    this.toModal = function() {
+
+    }
 }
 
 //our authentication info from yelp, Matt's Keys
@@ -39,10 +48,6 @@ var auth = {
     signatureMethod: "HMAC-SHA1"
   }
 };
-
-
-
-
 
 function searchYelp(query, location) {
     var accessor = {
@@ -75,7 +80,6 @@ function searchYelp(query, location) {
       'jsonpCallback': 'handleResults',
       'success': function(data, textStats, XMLHttpRequest) {
         var output = prettyPrint(data);
-        alert(output);
       }
     });
 }
@@ -86,7 +90,7 @@ function searchYelp(query, location) {
  */
 function handleResults(data) {
     console.log(data);
-    if(data !== undefined) {        
+    if(data !== undefined) {
         if (data.businesses.length == 0) {
             alert("Error: No businesses were found near that location");
             return;
@@ -102,7 +106,7 @@ function handleResults(data) {
     }
 }
 
- 
+
 function getResults(query, zipcode) {
 
 
@@ -131,7 +135,7 @@ function getResults(query, zipcode) {
 
   var parameterMap = OAuth.getParameterMap(message.parameters);
   parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature);
-  
+
 
   $.ajax({
     'url': message.action,
@@ -140,6 +144,57 @@ function getResults(query, zipcode) {
     'dataType': 'jsonp',
     'jsonpCallback': 'cb',
     'success': function(data, textStats, XMLHttpRequest) {
+      if (data["total"] > 0) {
+          for (var itemnum in data["businesses"]) {
+            if (data["businesses"].hasOwnProperty(itemnum)) {
+              var result = new YelpListing();
+              for (var key in data["businesses"][itemnum]) {
+                if (data["businesses"][itemnum].hasOwnProperty(key)) {
+                  if (key == "rating") {
+                    result.rating = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "rating_img_url") {
+                    result.rating_img_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "name") {
+                    result.name = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "review_count") {
+                    result.review_count = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "snippet_text") {
+                    result.snippet = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "image_url") {
+                    result.image_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "url") {
+                    result.yelp_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "display_phone") {
+                    result.phone = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "id") {
+                    result.id = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "location") {
+                    result.latitude   = data["businesses"][itemnum][key]["coordinate"]["latitude"];
+                    result.longitude  = data["businesses"][itemnum][key]["coordinate"]["longitude"];
+                    result.state_code = data["businesses"][itemnum][key]["coordinate"]["state_code"];
+                    result.zip        = data["businesses"][itemnum][key]["coordinate"]["postal_code"];
+                    result.city       = data["businesses"][itemnum][key]["coordinate"]["city"];
+                    if (data["businesses"][itemnum][key]["coordinate"]["display_address"].length == 4) {
+                      result.address1 = data["businesses"][itemnum][key]["coordinate"]["display_address"][0];
+                      result.address2 = data["businesses"][itemnum][key]["coordinate"]["display_address"][3];
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          alert("No results");
+        }
       console.log(data);
       var output = prettyPrint(data);
       $("body").append(output);
@@ -150,14 +205,11 @@ function getResults(query, zipcode) {
 
 
 $(document).ready(function(){
-  
+
   $("button#search").click(function(){
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
-    getResults(query, zipcode);  
-    $("#results_panel h4 span[query]").text(query);
-    $("#results_panel h4 span[zipcode]").text(zipcode);
-
+    getResults(query, zipcode);
     $(".flap").click();
   });
 
