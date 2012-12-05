@@ -40,17 +40,18 @@ var auth = {
   }
 };
 
-var debug_location = "New York";
-var debug_query = "pizza"
 
-function searchYelp() {
+
+
+
+function searchYelp(query, location) {
     var accessor = {
       consumerSecret: auth.consumerSecret,
       tokenSecret: auth.accessTokenSecret
     };
     parameters = [];
-    parameters.push(['term', debug_query]);
-    parameters.push(['location', debug_location]);
+    parameters.push(['term', query]);
+    parameters.push(['location', location]);
     parameters.push(['callback', 'handleResults']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
@@ -99,3 +100,66 @@ function handleResults(data) {
         alert("Error: " + data.message.text);
     }
 }
+
+
+function getResults(query, zipcode) {
+
+
+  var accessor = {
+    consumerSecret: auth.consumerSecret,
+    tokenSecret: auth.accessTokenSecret
+  };
+
+  parameters = [];
+  parameters.push(['term', query]);
+  parameters.push(['location', zipcode]);
+  parameters.push(['callback', 'cb']);
+  parameters.push(['oauth_consumer_key', auth.consumerKey]);
+  parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
+  parameters.push(['oauth_token', auth.accessToken]);
+  parameters.push(['oauth_signature_method', 'HMAC-SHA1']);
+
+  var message = {
+    'action': 'http://api.yelp.com/v2/search',
+    'method': 'GET',
+    'parameters': parameters
+  };
+
+  OAuth.setTimestampAndNonce(message);
+  OAuth.SignatureMethod.sign(message, accessor);
+
+  var parameterMap = OAuth.getParameterMap(message.parameters);
+  parameterMap.oauth_signature = OAuth.percentEncode(parameterMap.oauth_signature)
+  
+
+  $.ajax({
+    'url': message.action,
+    'data': parameterMap,
+    'cache': true,
+    'dataType': 'jsonp',
+    'jsonpCallback': 'cb',
+    'success': function(data, textStats, XMLHttpRequest) {
+      console.log(data);
+      var output = prettyPrint(data);
+      $("body").append(output);
+    }
+  });
+
+}
+
+
+$(document).ready(function(){
+  
+  $("button#search").click(function(){
+    var query = $("input#query").val();
+    var zipcode = $("input#locale").val();
+    getResults(query, zipcode);  
+    $("#results_panel h4 span[query]").text(query);
+    $("#results_panel h4 span[zipcode]").text(zipcode);
+
+    $(".flap").click();
+  });
+
+});
+
+

@@ -5361,6 +5361,7 @@ a.thumbnail:hover {
 .media,
 .media .media {
   margin-top: 15px;
+  padding: 7px 22px 13px 8px;
 }
 
 .media:first-child {
