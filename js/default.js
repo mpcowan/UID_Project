@@ -60,3 +60,4 @@ function unPin(pinNum) {
 function rePin(pinNum) {
     $('#pin' + pinNum.toString()).removeClass("pin-out");
 }
+
