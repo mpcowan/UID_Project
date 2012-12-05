@@ -1,6 +1,8 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
 var search_results = [];
+var toAdd_Cards = [];
+var toAdd_Modals = [];
 
 
 function YelpListing () {
@@ -30,9 +32,12 @@ function YelpListing () {
     this.yelp_categories   = [];
     this.custom_categories = [];
     this.notes             = [];
-    this.toSearchResult = function() {
-      var cardString = "<div class=\"card well\" draggable=\"\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
+    this.toSearchResult = function(num) {
+      var cardString = "<div id=\"master\"" + num.toString() + " class=\"card well\" draggable=\"\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
+      cardString += " onClick=\"pin(" + num.toString() + ")\"";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
       cardString += "<h3 class=\"popover-title\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" >\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
@@ -46,7 +51,7 @@ function YelpListing () {
       var cardString = "<div class=\"card\" rating=\"";
       cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
-      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin(\"" + this.id + "\")\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin('" + this.id + "')\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
       cardString += "<h3 class=\"popover-title\" onClick=\"showModal(\"" + this.id + "\")\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" onClick=\"showModal(\"" + this.id + "\")\">\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
@@ -56,6 +61,27 @@ function YelpListing () {
       cardString += "</td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n";
       return cardString;
     };
+    this.toModal = function() {
+      var modalString = "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
+      modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + this.name + "</h3>\n</div>\n";
+      modalString += "<div class=\"modal-body\">\n<div class=\"clearfix\">\n<div class=\"modal-main-col\">\n<div class=\"modal-card-content\">\n<table>\n<tr>\n<td>\n";
+      modalString += "<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
+      modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
+      modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + this.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n</td>\n</tr>\n";
+      modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Notes: </p class=\"modal-title\">\n<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n";
+      modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
+      modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + this.yelp_url + "\">Tweet</a>\n";
+      modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"http://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
+      modalString += "<p class=\"modal-title\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
+      modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle\" type=\"text\" placeholder=\"No name\" name=\"purple\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
+      modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
+      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+      return modalString;
+    }
 }
 
 //our authentication info from yelp, Matt's Keys
@@ -69,6 +95,7 @@ var auth = {
   }
 };
 
+/*
 function searchYelp(query, location) {
     var accessor = {
       consumerSecret: auth.consumerSecret,
@@ -103,11 +130,13 @@ function searchYelp(query, location) {
       }
     });
 }
+*/
 
 /*
  * If a sucessful API response is received, display
  * the result cards to the user
  */
+ /*
 function handleResults(data) {
     console.log(data);
     if(data !== undefined) {
@@ -125,11 +154,14 @@ function handleResults(data) {
         alert("Error: " + data.message.text);
     }
 }
+*/
 
 
 function getResults(query, zipcode) {
 
   search_results = [];
+  toAdd_Cards = [];
+  toAdd_Modals = [];
   var search_cards = [];
 
   var accessor = {
@@ -223,7 +255,9 @@ function getResults(query, zipcode) {
                 }
               }
               search_results.push(result);
-              search_cards.push(result.toSearchResult());
+              search_cards.push(result.toSearchResult(itemnum));
+              toAdd_Cards.push(result.toCard());
+              toAdd_Modals.push(result.toModal());
             }
           }
         } else {

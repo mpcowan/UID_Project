@@ -61,11 +61,20 @@ function rePin(pinNum) {
     $('#pin' + pinNum.toString()).removeClass("pin-out");
 }
 
+function pin(pinID) {
+    //remove it from the results list
+    $('#master' + pinID.toString()).remove();
+    //add the card to the isotope class with pin in
+    $(".isotope").append(toAdd_Cards[pinID]);
+    //add the modal bit to the body
+    $('body').append(toAdd_Modals[pinID]);
+}
+
 
 function storeCards(cards_array) {
 
   if(typeof(Storage)!=="undefined")
-    sessionStorage.cardsArray=cards_array;    
+    sessionStorage.cardsArray=cards_array;
   else
     return "Sorry, your browser does not support web storage...";
 
