@@ -60,3 +60,23 @@ body {
     width: 170px;
     overflow: hidden;
 }
+
+.new-comment-input {
+    height: 90px;
+    color: rgb(57, 57, 57);
+    cursor: text;
+}
+
+.new-comment-input:hover,
+.new-comment-input:focus {
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(211, 211, 211) rgb(211, 211, 211) rgb(187, 187, 187);
+    -moz-border-top-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    border-image: none;
+    box-shadow: 0px 1px 3px rgb(211, 211, 211);
+}
