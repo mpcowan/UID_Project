@@ -89,11 +89,11 @@
                                     custom style for extruder
                                     */
 
-        .extruder.left.a .flap{
+        .extruder.right.a .flap{
             font-size:18px;
-            color:white;
+            color: #06f;;
             padding:10px 0 10px 10px;
-            background:#772B14;
+            background:#fff;
             width:30px;
             position:absolute;
             top:40% !important;
@@ -104,22 +104,17 @@
             -moz-box-shadow:#666 2px 0px 3px;
             -webkit-box-shadow:#666 2px 0px 3px;
         }
+        .extruder.right.a:hover .flap:hover{
+        	cursor:pointer;
+        }
 
-        .extruder.left.a .content{
-            border-right:3px solid #772B14;
+        .extruder.right.a .content{
+        	border-left:3px solid #252525;
+            border-right:3px solid #252525;
             background:rgba(255,255,255,.95);
         }
 
-        .extruder.top .optionsPanel .panelVoice a:hover{
-            color:#fff;
-            background: url("elements/black_op_30.png");
-            border-bottom:1px solid #000;
-        }
-        .extruder.top .optionsPanel .panelVoice a{
-            border-bottom:1px solid #000;
-        }
-
-        .extruder.left.a .flap .flapLabel{
-            background:#772B14;
+        .extruder.right.a .flap .flapLabel{
+            background:#fff;
         }
         

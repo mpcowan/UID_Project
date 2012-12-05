@@ -23,7 +23,7 @@
     </head>
     <body>
 
-        <div id="extruderLeft" class="a {title:'Search...', url:'extruderLeft.html'}"></div>
+        <div id="extruderRight" class="a {title:'Search...', url:'extruderRight.html'}"></div>
 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="navbar-inner">
@@ -35,9 +35,9 @@
 
                         <form class="navbar-search pull-right">
                             <div class="input-append">
-                                <a href="#" class="btn btn-info btn-small" style="padding: 7px; margin-left: 7px;"><i class="icon-white icon-screenshot"></i></a>
+                                <a href="#" class="btn btn-info btn-small" style="padding: 7px; margin-left: 7px; position:relative; right: 8px;" rel="tooltip" title="Use my current location"><i class="icon-white icon-screenshot"></i></a>
                                 <input type="text" class="search-query span3 zip-search" placeholder="Enter Zipcode or City..." style="margin-right: 7px;">
-                                <span style="color: #06f; font-size: 20px; padding: 10px 3px;">&</span>
+                                <span style="color: #06f; font-size: 20px; padding: 10px 3px; position:relative; top: 3px;">&</span>
                                 <input type="text" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-left: 7px; margin-right: 20px;">
                                 <button type="submit" class="btn btn-primary">Search</button>
                             </div>
@@ -185,15 +185,15 @@
 
 
         <script>
-            $("#extruderLeft").buildMbExtruder({
-                        position:"left",
-                        width:300,
+            $("#extruderRight").buildMbExtruder({
+                        position:"right",
+                        width:350,
                         extruderOpacity:.8,
 
                         hidePanelsOnClose:false,
                         accordionPanels:false,
                         onExtOpen:function(){},
-                        onExtContentLoad:function(){$("#extruderLeft").openPanel();},
+                        onExtContentLoad:function(){$("#extruderRight").openPanel();},
                         onExtClose:function(){}
                     });
 
