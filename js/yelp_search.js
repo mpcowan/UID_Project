@@ -61,7 +61,7 @@ function YelpListing () {
       return cardString;
     };
     this.toModal = function() {
-      var modalString = "<div id=\"myModal\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
+      var modalString = "<div id=\"modal" + this.id + "\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
       modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + this.name + "</h3>\n</div>\n";
       modalString += "<div class=\"modal-body\">\n<div class=\"clearfix\">\n<div class=\"modal-main-col\">\n<div class=\"modal-card-content\">\n<table>\n<tr>\n<td>\n";
       modalString += "<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n</td>\n";

@@ -2,8 +2,8 @@ $(document).ready(function () {
     var pinnedCards = [];
 });
 
-function showModal(cardNum) {
-    $('#myModal').modal('show');
+function showModal(cardID) {
+    $('#modal' + cardID.toString()).modal('show');
 }
 
 function unPin(pinNum) {
