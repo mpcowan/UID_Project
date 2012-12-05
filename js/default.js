@@ -16,16 +16,17 @@ $(document).ready(function () {
                  * ratio of a distance on the map to the corresponding distance in the real world
                  * in either kilometers or miles
                  */
-                new nokia.maps.map.component.ScaleBar(),
+                new nokia.maps.map.component.ScaleBar()
                 /* Positioning will show a set "map to my GPS position" UI button
                  * Note: this component will only be visible if W3C geolocation API
                  * is supported by the browser and if you agree to share your location.
                  * If you location can not be found the positioning button will reset
                  * itself to its initial state
                  */
-                new nokia.maps.positioning.component.Positioning(),
+                //new nokia.maps.positioning.component.Positioning(),
                 // Add ContextMenu component so we get context menu on right mouse click / long press tap
-                new nokia.maps.map.component.ContextMenu()],
+                //new nokia.maps.map.component.ContextMenu()
+                ],
                 'zoomLevel': 14,
                 'center': [37.786138600000001, -122.40262130000001]
         });
