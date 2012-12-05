@@ -73,12 +73,12 @@
         </div>
         <div id="content" style="z-index:999;" droppable>
             <div style="padding:73px 40px 40px 40px; height:500px;">
-                
+
                     <div class="bs-docs-example bs-docs-example-popover" id="isotope_container">
                         <div class="isotope">
                         </div>
 
-                        
+
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                         onExtClose:function(){}
                     });
 
-            
+
             $(function() {
                 var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
                 $("[draggable]").draggable(draggableArguments);
@@ -109,14 +109,16 @@
                     drop: function( event, ui ) {
                         ui.helper.fadeOut();
                         var elem = globalElement.detach().draggable( "disable" );
-                        $(".isotope").isotope( 'insert', elem);                        
+                        $(".isotope").isotope( 'insert', elem);
+                        //ToDo unhide pin
                         var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                         $(elem).find(".pin-out").removeClass( "pin-out", 2000);
                         setTimeout(function(){n.close(); }, 3000);
+                        //call pin method
                     }
                 });
             });
-            
+
 
             var geocoder;
 
@@ -128,7 +130,7 @@
                 else
                     yqlgeo.get('visitor', normalize_yql_response);
             });
-        
+
             $(function(){
               var $container = $('.isotope');
               $container.isotope({
