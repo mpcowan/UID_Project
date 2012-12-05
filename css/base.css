@@ -68,14 +68,14 @@ textarea {
 
 .new-comment-input {
     position: relative;
-    height: 47px;
+    height: 100px;
     color: rgb(57, 57, 57);
     cursor: text;
     width: 95%;
 }
 
 .new-comment-input:focus {
-    height: 90px;
+    height: 100px;
     background-color: rgb(255, 255, 255);
     border-width: 1px;
     border-style: solid;
@@ -106,6 +106,22 @@ textarea {
     height: 30px;
     padding: 1px 5px;
     width: 24px;
+    -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.card-label {
+    display: block;
+    float: right;
+    margin-right: 4px;
+    height: 6px;
+    margin-top: -1px;
+    margin-bottom: 1px;
+    width: 50px;
+    -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
 }
 
 .green-label {
@@ -129,5 +145,5 @@ textarea {
 }
 
 [draggable]:hover {
-	cursor: pointer;	
+	cursor: pointer;
 }

@@ -42,7 +42,7 @@ function pin(pinID, mapUnique, lat, lon) {
         {
             'components': [
                 // ZoomBar provides a UI to zoom the map in & out
-                //new nokia.maps.map.component.ZoomBar(),
+                new nokia.maps.map.component.ZoomBar(),
                 // We add the behavior component to allow panning / zooming of the map
                 //new nokia.maps.map.component.Behavior(),
                 // Creates UI to easily switch between street map satellite and terrain mapview modes
@@ -64,7 +64,7 @@ function pin(pinID, mapUnique, lat, lon) {
                 // Add ContextMenu component so we get context menu on right mouse click / long press tap
                 //new nokia.maps.map.component.ContextMenu()
                 ],
-                'zoomLevel': 15,
+                'zoomLevel': 16,
                 'center': [lat, lon]
         });
     var marker = new nokia.maps.map.StandardMarker([lat, lon]);
