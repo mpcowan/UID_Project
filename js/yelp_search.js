@@ -1,8 +1,5 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
-var search_results = [];
-
-
 function YelpListing () {
     /*
      * Example creation of a new listing object
@@ -30,12 +27,11 @@ function YelpListing () {
     this.yelp_categories   = [];
     this.custom_categories = [];
     this.notes             = [];
+    this.asString = function() {
+        return this.name + ' ' + this.id + ' testing';
+    };
     this.toCard = function() {
-      var cardString = "<div class=\"card\" rating=\"";
-      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
-      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin(" + this.id + ")\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
-      cardString += ""
+
     }
     this.toModal = function() {
 
@@ -52,6 +48,66 @@ var auth = {
     signatureMethod: "HMAC-SHA1"
   }
 };
+
+var filer; 
+
+function onError(e) {
+  console.log('File Error: ' + e.name);
+}
+
+function filerInit() {
+   filer = new Filer(); 
+   filer.init({persistent: true, size: 2*1024 * 1024}, function(fs) {  
+      }, onError);
+   filer.init();
+}
+
+
+
+function testWrite() {
+
+
+    var alisting = new YelpListing();
+    alisting.name = "Changing the name";    
+
+  var alisting2 = new YelpListing();
+    alisting2.name = "New NAMEE HAHA";        
+
+var data_arr = [alisting, alisting2];
+    /* false says don't throw error if file already exists. */
+    filer.create('myFile.txt', false, function(fileEntry) {
+    // fileEntry.name == 'myFile.txt'
+    }, onError);
+
+    
+    //var blob = new Blob(['body { color: red; }'], {type: 'text/css'});    
+    var my_data = JSON.stringify(data_arr);
+    filer.write('myfile.txt', {data: my_data, type: 'text/plain'},
+      function(fileEntry, fileWriter) {
+        console.log('tested writing to dest');  
+      },
+      onError
+    );
+    
+}
+
+
+function testRead() {
+
+  console.log('testing reading...');
+  filer.open('myfile.txt', function(file) {
+      // Use FileReader to read file.
+      var reader = new FileReader();
+      reader.onload= function(e) {
+          console.log('Read Text = ' + this.result);
+      }
+      reader.readAsText(file);
+    }, onError);
+
+    
+}
+
+
 
 function searchYelp(query, location) {
     var accessor = {
@@ -113,7 +169,6 @@ function handleResults(data) {
 
 function getResults(query, zipcode) {
 
-  search_results = [];
 
   var accessor = {
     consumerSecret: auth.consumerSecret,
@@ -195,7 +250,6 @@ function getResults(query, zipcode) {
                   }
                 }
               }
-              search_results.append(result);
             }
           }
         } else {
