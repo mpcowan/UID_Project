@@ -69,7 +69,7 @@
             </div>
         </div>
 
-        <div id="content" class="draggable" style="z-index:999;">
+        <div id="content" style="z-index:999;" droppable>
 
 
             <div style="padding:73px 50px 50px 113px;">
@@ -234,7 +234,19 @@
                     });    
 
 
-            $(".media").draggable({});
+            $(function() {
+                var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: false}
+                $("[draggable]").draggable(draggableArguments);
+                $( "[droppable]" ).droppable({
+                    accept: "[draggable]",
+                    activeClass: "ui-state-hover",
+                    hoverClass: "ui-state-active",
+                    drop: function( event, ui ) {
+                        alert("asdf");
+                        $( this ).addClass( "ui-state-highlight" )
+                    }
+                });
+            });
 
             var geocoder;
 
@@ -416,7 +428,7 @@
         $this.addClass('selected');
   
         // make option object dynamically, i.e. { filter: '.my-filter-class' }
-        var options = {},
+        var options = {'sortAscending' : false},
             key = $optionSet.attr('data-option-key'),
             value = $this.attr('data-option-value');
         // parse 'false' as false boolean
