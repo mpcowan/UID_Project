@@ -200,9 +200,6 @@ $(document).ready(function(){
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
     getResults(query, zipcode);
-    $("#results_panel h4 span[query]").text(query);
-    $("#results_panel h4 span[zipcode]").text(zipcode);
-
     $(".flap").click();
   });
 
