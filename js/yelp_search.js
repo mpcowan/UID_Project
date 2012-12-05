@@ -73,57 +73,6 @@ function searchYelp(query, location) {
       'dataType': 'jsonp',
       'jsonpCallback': 'handleResults',
       'success': function(data, textStats, XMLHttpRequest) {
-        if (data["total"] > 0) {
-          for (var listing in data["businesses"]) {
-            var result = new YelpListing();
-            if (data["businesses"].hasOwnProperty(listing)) {
-              for (var key in listing) {
-                if (listing.hasOwnProperty(key)) {
-                  if (key == "rating") {
-                    result.rating = listing[key];
-                  }
-                  else if (key == "rating_img_url") {
-                    result.rating_img_url = listing[key];
-                  }
-                  else if (key == "name") {
-                    result.name = listing[key];
-                  }
-                  else if (key == "review_count") {
-                    result.review_count = listing[key];
-                  }
-                  else if (key == "snippet_text") {
-                    result.snippet = listing[key];
-                  }
-                  else if (key == "image_url") {
-                    result.image_url = listing[key];
-                  }
-                  else if (key == "url") {
-                    result.yelp_url = listing[key];
-                  }
-                  else if (key == "display_phone") {
-                    result.phone = listing[key];
-                  }
-                  else if (key == "id") {
-                    result.id = listing[key];
-                  }
-                  else if (key == "location") {
-                    result.latitude = listing[key]["coordinate"]["latitude"];
-                    result.longitude = listing[key]["coordinate"]["longitude"];
-                    result.state_code = listing[key]["coordinate"]["state_code"];
-                    result.zip = listing[key]["coordinate"]["postal_code"];
-                    result.city = listing[key]["coordinate"]["city"];
-                    if (listing[key]["coordinate"]["display_address"].length == 4) {
-                      result.address1 = listing[key]["coordinate"]["display_address"][0];
-                      result.address2 = listing[key]["coordinate"]["display_address"][3];
-                    }
-                  }
-                }
-              }
-            }
-          }
-        } else {
-          alert("No results");
-        }
         var output = prettyPrint(data);
       }
     });
@@ -189,6 +138,57 @@ function getResults(query, zipcode) {
     'dataType': 'jsonp',
     'jsonpCallback': 'cb',
     'success': function(data, textStats, XMLHttpRequest) {
+      if (data["total"] > 0) {
+          for (var itemnum in data["businesses"]) {
+            if (data["businesses"].hasOwnProperty(itemnum)) {
+              var result = new YelpListing();
+              for (var key in data["businesses"][itemnum]) {
+                if (data["businesses"][itemnum].hasOwnProperty(key)) {
+                  if (key == "rating") {
+                    result.rating = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "rating_img_url") {
+                    result.rating_img_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "name") {
+                    result.name = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "review_count") {
+                    result.review_count = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "snippet_text") {
+                    result.snippet = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "image_url") {
+                    result.image_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "url") {
+                    result.yelp_url = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "display_phone") {
+                    result.phone = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "id") {
+                    result.id = data["businesses"][itemnum][key];
+                  }
+                  else if (key == "location") {
+                    result.latitude   = data["businesses"][itemnum][key]["coordinate"]["latitude"];
+                    result.longitude  = data["businesses"][itemnum][key]["coordinate"]["longitude"];
+                    result.state_code = data["businesses"][itemnum][key]["coordinate"]["state_code"];
+                    result.zip        = data["businesses"][itemnum][key]["coordinate"]["postal_code"];
+                    result.city       = data["businesses"][itemnum][key]["coordinate"]["city"];
+                    if (data["businesses"][itemnum][key]["coordinate"]["display_address"].length == 4) {
+                      result.address1 = data["businesses"][itemnum][key]["coordinate"]["display_address"][0];
+                      result.address2 = data["businesses"][itemnum][key]["coordinate"]["display_address"][3];
+                    }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          alert("No results");
+        }
       console.log(data);
       var output = prettyPrint(data);
       $("body").append(output);
