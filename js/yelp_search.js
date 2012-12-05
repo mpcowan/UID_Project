@@ -34,9 +34,9 @@ function YelpListing () {
     this.toSearchResult = function(num) {
       var cardString = "<div id=\"master" + num.toString() + "\" class=\"card well\" rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div draggable=\"\" class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
-      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
-      cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
-      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      //cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out\"";
+      //cardString += " onClick=\"pin(" + num.toString() + ",'map" + this.id + "'," + this.latitude + "," + this.longitude + ")\"";
+      //cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
       cardString += "<h3 class=\"popover-title\" name>" + this.name + "</h3>\n";
       cardString += "<div class=\"popover-content\" >\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
@@ -341,6 +341,16 @@ function getResults(query, zipcode) {
                         try { result.address2 = data["businesses"][itemnum][key]["display_address"][1]; }
                         catch(err) { }
                       }
+                      else if (data["businesses"][itemnum][key]["display_address"].length == 3) {
+                        try { result.address1 = data["businesses"][itemnum][key]["display_address"][0]; }
+                        catch(err) { }
+                        try { result.address2 = data["businesses"][itemnum][key]["display_address"][2]; }
+                        catch(err) { }
+                      }
+                      else if (data["businesses"][itemnum][key]["display_address"].length == 1) {
+                        try { result.address1 = data["businesses"][itemnum][key]["display_address"][0]; }
+                        catch(err) { }
+                      }
                     }
                     catch(err) { }
                   }
@@ -362,13 +372,13 @@ function getResults(query, zipcode) {
 
       $("#results_panel").empty();
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
-      for (var tmp in search_cards) 
+      for (var tmp in search_cards)
         $("#results_panel").append(search_cards[tmp]);
 
       var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
       $("[draggable]").draggable(draggableArguments);
       $(".content").css("overflow-y", "scroll");
-      
+
     }
   });
 
