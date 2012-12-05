@@ -61,3 +61,12 @@ function rePin(pinNum) {
     $('#pin' + pinNum.toString()).removeClass("pin-out");
 }
 
+
+function storeCards(cards_array) {
+
+  if(typeof(Storage)!=="undefined")
+    sessionStorage.cardsArray=cards_array;    
+  else
+    return "Sorry, your browser does not support web storage...";
+
+}
