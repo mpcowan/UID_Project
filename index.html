@@ -181,20 +181,19 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <script>
             $("#extruderRight").buildMbExtruder({
-                        position:"right",
-                        width:350,
-                        extruderOpacity:.8,
+                position:"right",
+                width:350,
+                extruderOpacity:.8,
 
-                        hidePanelsOnClose:false,
-                        accordionPanels:false,
-                        onExtOpen:function(){},
-                        onExtContentLoad:function(){$("#extruderRight").openPanel();},
-                        onExtClose:function(){}
-                    });
+                hidePanelsOnClose:false,
+                accordionPanels:false,
+                onExtOpen:function(){},
+                onExtContentLoad:function(){$("#extruderRight").openPanel();},
+                onExtClose:function(){}
+            });
 
             $('#bs-docs-example-popover').isotope({
                 itemSelector : '.popover',
@@ -206,15 +205,12 @@
             });
 
             $('#sort-by a').click(function(){
-
-
                 // get href attribute, minus the '#'
                 var sortName = $(this).attr('href').slice(1);
                 alert(sortName);
                 $('#bs-docs-example-popover').isotope({ sortBy : sortName });
                 return false;
             });
-
 
             $(".media").draggable({});
 
@@ -228,7 +224,7 @@
                 else
                     yqlgeo.get('visitor', normalize_yql_response);
             });
-</script>
+        </script>
 
 
         <!-- Modal -->
