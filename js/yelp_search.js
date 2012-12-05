@@ -48,7 +48,7 @@ function YelpListing () {
     };
     this.toCard = function() {
       var cardString = "<div class=\"card isotope-item\" rating=\"";
-      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" style=\"position: absolute; left: 0px; top: 0px; transform: translate(0px, 0px);\">\n";
+      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" >\n";
       cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
       cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin('" + this.id + "')\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
       cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + this.id + "')\" name>" + this.name + "</h3>\n";
