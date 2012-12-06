@@ -1,5 +1,7 @@
 //go here for more info: http://www.yelp.com/developers/documentation/v2/search_api
 
+var custom_cats = [];
+
 var search_results = [];
 var toAdd_Cards = [];
 var toAdd_Modals = [];
@@ -33,10 +35,10 @@ function YelpListing () {
     this.custom_categories = [];
     this.note              = "";
     this.toSearchResult = function(num) {
-      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card\"";
       cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -116,26 +118,24 @@ function YelpListing () {
       modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
       modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + this.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n</td>\n</tr>\n";
       modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
-      if (this.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
-      else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
+      if (this.note == "") { modalString += "<textarea id=\"note" + this.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+      else { modalString += "<textarea id=\"note" + this.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + this.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
-      //modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + this.yelp_url + "\">Tweet</a>\n";
-      //modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
       modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
-      modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle\" type=\"text\" placeholder=\"No name\" name=\"purple\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
+      modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n";
       modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
-      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
       return modalString;
     };
 }
 
 function toSearchResult(yelp_listing, num) {
-      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
@@ -177,7 +177,7 @@ function toCard(yelp_listing) {
       var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " mapid='map" + yelp_listing.id + "'";
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
-      cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" >\n"; //used to include id=\"card" + yelp_listing.id + "\"
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -220,23 +220,23 @@ function toModal(yelp_listing) {
   modalString += "<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n";
   modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + yelp_listing.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + yelp_listing.review_count + "</p>\n</td>\n</tr>\n";
   modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
-  if (yelp_listing.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
-  else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
+  if (yelp_listing.note == "") { modalString += "<textarea id=\"note" + yelp_listing.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+  else { modalString += "<textarea id=\"note" + yelp_listing.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
   modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
   modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + yelp_listing.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
   modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
-  modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle\" type=\"text\" placeholder=\"No name\" name=\"purple\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
+  modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n";
   modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
-  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
   return modalString;
 }
 
 //our authentication info from yelp, Matt's Keys
-var auth_backup = {
+var auth = {
   consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
   consumerSecret: "Tr7k1th2pJRCL8QOh686DkVlSqk",
   accessToken: "7ZC4hwGaez9yL9Bm4tZyNHBDlgzQIfnU",
@@ -247,7 +247,7 @@ var auth_backup = {
 };
 
 //secondary api keys, courtesy of Matt
-var auth = {
+var auth_backup = {
   consumerKey: "ZQwbb6QQQjtFZ2NvhK9Q6A",
   consumerSecret: "W8SNS0IyuIbHSTq5bS7KXG7teKc",
   accessToken: "lGb7sPwLntAFArfsMSXA7Ame6vmR3nOx",
@@ -555,25 +555,118 @@ function storeCards(cards_array) {
     sessionStorage.cardsArray=cards_array;
   else
     return "Sorry, your browser does not support web storage...";
-
 }
 
 function loadCards(pinnedCards) {
-        
+
     if(pinnedCards != null) {
+      var counter = 0;
       $.each(pinnedCards, function(idx, item)
       {
-        $(".isotope").append( toCard(item) );
-        $("body").append(toModal(item));
-      });        
+        if (item != null) {
+          var elem = toCard(item);
+          $(".isotope").append(elem);
+          $("#card" + item.id).attr("pinindex", counter);
+          $("body").append(toModal(item));
+          //init the custom labels
+          if (custom_cats.length == 5) {
+              alert("Setting categories");
+              if (custom_cats[0] != "Green Label") {
+                  $('input:text[name=green' + pinID + ']').val(custom_cats[0]);
+              }
+              if (custom_cats[1] != "Orange Label") {
+                  $('input:text[name=orange' + pinID + ']').val(custom_cats[1]);
+              }
+              if (custom_cats[2] != "Purple Label") {
+                  $('input:text[name=purple' + pinID + ']').val(custom_cats[2]);
+              }
+              if (custom_cats[3] != "Red Label") {
+                  $('input:text[name=red' + pinID + ']').val(custom_cats[3]);
+              }
+              if (custom_cats[4] != "Blue Label") {
+                  $('input:text[name=blue' + pinID + ']').val(custom_cats[4]);
+              }
+          }
+          //init the map for the modal
+          var lat = item.latitude;
+          var lon = item.longitude;
+          nokia.Settings.set("appId", "tS3F6tL4Vw-6Mz4o7F7s");
+          nokia.Settings.set("authenticationToken", "wW7onlgkAti0wUGXo8Y5Tw");
+          var map = new nokia.maps.map.Display(document.getElementById("map" + item.id),
+              {
+                  'components': [
+                      // ZoomBar provides a UI to zoom the map in & out
+                      new nokia.maps.map.component.ZoomBar(),
+                      // We add the behavior component to allow panning / zooming of the map
+                      //new nokia.maps.map.component.Behavior(),
+                      // Creates UI to easily switch between street map satellite and terrain mapview modes
+                      new nokia.maps.map.component.TypeSelector(),
+                      // Creates a toggle button to show/hide public transport lines on the map
+                      new nokia.maps.map.component.PublicTransport(),
+                      /* Shows a scale bar in the bottom right corner of the map depicting
+                       * ratio of a distance on the map to the corresponding distance in the real world
+                       * in either kilometers or miles
+                       */
+                      new nokia.maps.map.component.ScaleBar()
+                      /* Positioning will show a set "map to my GPS position" UI button
+                       * Note: this component will only be visible if W3C geolocation API
+                       * is supported by the browser and if you agree to share your location.
+                       * If you location can not be found the positioning button will reset
+                       * itself to its initial state
+                       */
+                      //new nokia.maps.positioning.component.Positioning(),
+                      // Add ContextMenu component so we get context menu on right mouse click / long press tap
+                      //new nokia.maps.map.component.ContextMenu()
+                      ],
+                      'zoomLevel': 16,
+                      'center': [lat, lon]
+              });
+          var marker = new nokia.maps.map.StandardMarker([lat, lon]);
+          map.objects.add(marker);
+          counter = counter + 1;
+        }
+      });
     }
 
 }
 
-$(document).ready(function(){
+function loadCategories() {
+  var temp = eval(JSON.parse(sessionStorage.userCats));
+  if (temp != null) {
+    custom_cats = temp;
+  }
+  else {
+    custom_cats = [];
+    custom_cats.push("Green Label");
+    custom_cats.push("Orange Label");
+    custom_cats.push("Purple Label");
+    custom_cats.push("Red Label");
+    custom_cats.push("Blue Label");
+  }
+}
 
-  if( sessionStorage.cardsArray )
+$(document).ready(function(){
+  custom_cats = [];
+  pinnedCards = [];
+
+  if(sessionStorage.userCats) {
+    loadCategories();
+  }
+  else {
+    custom_cats = [];
+    custom_cats.push("Green Label");
+    custom_cats.push("Orange Label");
+    custom_cats.push("Purple Label");
+    custom_cats.push("Red Label");
+    custom_cats.push("Blue Label");
+  }
+
+  if( sessionStorage.cardsArray ) {
     pinnedCards = eval(JSON.parse(sessionStorage.cardsArray));
+    if (pinnedCards == null) {
+      pinnedCards = [];
+    }
+  }
   else
     pinnedCards = [];
 

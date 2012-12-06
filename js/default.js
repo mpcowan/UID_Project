@@ -10,10 +10,10 @@ function unPin(pinNum) {
         "label" : "Yes",
         "class" : "btn-primary",
         "callback": function() {
-           
-            var pin_idx = $('#pin' + pinNum.toString()).attr("pinindex");
+            var str_pin_idx = $('#card' + pinNum.toString()).attr("pinindex");
+            var pin_idx = parseInt(str_pin_idx);
             pinnedCards.splice(pin_idx, 1);
-            savePinnedCards(); 
+            savePinnedCards();
             var elem = $('#card' + pinNum.toString());
             $(".isotope").isotope( 'remove', elem);
         }
@@ -27,8 +27,100 @@ function unPin(pinNum) {
 
 }
 
+function getPinIndex(cardID) {
+    var str_pin_idx = $('#card' + cardID.toString()).attr("pinindex");
+    var pin_idx = parseInt(str_pin_idx);
+    return pin_idx;
+}
+
+function saveModal(cardID) {
+    var pin_idx = getPinIndex(cardID);
+    var changed = false;
+    //save the note
+    if (pinnedCards[pin_idx].note != $("#note" + cardID).val()) {
+        pinnedCards[pin_idx].note = $("#note" + cardID).val();
+        changed = true;
+    }
+    //save the custom category names
+    var green = $("#greenTitle"+cardID).val();
+    var orange = $("#orangeTitle"+cardID).val();
+    var purple = $("#purpleTitle"+cardID).val();
+    var red = $("#redTitle"+cardID).val();
+    var blue = $("#blueTitle"+cardID).val();
+    if (custom_cats.length == 5) {
+        if (custom_cats[0] != green) {
+            if (green == "") {
+                custom_cats[0] = "Green Label";
+            }
+            else {
+                custom_cats[0] = green;
+            }
+            changed = true;
+        }
+        if (custom_cats[1] != orange) {
+            if (orange == "") {
+                custom_cats[1] = "Orange Label";
+            }
+            else {
+                custom_cats[1] = orange;
+            }
+            changed = true;
+        }
+        if (custom_cats[2] != purple) {
+            if (purple == "") {
+                custom_cats[2] = "Purple Label";
+            }
+            else {
+                custom_cats[2] = purple;
+            }
+            changed = true;
+        }
+        if (custom_cats[3] != red) {
+            if (red == "") {
+                custom_cats[3] = "Red Label";
+            }
+            else {
+                custom_cats[3] = red;
+            }
+            changed = true;
+        }
+        if (custom_cats[4] != blue) {
+            if (blue == "") {
+                custom_cats[4] = "Blue Label";
+            }
+            else {
+                custom_cats[4] = blue;
+            }
+            changed = true;
+        }
+    }
+    //store the new information
+    savePinnedCards();
+    //store the new category information
+    saveCategories();
+    //display a success message
+    /*
+    if (changed) {
+    bootbox.dialog("Your modifications have been saved.", [{
+                                "label" : "OK",
+                                "class" : "btn-success",
+                            }]);
+    }
+    else {
+        bootbox.dialog("No modifications to save.", [{
+                                    "label" : "OK",
+                                    "class" : "btn-warning",
+                                }]);
+    }
+    */
+}
+
 function savePinnedCards() {
    sessionStorage.cardsArray = JSON.stringify(pinnedCards);
+}
+
+function saveCategories() {
+    sessionStorage.userCats = JSON.stringify(custom_cats);
 }
 
 function rePin(pinNum) {
@@ -42,6 +134,25 @@ function pin(pinID, mapUnique, lat, lon) {
     //$('#master' + pinID.toString()).remove();
     //add the modal bit to the body
     $('body').append(toAdd_Modals[pinID]);
+    //init the custom labels
+    if (custom_cats.length == 5) {
+        alert("Setting categories");
+        if (custom_cats[0] != "Green Label") {
+            $('input:text[name=green' + pinID + ']').val(custom_cats[0]);
+        }
+        if (custom_cats[1] != "Orange Label") {
+            $('input:text[name=orange' + pinID + ']').val(custom_cats[1]);
+        }
+        if (custom_cats[2] != "Purple Label") {
+            $('input:text[name=purple' + pinID + ']').val(custom_cats[2]);
+        }
+        if (custom_cats[3] != "Red Label") {
+            $('input:text[name=red' + pinID + ']').val(custom_cats[3]);
+        }
+        if (custom_cats[4] != "Blue Label") {
+            $('input:text[name=blue' + pinID + ']').val(custom_cats[4]);
+        }
+    }
     //init the map for the modal
     nokia.Settings.set("appId", "tS3F6tL4Vw-6Mz4o7F7s");
     nokia.Settings.set("authenticationToken", "wW7onlgkAti0wUGXo8Y5Tw");
