@@ -42,11 +42,11 @@ function saveModal(cardID) {
         changed = true;
     }
     //save the custom category names
-    var green = $("#greenTitle").val();
-    var orange = $("#orangeTitle").val();
-    var purple = $("#purpleTitle").val();
-    var red = $("#redTitle").val();
-    var blue = $("#blueTitle").val();
+    var green = $("#greenTitle"+cardID).val();
+    var orange = $("#orangeTitle"+cardID).val();
+    var purple = $("#purpleTitle"+cardID).val();
+    var red = $("#redTitle"+cardID).val();
+    var blue = $("#blueTitle"+cardID).val();
     if (custom_cats.length == 5) {
         if (custom_cats[0] != green) {
             if (green == "") {
@@ -99,6 +99,7 @@ function saveModal(cardID) {
     //store the new category information
     saveCategories();
     //display a success message
+    /*
     if (changed) {
     bootbox.dialog("Your modifications have been saved.", [{
                                 "label" : "OK",
@@ -111,6 +112,7 @@ function saveModal(cardID) {
                                     "class" : "btn-warning",
                                 }]);
     }
+    */
 }
 
 function savePinnedCards() {
@@ -132,6 +134,25 @@ function pin(pinID, mapUnique, lat, lon) {
     //$('#master' + pinID.toString()).remove();
     //add the modal bit to the body
     $('body').append(toAdd_Modals[pinID]);
+    //init the custom labels
+    if (custom_cats.length == 5) {
+        alert("Setting categories");
+        if (custom_cats[0] != "Green Label") {
+            $('input:text[name=green' + pinID + ']').val(custom_cats[0]);
+        }
+        if (custom_cats[1] != "Orange Label") {
+            $('input:text[name=orange' + pinID + ']').val(custom_cats[1]);
+        }
+        if (custom_cats[2] != "Purple Label") {
+            $('input:text[name=purple' + pinID + ']').val(custom_cats[2]);
+        }
+        if (custom_cats[3] != "Red Label") {
+            $('input:text[name=red' + pinID + ']').val(custom_cats[3]);
+        }
+        if (custom_cats[4] != "Blue Label") {
+            $('input:text[name=blue' + pinID + ']').val(custom_cats[4]);
+        }
+    }
     //init the map for the modal
     nokia.Settings.set("appId", "tS3F6tL4Vw-6Mz4o7F7s");
     nokia.Settings.set("authenticationToken", "wW7onlgkAti0wUGXo8Y5Tw");
