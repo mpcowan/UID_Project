@@ -131,43 +131,67 @@ function addCategory(cardID, catID) {
     var pin_idx = getPinIndex(cardID);
     if (catID == 1) {
         pinnedCards[pin_idx].custom_categories.push(1);
-        $("#cats" + cardID).append("<div class=\"card-label green-label\"></div>");
+        $("#cats" + cardID).append("<div id=\"green-label" + cardID + "\" class=\"card-label green-label\"></div>");
     }
     else if (catID == 2) {
         pinnedCards[pin_idx].custom_categories.push(2);
-        $("#cats" + cardID).append("<div class=\"card-label orange-label\"></div>");
+        $("#cats" + cardID).append("<div id=\"orange-label" + cardID + "\" class=\"card-label orange-label\"></div>");
     }
     else if (catID == 3) {
         pinnedCards[pin_idx].custom_categories.push(3);
-        $("#cats" + cardID).append("<div class=\"card-label purple-label\"></div>");
+        $("#cats" + cardID).append("<div id=\"purple-label" + cardID + "\" class=\"card-label purple-label\"></div>");
     }
     else if (catID == 4) {
         pinnedCards[pin_idx].custom_categories.push(4);
-        $("#cats" + cardID).append("<div class=\"card-label red-label\"></div>");
+        $("#cats" + cardID).append("<div id=\"red-label" + cardID + "\" class=\"card-label red-label\"></div>");
     }
     else if (catID == 5) {
         pinnedCards[pin_idx].custom_categories.push(5);
-        $("#cats" + cardID).append("<div class=\"card-label blue-label\"></div>");
+        $("#cats" + cardID).append("<div id=\"blue-label" + cardID + "\" class=\"card-label blue-label\"></div>");
     }
-    savePinnedCards
+    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-minus");
+    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-plus");
+    $("#cat-but" + catID.toString() + cardID).removeClass("btn-danger");
+    $("#cat-but" + catID.toString() + cardID).addClass("btn-success");
+    savePinnedCards();
 }
 
 function removeCategory(cardID, catID) {
     var pin_idx = getPinIndex(cardID);
     if (catID == 1) {
-
+        pinnedCards[pin_idx].custom_categories.splice( $.inArray(1, pinnedCards[pin_idx].custom_categories), 1 );
+        $("#green-label" + cardID).remove();
     }
     else if (catID == 2) {
-
+        pinnedCards[pin_idx].custom_categories.splice( $.inArray(2, pinnedCards[pin_idx].custom_categories), 1 );
+        $("#orange-label" + cardID).remove();
     }
     else if (catID == 3) {
-
+        pinnedCards[pin_idx].custom_categories.splice( $.inArray(3, pinnedCards[pin_idx].custom_categories), 1 );
+        $("#purple-label" + cardID).remove();
     }
     else if (catID == 4) {
-
+        pinnedCards[pin_idx].custom_categories.splice( $.inArray(4, pinnedCards[pin_idx].custom_categories), 1 );
+        $("#red-label" + cardID).remove();
     }
     else if (catID == 5) {
+        pinnedCards[pin_idx].custom_categories.splice( $.inArray(5, pinnedCards[pin_idx].custom_categories), 1 );
+        $("#blue-label" + cardID).remove();
+    }
+    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-minus");
+    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-plus");
+    $("#cat-but" + catID.toString() + cardID).addClass("btn-danger");
+    $("#cat-but" + catID.toString() + cardID).removeClass("btn-success");
+    savePinnedCards();
+}
 
+function toggleCategory(cardID, catID) {
+    var pin_idx = getPinIndex(cardID);
+    if ($.inArray(parseInt(catID), pinnedCards[pin_idx].custom_categories) != -1) {
+        removeCategory(cardID, catID);
+    }
+    else {
+        addCategory(cardID, catID);
     }
 }
 
