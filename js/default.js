@@ -77,3 +77,11 @@ function pin(pinID, mapUnique, lat, lon) {
     //setTimeout(function(){n.close(); }, 3000);
 }
 
+function isPinned(yelp_id) {
+    for (var i = 0; i < pinnedCards.length; i++) {
+        if (pinnedCards[i].id == yelp_id) {
+            return true;
+        }
+    }
+    return false;
+}

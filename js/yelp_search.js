@@ -33,7 +33,7 @@ function YelpListing () {
     this.note              = "";
     this.toSearchResult = function(num) {
       var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
-      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " mapid='map" + this.id + "'" + " searchInd=" + num.toString();
+      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
