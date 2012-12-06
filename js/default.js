@@ -129,10 +129,40 @@ function rePin(pinNum) {
 
 function addCategory(cardID, catID) {
     alert("Adding category");
+    if (catID == 1) {
+
+    }
+    else if (catID == 2) {
+
+    }
+    else if (catID == 3) {
+
+    }
+    else if (catID == 4) {
+
+    }
+    else if (catID == 5) {
+
+    }
 }
 
 function removeCategory(cardID, catID) {
     alert("Removing category");
+    if (catID == 1) {
+
+    }
+    else if (catID == 2) {
+
+    }
+    else if (catID == 3) {
+
+    }
+    else if (catID == 4) {
+
+    }
+    else if (catID == 5) {
+
+    }
 }
 
 function pin(pinID, mapUnique, lat, lon) {
