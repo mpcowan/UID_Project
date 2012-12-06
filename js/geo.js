@@ -104,7 +104,7 @@ function handle_errors(error)
 
 
         var n = noty({ text: "Location added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
-        setTimeout(function(){n.close(); }, 3000);
+      setTimeout(function(){n.close(); }, 3000);
 
         $("input#locale").val(local);
 

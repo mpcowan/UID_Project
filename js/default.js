@@ -10,7 +10,12 @@ function unPin(pinNum) {
         "label" : "Yes",
         "class" : "btn-primary",
         "callback": function() {
-            $('#card' + pinNum.toString()).remove();
+           
+            var pin_idx = $('#pin' + pinNum.toString()).attr("pinindex");
+            pinnedCards.splice(pin_idx, 1);
+            savePinnedCards(); 
+            var elem = $('#card' + pinNum.toString());
+            $(".isotope").isotope( 'remove', elem);
         }
     }, {
         "label" : "Cancel",
@@ -19,6 +24,7 @@ function unPin(pinNum) {
             rePin(pinNum);
         }
     }]);
+
 }
 
 function savePinnedCards() {
