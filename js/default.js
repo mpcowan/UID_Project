@@ -10,10 +10,10 @@ function unPin(pinNum) {
         "label" : "Yes",
         "class" : "btn-primary",
         "callback": function() {
-           
-            var pin_idx = $('#pin' + pinNum.toString()).attr("pinindex");
+            var str_pin_idx = $('#card' + pinNum.toString()).attr("pinindex");
+            var pin_idx = parseInt(str_pin_idx);
             pinnedCards.splice(pin_idx, 1);
-            savePinnedCards(); 
+            savePinnedCards();
             var elem = $('#card' + pinNum.toString());
             $(".isotope").isotope( 'remove', elem);
         }

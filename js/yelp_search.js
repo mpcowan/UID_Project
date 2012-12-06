@@ -33,10 +33,10 @@ function YelpListing () {
     this.custom_categories = [];
     this.note              = "";
     this.toSearchResult = function(num) {
-      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card\"";
       cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
-      cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -120,8 +120,6 @@ function YelpListing () {
       else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + this.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
-      //modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + this.yelp_url + "\">Tweet</a>\n";
-      //modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
       modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
       modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
       modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
@@ -133,9 +131,9 @@ function YelpListing () {
       return modalString;
     };
 }
-
-function toSearchResult(yelp_listing, num) {
-      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+function
+ toSearchResult(yelp_listing, num) {
+      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
@@ -177,7 +175,7 @@ function toCard(yelp_listing) {
       var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " mapid='map" + yelp_listing.id + "'";
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
-      cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" >\n"; //used to include id=\"card" + yelp_listing.id + "\"
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
@@ -236,7 +234,7 @@ function toModal(yelp_listing) {
 }
 
 //our authentication info from yelp, Matt's Keys
-var auth_backup = {
+var auth = {
   consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
   consumerSecret: "Tr7k1th2pJRCL8QOh686DkVlSqk",
   accessToken: "7ZC4hwGaez9yL9Bm4tZyNHBDlgzQIfnU",
@@ -247,7 +245,7 @@ var auth_backup = {
 };
 
 //secondary api keys, courtesy of Matt
-var auth = {
+var auth_backup = {
   consumerKey: "ZQwbb6QQQjtFZ2NvhK9Q6A",
   consumerSecret: "W8SNS0IyuIbHSTq5bS7KXG7teKc",
   accessToken: "lGb7sPwLntAFArfsMSXA7Ame6vmR3nOx",
@@ -559,21 +557,32 @@ function storeCards(cards_array) {
 }
 
 function loadCards(pinnedCards) {
-        
+
     if(pinnedCards != null) {
+      var counter = 0;
       $.each(pinnedCards, function(idx, item)
       {
-        $(".isotope").append( toCard(item) );
-        $("body").append(toModal(item));
-      });        
+        if (item != null) {
+          var elem = toCard(item);
+          $(".isotope").append(elem);
+          $("#card" + item.id).attr("pinindex", counter);
+          $("body").append(toModal(item));
+          counter = counter + 1;
+        }
+      });
     }
 
 }
 
 $(document).ready(function(){
+  pinnedCards = [];
 
-  if( sessionStorage.cardsArray )
+  if( sessionStorage.cardsArray ) {
     pinnedCards = eval(JSON.parse(sessionStorage.cardsArray));
+    if (pinnedCards == null) {
+      pinnedCards = [];
+    }
+  }
   else
     pinnedCards = [];
 
