@@ -46,19 +46,19 @@ function YelpListing () {
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
           if (this.custom_categories[ind] == 1) {
-            cardString += "<div class=\"card-label green-label\"></div>";
+            cardString += "<div id=\"green-label" + this.id + "\" class=\"card-label green-label\"></div>";
           }
           else if (this.custom_categories[ind] == 2) {
-            cardString += "<div class=\"card-label orange-label\"></div>";
+            cardString += "<div id=\"orange-label" + this.id + "\" class=\"card-label orange-label\"></div>";
           }
           else if (this.custom_categories[ind] == 3) {
-            cardString += "<div class=\"card-label purple-label\"></div>";
+            cardString += "<div id=\"purple-label" + this.id + "\" class=\"card-label purple-label\"></div>";
           }
           else if (this.custom_categories[ind] == 4) {
-            cardString += "<div class=\"card-label red-label\"></div>";
+            cardString += "<div id=\"red-label" + this.id + "\" class=\"card-label red-label\"></div>";
           }
           else {
-            cardString += "<div class=\"card-label blue-label\"></div>";
+            cardString += "<div id=\"blue-label" + this.id + "\" class=\"card-label blue-label\"></div>";
           }
         }
       }
@@ -84,19 +84,19 @@ function YelpListing () {
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
           if (this.custom_categories[ind] == 1) {
-            cardString += "<div class=\"card-label green-label\"></div>";
+            cardString += "<div id=\"green-label" + this.id + "\" class=\"card-label green-label\"></div>";
           }
           else if (this.custom_categories[ind] == 2) {
-            cardString += "<div class=\"card-label orange-label\"></div>";
+            cardString += "<div id=\"orange-label" + this.id + "\" class=\"card-label orange-label\"></div>";
           }
           else if (this.custom_categories[ind] == 3) {
-            cardString += "<div class=\"card-label purple-label\"></div>";
+            cardString += "<div id=\"purple-label" + this.id + "\" class=\"card-label purple-label\"></div>";
           }
           else if (this.custom_categories[ind] == 4) {
-            cardString += "<div class=\"card-label red-label\"></div>";
+            cardString += "<div id=\"red-label" + this.id + "\" class=\"card-label red-label\"></div>";
           }
           else {
-            cardString += "<div class=\"card-label blue-label\"></div>";
+            cardString += "<div id=\"blue-label" + this.id + "\" class=\"card-label blue-label\"></div>";
           }
         }
       }
@@ -156,19 +156,19 @@ function toSearchResult(yelp_listing, num) {
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
           if (yelp_listing.custom_categories[ind] == 1) {
-            cardString += "<div class=\"card-label green-label\"></div>";
+            cardString += "<div id=\"green-label" + this.id + "\" class=\"card-label green-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 2) {
-            cardString += "<div class=\"card-label orange-label\"></div>";
+            cardString += "<div id=\"orange-label" + this.id + "\" class=\"card-label orange-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 3) {
-            cardString += "<div class=\"card-label purple-label\"></div>";
+            cardString += "<div id=\"purple-label" + this.id + "\" class=\"card-label purple-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 4) {
-            cardString += "<div class=\"card-label red-label\"></div>";
+            cardString += "<div id=\"red-label" + this.id + "\" class=\"card-label red-label\"></div>";
           }
           else {
-            cardString += "<div class=\"card-label blue-label\"></div>";
+            cardString += "<div id=\"blue-label" + this.id + "\" class=\"card-label blue-label\"></div>";
           }
         }
       }
@@ -195,19 +195,19 @@ function toCard(yelp_listing) {
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
           if (yelp_listing.custom_categories[ind] == 1) {
-            cardString += "<div class=\"card-label green-label\"></div>";
+            cardString += "<div id=\"green-label" + this.id + "\" class=\"card-label green-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 2) {
-            cardString += "<div class=\"card-label orange-label\"></div>";
+            cardString += "<div id=\"orange-label" + this.id + "\" class=\"card-label orange-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 3) {
-            cardString += "<div class=\"card-label purple-label\"></div>";
+            cardString += "<div id=\"purple-label" + this.id + "\" class=\"card-label purple-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 4) {
-            cardString += "<div class=\"card-label red-label\"></div>";
+            cardString += "<div id=\"red-label" + this.id + "\" class=\"card-label red-label\"></div>";
           }
           else {
-            cardString += "<div class=\"card-label blue-label\"></div>";
+            cardString += "<div id=\"blue-label" + this.id + "\" class=\"card-label blue-label\"></div>";
           }
         }
       }
