@@ -121,7 +121,7 @@
                             $(elem).find(".pin-hidden").removeClass("pin-hidden");
                             var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                             $(elem).find(".pin-out").removeClass( "pin-out", 2000);
-                            $(elem).attr("pinindex", pinindex);
+                            var pinindex = $(elem).attr("pinindex", pinindex);
                             setTimeout(function(){n.close(); }, 3000);
                         }
                         else {

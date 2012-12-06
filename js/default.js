@@ -25,12 +25,17 @@ function unPin(pinNum) {
     }]);
 }
 
+function savePinnedCard(pinnedCard) {
+    
+}
+
 function rePin(pinNum) {
     $('#pin' + pinNum.toString()).removeClass("pin-out");
 }
 
 function pin(pinID, mapUnique, lat, lon) {
     pinnedCards.push(search_results[pinID]);
+    savePinnedCard(search_results[pinID]);
     //remove it from the results list
     //$('#master' + pinID.toString()).remove();
     //add the modal bit to the body

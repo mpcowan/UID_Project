@@ -3,6 +3,7 @@
 var search_results = [];
 var toAdd_Cards = [];
 var toAdd_Modals = [];
+var persisting_cards = [];
 
 function YelpListing () {
     /*
@@ -457,13 +458,21 @@ function storeCards(cards_array) {
 }
 
 function loadCards() {
-    return sessionStorage.cardsArray;
+    pinnedcards = sessionStorage.cardsArray;
+
+    if( pinnedcards.length ) {
+      $.each(pinnedcards, function(idx, card){
+        $(".isotope").append(card.toCard());
+        $("body").append(card.toModal());
+      });
+    }
 }
 
 $(document).ready(function(){
 
   //filerInit();
-  $(".isotope").html(loadCards());
+  // $(".isotope").html(loadCards());
+  loadCards();
 
   $("button#search").click(function(){
     var query = $("input#query").val();
