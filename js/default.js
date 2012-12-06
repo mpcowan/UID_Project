@@ -15,6 +15,7 @@ function unPin(pinNum) {
             pinnedCards.splice(pin_idx, 1);
             savePinnedCards();
             var elem = $('#card' + pinNum.toString());
+            $("#modal" + pinNum.toString()).remove();
             $(".isotope").isotope( 'remove', elem);
         }
     }, {
