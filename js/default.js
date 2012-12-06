@@ -42,7 +42,62 @@ function saveModal(cardID) {
         changed = true;
     }
     //save the custom category names
-
+    var green = $("#greenTitle").val();
+    var orange = $("#orangeTitle").val();
+    var purple = $("#purpleTitle").val();
+    var red = $("#redTitle").val();
+    var blue = $("#blueTitle").val();
+    if (custom_cats.length == 5) {
+        if (custom_cats[0] != green) {
+            if (green == "") {
+                custom_cats[0] = "Green Label";
+            }
+            else {
+                custom_cats[0] = green;
+            }
+            changed = true;
+        }
+        if (custom_cats[1] != orange) {
+            if (orange == "") {
+                custom_cats[1] = "Orange Label";
+            }
+            else {
+                custom_cats[1] = orange;
+            }
+            changed = true;
+        }
+        if (custom_cats[2] != purple) {
+            if (purple == "") {
+                custom_cats[2] = "Purple Label";
+            }
+            else {
+                custom_cats[2] = purple;
+            }
+            changed = true;
+        }
+        if (custom_cats[3] != red) {
+            if (red == "") {
+                custom_cats[3] = "Red Label";
+            }
+            else {
+                custom_cats[3] = red;
+            }
+            changed = true;
+        }
+        if (custom_cats[4] != blue) {
+            if (blue == "") {
+                custom_cats[4] = "Blue Label";
+            }
+            else {
+                custom_cats[4] = blue;
+            }
+            changed = true;
+        }
+    }
+    //store the new information
+    savePinnedCards();
+    //store the new category information
+    saveCategories();
     //display a success message
     if (changed) {
     bootbox.dialog("Your modifications have been saved.", [{
@@ -60,6 +115,10 @@ function saveModal(cardID) {
 
 function savePinnedCards() {
    sessionStorage.cardsArray = JSON.stringify(pinnedCards);
+}
+
+function saveCategories() {
+    sessionStorage.userCats = JSON.stringify(custom_cats);
 }
 
 function rePin(pinNum) {
