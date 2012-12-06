@@ -563,17 +563,19 @@ function storeCards(cards_array) {
 function loadCards(pinnedCards) {
         
     if(pinnedCards != null) {
-      $.each(pinnedCards, function(idx, card){
-        $(".isotope").append( toCard(card) );
-        $("body").append(toModal(card));
-      });
+      $.each(pinnedCards, function(idx, item)
+      {
+        $(".isotope").append( toCard(item) );
+        $("body").append(toModal(item));
+      });        
     }
+
 }
 
 $(document).ready(function(){
 
   if( sessionStorage.cardsArray )
-    pinnedCards = JSON.parse(sessionStorage.cardsArray);
+    pinnedCards = eval(JSON.parse(sessionStorage.cardsArray));
   else
     pinnedCards = [];
 
@@ -581,7 +583,8 @@ $(document).ready(function(){
   // $(".isotope").html(loadCards());
   loadCards(pinnedCards);
 
-  $("button#search").click(function(){
+  $("button#search").click(function(e){
+    e.preventDefault();
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
     $("#results_panel").html("<br/><br/><h4 style='text-align:center;'>Loading results from Yelp...&nbsp; <img src='imgs/load.gif'></h4>");

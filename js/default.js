@@ -21,13 +21,8 @@ function unPin(pinNum) {
     }]);
 }
 
-function savePinnedCard(pinnedCard) {
-    var pinned_cards_json = [];
-    if (sessionStorage.cardsArray)
-        var pinned_cards_json = JSON.parse(sessionStorage.cardsArray);
-    var pinned_card_json = JSON.stringify(pinnedCard);
-    pinned_cards_json.push(pinned_card_json);
-    sessionStorage.cardsArray = pinned_cards_json;
+function savePinnedCards() {
+   sessionStorage.cardsArray = JSON.stringify(pinnedCards);
 }
 
 function rePin(pinNum) {
@@ -36,7 +31,7 @@ function rePin(pinNum) {
 
 function pin(pinID, mapUnique, lat, lon) {
     pinnedCards.push(search_results[pinID]);
-    savePinnedCard(search_results[pinID]);
+    savePinnedCards();
     //remove it from the results list
     //$('#master' + pinID.toString()).remove();
     //add the modal bit to the body
