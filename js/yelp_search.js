@@ -589,4 +589,9 @@ $(document).ready(function(){
     getResults(query, zipcode);
     if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
   });
+
+  $(".flap").click(function()
+  {
+    $(".content").css("overflow-y", "scroll");
+  });
 });
