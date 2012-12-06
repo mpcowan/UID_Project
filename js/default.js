@@ -127,6 +127,14 @@ function rePin(pinNum) {
     $('#pin' + pinNum.toString()).removeClass("pin-out");
 }
 
+function addCategory(cardID, catID) {
+    alert("Adding category");
+}
+
+function removeCategory(cardID, catID) {
+    alert("Removing category");
+}
+
 function pin(pinID, mapUnique, lat, lon) {
     pinnedCards.push(search_results[pinID]);
     savePinnedCards();
@@ -134,23 +142,23 @@ function pin(pinID, mapUnique, lat, lon) {
     //$('#master' + pinID.toString()).remove();
     //add the modal bit to the body
     $('body').append(toAdd_Modals[pinID]);
+    var actID = mapUnique.substring(3);
     //init the custom labels
     if (custom_cats.length == 5) {
-        alert("Setting categories");
         if (custom_cats[0] != "Green Label") {
-            $('input:text[name=green' + pinID + ']').val(custom_cats[0]);
+            $('input:text[name=green' + actID + ']').val(custom_cats[0]);
         }
         if (custom_cats[1] != "Orange Label") {
-            $('input:text[name=orange' + pinID + ']').val(custom_cats[1]);
+            $('input:text[name=orange' + actID + ']').val(custom_cats[1]);
         }
         if (custom_cats[2] != "Purple Label") {
-            $('input:text[name=purple' + pinID + ']').val(custom_cats[2]);
+            $('input:text[name=purple' + actID + ']').val(custom_cats[2]);
         }
         if (custom_cats[3] != "Red Label") {
-            $('input:text[name=red' + pinID + ']').val(custom_cats[3]);
+            $('input:text[name=red' + actID + ']').val(custom_cats[3]);
         }
         if (custom_cats[4] != "Blue Label") {
-            $('input:text[name=blue' + pinID + ']').val(custom_cats[4]);
+            $('input:text[name=blue' + actID + ']').val(custom_cats[4]);
         }
     }
     //init the map for the modal

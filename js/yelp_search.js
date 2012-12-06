@@ -122,12 +122,22 @@ function YelpListing () {
       else { modalString += "<textarea id=\"note" + this.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + this.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
-      modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
-      modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + this.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n";
+      modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n";
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + this.id + "\">\n</td>\n<td>\n";
+      if ($.inArray(1, this.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + this.id + "',1)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + this.id + "',1)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + this.id + "\">\n</td>\n<td>\n";
+      if ($.inArray(2, this.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + this.id + "',2)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + this.id + "',2)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + this.id + "\">\n</td>\n<td>\n";
+      if ($.inArray(3, this.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + this.id + "',3)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + this.id + "',3)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + this.id + "\">\n</td>\n<td>\n";
+      if ($.inArray(4, this.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + this.id + "',4)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + this.id + "',4)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+      modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + this.id + "\">\n</td>\n<td>\n";
+      if ($.inArray(5, this.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + this.id + "',5)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
+      else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + this.id + "',5)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
       modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
       modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
       return modalString;
@@ -224,12 +234,22 @@ function toModal(yelp_listing) {
   else { modalString += "<textarea id=\"note" + yelp_listing.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
   modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
   modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + yelp_listing.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
-  modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
-  modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
-  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + yelp_listing.id + "\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n";
+  modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"green" + yelp_listing.id + "\">\n</td>\n<td>\n";
+  if ($.inArray(1, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + yelp_listing.id + "',1)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + yelp_listing.id + "',1)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"orange" + yelp_listing.id + "\">\n</td>\n<td>\n";
+  if ($.inArray(2, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + yelp_listing.id + "',2)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + yelp_listing.id + "',2)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"purple" + yelp_listing.id + "\">\n</td>\n<td>\n";
+  if ($.inArray(3, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + yelp_listing.id + "',3)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + yelp_listing.id + "',3)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"red" + yelp_listing.id + "\">\n</td>\n<td>\n";
+  if ($.inArray(4, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + yelp_listing.id + "',4)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + yelp_listing.id + "',4)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n"; }
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + yelp_listing.id + "\">\n</td>\n<td>\n";
+  if ($.inArray(5, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" class=\"btn btn-success btn-small\" onClick=\"addCategory('" + yelp_listing.id + "',5)\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
+  else { modalString += "<a href=\"#\" class=\"btn btn-danger btn-small\" onClick=\"removeCategory('" + yelp_listing.id + "',5)\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
   modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
   modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
   return modalString;
@@ -570,21 +590,20 @@ function loadCards(pinnedCards) {
           $("body").append(toModal(item));
           //init the custom labels
           if (custom_cats.length == 5) {
-              alert("Setting categories");
               if (custom_cats[0] != "Green Label") {
-                  $('input:text[name=green' + pinID + ']').val(custom_cats[0]);
+                  $('input:text[name=green' + item.id + ']').val(custom_cats[0]);
               }
               if (custom_cats[1] != "Orange Label") {
-                  $('input:text[name=orange' + pinID + ']').val(custom_cats[1]);
+                  $('input:text[name=orange' + item.id + ']').val(custom_cats[1]);
               }
               if (custom_cats[2] != "Purple Label") {
-                  $('input:text[name=purple' + pinID + ']').val(custom_cats[2]);
+                  $('input:text[name=purple' + item.id + ']').val(custom_cats[2]);
               }
               if (custom_cats[3] != "Red Label") {
-                  $('input:text[name=red' + pinID + ']').val(custom_cats[3]);
+                  $('input:text[name=red' + item.id + ']').val(custom_cats[3]);
               }
               if (custom_cats[4] != "Blue Label") {
-                  $('input:text[name=blue' + pinID + ']').val(custom_cats[4]);
+                  $('input:text[name=blue' + item.id + ']').val(custom_cats[4]);
               }
           }
           //init the map for the modal
