@@ -178,7 +178,7 @@ function toCard(yelp_listing) {
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " mapid='map" + yelp_listing.id + "'";
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
-      cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
+      cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
       cardString += "<div class=\"card-categories\">\n"
@@ -224,8 +224,6 @@ function toModal(yelp_listing) {
   else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
   modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
   modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + yelp_listing.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
-  //modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + yelp_listing.yelp_url + "\">Tweet</a>\n";
-  //modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
   modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
   modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
   modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
