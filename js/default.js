@@ -194,11 +194,9 @@ function removeCategory(cardID, catID) {
 function toggleCategory(cardID, catID) {
     var pin_idx = getPinIndex(cardID);
     if ($.inArray(parseInt(catID), pinnedCards[pin_idx].custom_categories) != -1) {
-        alert("Removing category: " + catID.toString());
         removeCategory(cardID, catID);
     }
     else {
-        alert("Adding category: " + catID.toString());
         addCategory(cardID, catID);
     }
 }
