@@ -116,8 +116,8 @@ function YelpListing () {
       modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
       modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + this.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n</td>\n</tr>\n";
       modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
-      if (this.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
-      else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
+      if (this.note == "") { modalString += "<textarea id=\"note" + this.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+      else { modalString += "<textarea id=\"note" + this.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + this.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
       modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
@@ -127,12 +127,12 @@ function YelpListing () {
       modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
       modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
       modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
-      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
       return modalString;
     };
 }
-function
- toSearchResult(yelp_listing, num) {
+
+function toSearchResult(yelp_listing, num) {
       var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
       cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
@@ -218,8 +218,8 @@ function toModal(yelp_listing) {
   modalString += "<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n";
   modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + yelp_listing.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + yelp_listing.review_count + "</p>\n</td>\n</tr>\n";
   modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
-  if (yelp_listing.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
-  else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
+  if (yelp_listing.note == "") { modalString += "<textarea id=\"note" + yelp_listing.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+  else { modalString += "<textarea id=\"note" + yelp_listing.id + "\" class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
   modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
   modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + yelp_listing.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
   modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
@@ -229,7 +229,7 @@ function toModal(yelp_listing) {
   modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
   modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
   modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
-  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
   return modalString;
 }
 

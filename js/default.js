@@ -27,6 +27,37 @@ function unPin(pinNum) {
 
 }
 
+function getPinIndex(cardID) {
+    var str_pin_idx = $('#card' + cardID.toString()).attr("pinindex");
+    var pin_idx = parseInt(str_pin_idx);
+    return pin_idx;
+}
+
+function saveModal(cardID) {
+    var pin_idx = getPinIndex(cardID);
+    var changed = false;
+    //save the note
+    if (pinnedCards[pin_idx].note != $("#note" + cardID).val()) {
+        pinnedCards[pin_idx].note = $("#note" + cardID).val();
+        changed = true;
+    }
+    //save the custom category names
+
+    //display a success message
+    if (changed) {
+    bootbox.dialog("Your modifications have been saved.", [{
+                                "label" : "OK",
+                                "class" : "btn-success",
+                            }]);
+    }
+    else {
+        bootbox.dialog("No modifications to save.", [{
+                                    "label" : "OK",
+                                    "class" : "btn-warning",
+                                }]);
+    }
+}
+
 function savePinnedCards() {
    sessionStorage.cardsArray = JSON.stringify(pinnedCards);
 }
