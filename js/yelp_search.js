@@ -462,6 +462,8 @@ function loadCards() {
 
 $(document).ready(function(){
 
+  pinnedCards = [];
+
   //filerInit();
   $(".isotope").html(loadCards());
 

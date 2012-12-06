@@ -1,9 +1,5 @@
 var pinnedCards = [];
 
-$(document).ready(function () {
-    pinnedCards = [];
-});
-
 function showModal(cardID) {
     $('#modal' + cardID.toString()).modal('show');
 }
