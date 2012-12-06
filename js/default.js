@@ -100,13 +100,16 @@ function saveModal(cardID) {
     //store the new category information
     saveCategories();
     //display a success message
-    /*
     if (changed) {
-    bootbox.dialog("Your modifications have been saved.", [{
+        updateModals();
+        /*
+        bootbox.dialog("Your modifications have been saved.", [{
                                 "label" : "OK",
                                 "class" : "btn-success",
                             }]);
+        */
     }
+    /*
     else {
         bootbox.dialog("No modifications to save.", [{
                                     "label" : "OK",
@@ -114,6 +117,30 @@ function saveModal(cardID) {
                                 }]);
     }
     */
+}
+
+function updateModals() {
+    if (pinnedCards.length > 0 && custom_cats.length == 5) {
+        $.each(pinnedCards, function(ind, card) {
+            var modalID = "modal" + card.id;
+            var greenID = "greenTitle" + card.id;
+            var orangeID = "orangeTitle" + card.id;
+            var purpleID = "purpleTitle" + card.id;
+            var redID = "redTitle" + card.id;
+            var blueID = "blueTitle" + card.id;
+            var greenName = "green" + card.id;
+            var orangeName = "orange" + card.id;
+            var purpleName = "purple" + card.id;
+            var redName = "red" + card.id;
+            var blueName = "blue" + card.id;
+            //actually update the text in there
+            if (custom_cats[0] != "Green Label") { $('input:text[name=' + greenName + ']').val(custom_cats[0]); }
+            if (custom_cats[1] != "Orange Label") { $('input:text[name=' + orangeName + ']').val(custom_cats[1]); }
+            if (custom_cats[2] != "Purple Label") { $('input:text[name=' + purpleName + ']').val(custom_cats[2]); }
+            if (custom_cats[3] != "Red Label") { $('input:text[name=' + redName + ']').val(custom_cats[3]); }
+            if (custom_cats[4] != "Blue Label") { $('input:text[name=' + blueName + ']').val(custom_cats[4]); }
+        });
+    }
 }
 
 function savePinnedCards() {
