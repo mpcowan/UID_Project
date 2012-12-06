@@ -115,12 +115,13 @@
                             var mapUnique = $(elem).attr("mapid");
                             var lat = parseFloat($(elem).attr("lat"));
                             var lon = parseFloat($(elem).attr("lon"));
-                            pin(pinID, mapUnique, lat, lon);
+                            var pinindex = pin(pinID, mapUnique, lat, lon);
                             //Todo Check if already pinned before pinning
                             $(".isotope").isotope( 'insert', elem);
                             $(elem).find(".pin-hidden").removeClass("pin-hidden");
                             var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                             $(elem).find(".pin-out").removeClass( "pin-out", 2000);
+                            $(elem).attr("pinindex", pinindex);
                             setTimeout(function(){n.close(); }, 3000);
                         }
                         else {

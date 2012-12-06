@@ -75,6 +75,7 @@ function pin(pinID, mapUnique, lat, lon) {
     //$(".isotope").isotope( 'insert', toAdd_Cards[pinID]);
     //var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
     //setTimeout(function(){n.close(); }, 3000);
+    return (pinnedCards.length-1);
 }
 
 function isPinned(yelp_id) {
