@@ -149,6 +149,9 @@ function addCategory(cardID, catID) {
         pinnedCards[pin_idx].custom_categories.push(5);
         $("#cats" + cardID).append("<div id=\"blue-label" + cardID + "\" class=\"card-label blue-label\"></div>");
     }
+    else {
+        alert("catID not found -> " + catID.toString());
+    }
     $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-minus");
     $("#but" + catID.toString() + "icon" + cardID).addClass("icon-plus");
     $("#cat-but" + catID.toString() + cardID).removeClass("btn-danger");
@@ -178,6 +181,9 @@ function removeCategory(cardID, catID) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(5, pinnedCards[pin_idx].custom_categories), 1 );
         $("#blue-label" + cardID).remove();
     }
+    else {
+        alert("catId not found -> " + catID.toString());
+    }
     $("#but" + catID.toString() + "icon" + cardID).addClass("icon-minus");
     $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-plus");
     $("#cat-but" + catID.toString() + cardID).addClass("btn-danger");
@@ -188,9 +194,11 @@ function removeCategory(cardID, catID) {
 function toggleCategory(cardID, catID) {
     var pin_idx = getPinIndex(cardID);
     if ($.inArray(parseInt(catID), pinnedCards[pin_idx].custom_categories) != -1) {
+        alert("Removing category: " + catID.toString());
         removeCategory(cardID, catID);
     }
     else {
+        alert("Adding category: " + catID.toString());
         addCategory(cardID, catID);
     }
 }
