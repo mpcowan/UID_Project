@@ -12,7 +12,7 @@ function YelpListing () {
     */
     this.name              = "";   //Name of this business
     this.id                = "";   //Yelp ID for this business
-    this.img_url           = "imgs/restaurant_placeholder.png";
+    this.img_url           = "http://s3-media2.ak.yelpcdn.com/bphoto/7DIHu8a0AHhw-BffrDIxPA/ms.jpg";
     this.yelp_url          = "";   //URL for business page on Yelp
     this.phone             = "";   //Phone number for this business formatted
     this.review_count      = 0;    //Number of reviews for this business
@@ -111,7 +111,9 @@ function YelpListing () {
       modalString += "<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
       modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
       modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + this.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + this.review_count + "</p>\n</td>\n</tr>\n";
-      modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p class=\"modal-title\">\n<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n";
+      modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
+      if (this.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+      else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + this.note + "</textarea>\n</div>\n"; }
       modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
       modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + this.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
       //modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + this.yelp_url + "\">Tweet</a>\n";
