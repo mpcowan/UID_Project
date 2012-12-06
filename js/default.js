@@ -128,26 +128,32 @@ function rePin(pinNum) {
 }
 
 function addCategory(cardID, catID) {
-    alert("Adding category");
+    var pin_idx = getPinIndex(cardID);
     if (catID == 1) {
-
+        pinnedCards[pin_idx].custom_categories.push(1);
+        $("#cats" + cardID).append("<div class=\"card-label green-label\"></div>");
     }
     else if (catID == 2) {
-
+        pinnedCards[pin_idx].custom_categories.push(2);
+        $("#cats" + cardID).append("<div class=\"card-label orange-label\"></div>");
     }
     else if (catID == 3) {
-
+        pinnedCards[pin_idx].custom_categories.push(3);
+        $("#cats" + cardID).append("<div class=\"card-label purple-label\"></div>");
     }
     else if (catID == 4) {
-
+        pinnedCards[pin_idx].custom_categories.push(4);
+        $("#cats" + cardID).append("<div class=\"card-label red-label\"></div>");
     }
     else if (catID == 5) {
-
+        pinnedCards[pin_idx].custom_categories.push(5);
+        $("#cats" + cardID).append("<div class=\"card-label blue-label\"></div>");
     }
+    savePinnedCards
 }
 
 function removeCategory(cardID, catID) {
-    alert("Removing category");
+    var pin_idx = getPinIndex(cardID);
     if (catID == 1) {
 
     }

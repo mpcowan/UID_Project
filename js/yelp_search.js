@@ -42,7 +42,7 @@ function YelpListing () {
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
-      cardString += "<div class=\"card-categories\">\n"
+      cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
           if (this.custom_categories[ind] == 1) {
@@ -80,7 +80,7 @@ function YelpListing () {
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
-      cardString += "<div class=\"card-categories\">\n"
+      cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
           if (this.custom_categories[ind] == 1) {
@@ -152,7 +152,7 @@ function toSearchResult(yelp_listing, num) {
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
-      cardString += "<div class=\"card-categories\">\n"
+      cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
           if (yelp_listing.custom_categories[ind] == 1) {
@@ -191,7 +191,7 @@ function toCard(yelp_listing) {
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
       cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
-      cardString += "<div class=\"card-categories\">\n"
+      cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
           if (yelp_listing.custom_categories[ind] == 1) {
