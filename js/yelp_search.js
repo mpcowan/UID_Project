@@ -70,10 +70,13 @@ function YelpListing () {
       return cardString;
     };
     this.toCard = function() {
-      var cardString = "<div class=\"card isotope-item\" rating=\"";
-      cardString += this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\" >\n";
-      cardString += "<div class=\"popover top pin-align show-hand\" id=\"card" + this.id + "\">\n";
-      cardString += "<div class=\"pin-in\" id=\"pin" + this.id + "\" onClick=\"unPin('" + this.id + "')\"><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\"/></div>\n";
+      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card\"";
+      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " mapid='map" + this.id + "'";
+      cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
+      cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
+      cardString += " onClick=\"unPin('" + this.id + "')\"";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
       cardString += "<div class=\"card-categories\">\n"
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
@@ -96,7 +99,7 @@ function YelpListing () {
       }
       cardString += "</div>\n";
       cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + this.id + "')\" name>" + this.name + "</h3>\n";
-      cardString += "<div class=\"popover-content\" onClick=\"showModal('" + this.id + "')\">\n";
+      cardString += "<div class=\"popover-content\" onClick=\"showModal('" + this.id + "')\" >\n";
       cardString += "<table>\n<tr>\n<td>\n<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n";
       cardString += "</td>\n<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n";
       cardString += "<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n<tr>\n<td style=\"padding-top: 7px;\">\n";
@@ -131,7 +134,7 @@ function YelpListing () {
 }
 
 //our authentication info from yelp, Matt's Keys
-var auth = {
+var auth_backup = {
   consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
   consumerSecret: "Tr7k1th2pJRCL8QOh686DkVlSqk",
   accessToken: "7ZC4hwGaez9yL9Bm4tZyNHBDlgzQIfnU",
@@ -140,6 +143,17 @@ var auth = {
     signatureMethod: "HMAC-SHA1"
   }
 };
+
+//secondary api keys, courtesy of Matt
+var auth = {
+  consumerKey: "ZQwbb6QQQjtFZ2NvhK9Q6A",
+  consumerSecret: "W8SNS0IyuIbHSTq5bS7KXG7teKc",
+  accessToken: "lGb7sPwLntAFArfsMSXA7Ame6vmR3nOx",
+  accessTokenSecret: "2C4vVKYOU3iDo6acPouJUJeaqUo",
+  serviceProvider: {
+    signatureMethod: "HMAC-SHA1"
+  }
+}
 
 /*
 var filer;
