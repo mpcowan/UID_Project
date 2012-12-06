@@ -457,24 +457,26 @@ function storeCards(cards_array) {
 
 }
 
-function loadCards() {
-    pinnedcards = sessionStorage.cardsArray;
-
-    if( pinnedcards.length ) {
-      $.each(pinnedcards, function(idx, card){
-        $(".isotope").append(card.toCard());
-        $("body").append(card.toModal());
+function loadCards(pinnedCards) {
+        
+    if(pinnedCards != null) {
+      $.each(pinnedCards, function(idx, card){
+        $(".isotope").append( toCard(card) );
+        $("body").append(toModal(card));
       });
     }
 }
 
 $(document).ready(function(){
 
-  pinnedCards = [];
+  if( sessionStorage.cardsArray )
+    pinnedCards = JSON.parse(sessionStorage.cardsArray);
+  else
+    pinnedCards = [];
 
   //filerInit();
   // $(".isotope").html(loadCards());
-  loadCards();
+  loadCards(pinnedCards);
 
   $("button#search").click(function(){
     var query = $("input#query").val();

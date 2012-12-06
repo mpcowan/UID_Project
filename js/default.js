@@ -22,7 +22,12 @@ function unPin(pinNum) {
 }
 
 function savePinnedCard(pinnedCard) {
-    
+    var pinned_cards_json = [];
+    if (sessionStorage.cardsArray)
+        var pinned_cards_json = JSON.parse(sessionStorage.cardsArray);
+    var pinned_card_json = JSON.stringify(pinnedCard);
+    pinned_cards_json.push(pinned_card_json);
+    sessionStorage.cardsArray = pinned_cards_json;
 }
 
 function rePin(pinNum) {
