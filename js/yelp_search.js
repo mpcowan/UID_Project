@@ -133,6 +133,109 @@ function YelpListing () {
     };
 }
 
+function toSearchResult(yelp_listing, num) {
+      var cardString = "<div draggable=\"\" id=\"master" + num.toString() + "\" class=\"card\"";
+      cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
+      cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
+      cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
+      cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "<div class=\"card-categories\">\n"
+      if (yelp_listing.custom_categories.length > 0) {
+        for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
+          if (yelp_listing.custom_categories[ind] == 1) {
+            cardString += "<div class=\"card-label green-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 2) {
+            cardString += "<div class=\"card-label orange-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 3) {
+            cardString += "<div class=\"card-label purple-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 4) {
+            cardString += "<div class=\"card-label red-label\"></div>";
+          }
+          else {
+            cardString += "<div class=\"card-label blue-label\"></div>";
+          }
+        }
+      }
+      cardString += "</div>\n";
+      cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + yelp_listing.id + "')\" name>" + yelp_listing.name + "</h3>\n";
+      cardString += "<div class=\"popover-content\" onClick=\"showModal('" + yelp_listing.id + "')\" >\n";
+      cardString += "<table>\n<tr>\n<td>\n<img src=\"" + yelp_listing.img_url + "\" alt=\"Business Picture\" />\n";
+      cardString += "</td>\n<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n";
+      cardString += "<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n<tr>\n<td style=\"padding-top: 7px;\">\n";
+      cardString += "<img src=\"" + yelp_listing.rating_img_url + "\" alt=\"Rating Image\" />\n</td>\n<td>\n<p>Reviews: " + yelp_listing.review_count + "</p>\n";
+      cardString += "</td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n";
+      return cardString;
+}
+
+function toCard(yelp_listing) {
+      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
+      cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " mapid='map" + yelp_listing.id + "'";
+      cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
+      cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
+      cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
+      cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "<div class=\"card-categories\">\n"
+      if (yelp_listing.custom_categories.length > 0) {
+        for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
+          if (yelp_listing.custom_categories[ind] == 1) {
+            cardString += "<div class=\"card-label green-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 2) {
+            cardString += "<div class=\"card-label orange-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 3) {
+            cardString += "<div class=\"card-label purple-label\"></div>";
+          }
+          else if (yelp_listing.custom_categories[ind] == 4) {
+            cardString += "<div class=\"card-label red-label\"></div>";
+          }
+          else {
+            cardString += "<div class=\"card-label blue-label\"></div>";
+          }
+        }
+      }
+      cardString += "</div>\n";
+      cardString += "<h3 class=\"popover-title\" onClick=\"showModal('" + yelp_listing.id + "')\" name>" + yelp_listing.name + "</h3>\n";
+      cardString += "<div class=\"popover-content\" onClick=\"showModal('" + yelp_listing.id + "')\" >\n";
+      cardString += "<table>\n<tr>\n<td>\n<img src=\"" + yelp_listing.img_url + "\" alt=\"Business Picture\" />\n";
+      cardString += "</td>\n<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n";
+      cardString += "<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n<tr>\n<td style=\"padding-top: 7px;\">\n";
+      cardString += "<img src=\"" + yelp_listing.rating_img_url + "\" alt=\"Rating Image\" />\n</td>\n<td>\n<p>Reviews: " + yelp_listing.review_count + "</p>\n";
+      cardString += "</td>\n</tr>\n</table>\n</div>\n</div>\n</div>\n";
+      return cardString;
+    }
+
+function toModal(yelp_listing) {
+  var modalString = "<div id=\"modal" + yelp_listing.id + "\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
+  modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + yelp_listing.name + "</h3>\n</div>\n";
+  modalString += "<div class=\"modal-body\">\n<div class=\"clearfix\">\n<div class=\"modal-main-col\">\n<div class=\"modal-card-content\">\n<table>\n<tr>\n<td>\n";
+  modalString += "<img src=\"" + yelp_listing.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
+  modalString += "<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n";
+  modalString += "<tr>\n<td style=\"padding-top: 7px;\">\n<img src=\"" + yelp_listing.rating_img_url + "\" alt=\"Rating image\" />\n</td>\n<td>\n<p>Reviews: " + yelp_listing.review_count + "</p>\n</td>\n</tr>\n";
+  modalString += "</table>\n</div>\n<p class=\"modal-title\" style=\"padding-top: 15px; padding-bottom: 7px;\">Note: </p>\n";
+  if (yelp_listing.note == "") { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\"></textarea>\n</div>\n"; }
+  else { modalString += "<textarea class=\"new-comment-input\" placeholder=\"Write a comment or note...\">" + yelp_listing.note + "</textarea>\n</div>\n"; }
+  modalString += "<div class=\"modal-sidebar\">\n<p class=\"modal-title\">Social</p class=\"modal-title\">\n";
+  modalString += "<a href=\"https://twitter.com/intent/tweet?original_referer=&text=Good%20Eats%3A%20&tw_p=tweetbutton&url=" + yelp_listing.yelp_url + "\" target=\"_blank\" class=\"btn btn-info\">Share on Twitter</a>";
+  //modalString += "<a href=\"https://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Good Eats: \" data-size=\"large\" data-count=\"none\" data-dnt=\"true\" data-url=\"" + yelp_listing.yelp_url + "\">Tweet</a>\n";
+  //modalString += "<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=\"https://platform.twitter.com/widgets.js\";fjs.parentNode.insertBefore(js,fjs);}}(document,\"script\",\"twitter-wjs\");</script>\n";
+  modalString += "<p class=\"modal-title\" style=\"margin-top: 7px;\">Custom Categories</p class=\"modal-title\">\n<div class=\"editable-labels\">\n<div class=\"editable-label\">\n<table>\n<tr>\n";
+  modalString += "<td>\n<div class=\"green-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"greenTitle\" type=\"text\" placeholder=\"No name\" name=\"green\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"orange-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"orangeTitle\" type=\"text\" placeholder=\"No name\" name=\"orange\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"purple-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"purpleTitle\" type=\"text\" placeholder=\"No name\" name=\"purple\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"red-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"redTitle\" type=\"text\" placeholder=\"No name\" name=\"red\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-danger btn-small\"><i class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n";
+  modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle\" type=\"text\" placeholder=\"No name\" name=\"blue\">\n</td>\n<td>\n<a href=\"#\" class=\"btn btn-success btn-small\"><i class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n<p class=\"modal-title\">Yelp Categories</p class=\"modal-title\">\n";
+  modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
+  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\">Save changes</button>\n</div>\n</div>\n";
+  return modalString;
+}
+
 //our authentication info from yelp, Matt's Keys
 var auth_backup = {
   consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
