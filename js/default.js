@@ -152,10 +152,10 @@ function addCategory(cardID, catID) {
     else {
         alert("catID not found -> " + catID.toString());
     }
-    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-minus");
-    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-plus");
-    $("#cat-but" + catID.toString() + cardID).removeClass("btn-danger");
-    $("#cat-but" + catID.toString() + cardID).addClass("btn-success");
+    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-minus");
+    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-plus");
+    $("#cat-but" + catID.toString() + cardID).addClass("btn-danger");
+    $("#cat-but" + catID.toString() + cardID).removeClass("btn-success");
     savePinnedCards();
 }
 
@@ -184,10 +184,10 @@ function removeCategory(cardID, catID) {
     else {
         alert("catId not found -> " + catID.toString());
     }
-    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-minus");
-    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-plus");
-    $("#cat-but" + catID.toString() + cardID).addClass("btn-danger");
-    $("#cat-but" + catID.toString() + cardID).removeClass("btn-success");
+    $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-minus");
+    $("#but" + catID.toString() + "icon" + cardID).addClass("icon-plus");
+    $("#cat-but" + catID.toString() + cardID).removeClass("btn-danger");
+    $("#cat-but" + catID.toString() + cardID).addClass("btn-success");
     savePinnedCards();
 }
 
