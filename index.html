@@ -167,6 +167,13 @@
                     }
                 });
 
+                // filter items when filter link is clicked
+                $('#filter-by a').click(function(){
+                  var selector = $(this).attr('data-filter');
+                  $container.isotope({ filter: selector });
+                  return false;
+                });
+
                 var $optionSets = $('.option-set'),
                   $optionLinks = $optionSets.find('a');
 

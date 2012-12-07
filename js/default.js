@@ -34,13 +34,6 @@ function getPinIndex(cardID) {
     return pin_idx;
 }
 
-// filter items when filter link is clicked
-$('#filter-by a').click(function(){
-  var selector = $(this).attr('data-filter');
-  $container.isotope({ filter: selector });
-  return false;
-});
-
 function saveModal(cardID) {
     var pin_idx = getPinIndex(cardID);
     if (pin_idx == undefined) {
@@ -158,16 +151,16 @@ function updateModals() {
 
 function updateFilters() {
     if (custom_cats.length == 5) {
-        if (custom_cats[0] != "") { $("#greenFilter").val(custom_cats[0]); }
-        else { $("#greenFilter").val("Green Label"); }
-        if (custom_cats[1] != "") { $("#orangeFilter").val(custom_cats[1]); }
-        else { $("#orangeFilter").val("Orange Label"); }
-        if (custom_cats[2] != "") { $("#purpleFilter").val(custom_cats[2]); }
-        else { $("#purpleFilter").val("Purple Label"); }
-        if (custom_cats[3] != "") { $("#redFilter").val(custom_cats[3]); }
-        else { $("#redFilter").val("Red Label"); }
-        if (custom_cats[4] != "") { $("#blueFilter").val(custom_cats[4]); }
-        else { $("#blueFilter").val("Blue Label"); }
+        if (custom_cats[0] != "") { $("#greenFilter").text(custom_cats[0]); }
+        else { $("#greenFilter").text("Green Label"); }
+        if (custom_cats[1] != "") { $("#orangeFilter").text(custom_cats[1]); }
+        else { $("#orangeFilter").text("Orange Label"); }
+        if (custom_cats[2] != "") { $("#purpleFilter").text(custom_cats[2]); }
+        else { $("#purpleFilter").text("Purple Label"); }
+        if (custom_cats[3] != "") { $("#redFilter").text(custom_cats[3]); }
+        else { $("#redFilter").text("Red Label"); }
+        if (custom_cats[4] != "") { $("#blueFilter").text(custom_cats[4]); }
+        else { $("#blueFilter").text("Blue Label"); }
     }
 }
 
