@@ -36,6 +36,11 @@ function getPinIndex(cardID) {
 
 function saveModal(cardID) {
     var pin_idx = getPinIndex(cardID);
+    if (pin_idx == undefined) {
+        alert("Could not determine pin index of: " + cardID);
+        alert("Changes can not be saved. Try refreshing the page and trying again.");
+        return;
+    }
     var changed = false;
     //save the note
     if (pinnedCards[pin_idx].note != $("#note" + cardID).val()) {

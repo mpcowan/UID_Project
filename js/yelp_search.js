@@ -567,7 +567,7 @@ function getResults(query, zipcode) {
 
     }
   });
-
+  return false;
 }
 
 function storeCards(cards_array) {
@@ -693,17 +693,18 @@ $(document).ready(function(){
   // $(".isotope").html(loadCards());
   loadCards(pinnedCards);
 
-  $("button#search").click(function(e){
+  $("button#search").click(function(e) {
     e.preventDefault();
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
     $("#results_panel").html("<br/><br/><h4 style='text-align:center;'>Loading results from Yelp...&nbsp; <img src='imgs/load.gif'></h4>");
     getResults(query, zipcode);
     if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
+    return false;
   });
 
-  $(".flap").click(function()
-  {
-    $(".content").css("overflow-y", "scroll");
+    $(".flap").click(function() {
+      $(".content").css("overflow-y", "scroll");
+    });
+
   });
-});
