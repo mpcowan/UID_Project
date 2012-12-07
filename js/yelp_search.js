@@ -719,6 +719,20 @@ $(document).ready(function(){
     e.preventDefault();
     var query = $("input#query").val();
     var zipcode = $("input#locale").val();
+    if (zipcode == "") {
+      bootbox.dialog("Please enter a city or zipcode first.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+      return false;
+    }
+    if (query == "") {
+      bootbox.dialog("Please enter a search query first.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+      return false;
+    }
     $("#results_panel").html("<br/><br/><h4 style='text-align:center;'>Loading results from Yelp...&nbsp; <img src='imgs/load.gif'></h4>");
     getResults(query, zipcode);
     if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
