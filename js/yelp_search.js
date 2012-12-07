@@ -35,8 +35,13 @@ function YelpListing () {
     this.custom_categories = [];
     this.note              = "";
     this.toSearchResult = function(num) {
-      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card\"";
-      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'" + " searchInd=" + num.toString();
+      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card";
+      if ($.inArray(1, this.custom_categories) != -1) { cardString += " green"; }
+      if ($.inArray(2, this.custom_categories) != -1) { cardString += " orange"; }
+      if ($.inArray(3, this.custom_categories) != -1) { cardString += " purple"; }
+      if ($.inArray(4, this.custom_categories) != -1) { cardString += " red"; }
+      if ($.inArray(5, this.custom_categories) != -1) { cardString += " blue"; }
+      cardString += "\" lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
@@ -73,8 +78,13 @@ function YelpListing () {
       return cardString;
     };
     this.toCard = function() {
-      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card\"";
-      cardString += "lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " mapid='map" + this.id + "'";
+      var cardString = "<div draggable=\"\" id=\"card" + this.id + "\" class=\"card";
+      if ($.inArray(1, this.custom_categories) != -1) { cardString += " green"; }
+      if ($.inArray(2, this.custom_categories) != -1) { cardString += " orange"; }
+      if ($.inArray(3, this.custom_categories) != -1) { cardString += " purple"; }
+      if ($.inArray(4, this.custom_categories) != -1) { cardString += " red"; }
+      if ($.inArray(5, this.custom_categories) != -1) { cardString += " blue"; }
+      cardString += "\" lat=" + this.latitude.toString() + " lon=" + this.longitude.toString() + " yelpid='" + this.id + "' mapid='map" + this.id + "'";
       cardString += " rating=\"" + this.rating + "\" popularity=\"" + this.review_count + "\" name=\"" + this.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
@@ -145,8 +155,13 @@ function YelpListing () {
 }
 
 function toSearchResult(yelp_listing, num) {
-      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
-      cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
+      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card";
+      if ($.inArray(1, yelp_listing.custom_categories) != -1) { cardString += " green"; }
+      if ($.inArray(2, yelp_listing.custom_categories) != -1) { cardString += " orange"; }
+      if ($.inArray(3, yelp_listing.custom_categories) != -1) { cardString += " purple"; }
+      if ($.inArray(4, yelp_listing.custom_categories) != -1) { cardString += " red"; }
+      if ($.inArray(5, yelp_listing.custom_categories) != -1) { cardString += " blue"; }
+      cardString += "\" lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'" + " searchInd=" + num.toString();
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
@@ -156,19 +171,19 @@ function toSearchResult(yelp_listing, num) {
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
           if (yelp_listing.custom_categories[ind] == 1) {
-            cardString += "<div id=\"green-label" + this.id + "\" class=\"card-label green-label\"></div>";
+            cardString += "<div id=\"green-label" + yelp_listing.id + "\" class=\"card-label green-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 2) {
-            cardString += "<div id=\"orange-label" + this.id + "\" class=\"card-label orange-label\"></div>";
+            cardString += "<div id=\"orange-label" + yelp_listing.id + "\" class=\"card-label orange-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 3) {
-            cardString += "<div id=\"purple-label" + this.id + "\" class=\"card-label purple-label\"></div>";
+            cardString += "<div id=\"purple-label" + yelp_listing.id + "\" class=\"card-label purple-label\"></div>";
           }
           else if (yelp_listing.custom_categories[ind] == 4) {
-            cardString += "<div id=\"red-label" + this.id + "\" class=\"card-label red-label\"></div>";
+            cardString += "<div id=\"red-label" + yelp_listing.id + "\" class=\"card-label red-label\"></div>";
           }
           else {
-            cardString += "<div id=\"blue-label" + this.id + "\" class=\"card-label blue-label\"></div>";
+            cardString += "<div id=\"blue-label" + yelp_listing.id + "\" class=\"card-label blue-label\"></div>";
           }
         }
       }
@@ -184,8 +199,13 @@ function toSearchResult(yelp_listing, num) {
 }
 
 function toCard(yelp_listing) {
-      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card\"";
-      cardString += "lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " mapid='map" + yelp_listing.id + "'";
+      var cardString = "<div draggable=\"\" id=\"card" + yelp_listing.id + "\" class=\"card";
+      if ($.inArray(1, yelp_listing.custom_categories) != -1) { cardString += " green"; }
+      if ($.inArray(2, yelp_listing.custom_categories) != -1) { cardString += " orange"; }
+      if ($.inArray(3, yelp_listing.custom_categories) != -1) { cardString += " purple"; }
+      if ($.inArray(4, yelp_listing.custom_categories) != -1) { cardString += " red"; }
+      if ($.inArray(5, yelp_listing.custom_categories) != -1) { cardString += " blue"; }
+      cardString += "\" lat=" + yelp_listing.latitude.toString() + " lon=" + yelp_listing.longitude.toString() + " yelpid='" + yelp_listing.id + "' mapid='map" + yelp_listing.id + "'";
       cardString += " rating=\"" + yelp_listing.rating + "\" popularity=\"" + yelp_listing.review_count + "\" name=\"" + yelp_listing.name + "\">\n";
       cardString += "<div  class=\"popover top pin-align\" >\n"; //used to include id=\"card" + yelp_listing.id + "\"
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
@@ -662,6 +682,7 @@ function loadCategories() {
     custom_cats.push("Red Label");
     custom_cats.push("Blue Label");
   }
+  updateFilters();
 }
 
 $(document).ready(function(){

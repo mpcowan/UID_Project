@@ -34,6 +34,13 @@ function getPinIndex(cardID) {
     return pin_idx;
 }
 
+// filter items when filter link is clicked
+$('#filter-by a').click(function(){
+  var selector = $(this).attr('data-filter');
+  $container.isotope({ filter: selector });
+  return false;
+});
+
 function saveModal(cardID) {
     var pin_idx = getPinIndex(cardID);
     if (pin_idx == undefined) {
@@ -107,6 +114,7 @@ function saveModal(cardID) {
     //display a success message
     if (changed) {
         updateModals();
+        updateFilters();
         /*
         bootbox.dialog("Your modifications have been saved.", [{
                                 "label" : "OK",
@@ -148,6 +156,21 @@ function updateModals() {
     }
 }
 
+function updateFilters() {
+    if (custom_cats.length == 5) {
+        if (custom_cats[0] != "") { $("#greenFilter").val(custom_cats[0]); }
+        else { $("#greenFilter").val("Green Label"); }
+        if (custom_cats[1] != "") { $("#orangeFilter").val(custom_cats[1]); }
+        else { $("#orangeFilter").val("Orange Label"); }
+        if (custom_cats[2] != "") { $("#purpleFilter").val(custom_cats[2]); }
+        else { $("#purpleFilter").val("Purple Label"); }
+        if (custom_cats[3] != "") { $("#redFilter").val(custom_cats[3]); }
+        else { $("#redFilter").val("Red Label"); }
+        if (custom_cats[4] != "") { $("#blueFilter").val(custom_cats[4]); }
+        else { $("#blueFilter").val("Blue Label"); }
+    }
+}
+
 function savePinnedCards() {
    sessionStorage.cardsArray = JSON.stringify(pinnedCards);
 }
@@ -165,22 +188,27 @@ function addCategory(cardID, catID) {
     if (catID == 1) {
         pinnedCards[pin_idx].custom_categories.push(1);
         $("#cats" + cardID).append("<div id=\"green-label" + cardID + "\" class=\"card-label green-label\"></div>");
+        $("#card" + cardID).addClass("green");
     }
     else if (catID == 2) {
         pinnedCards[pin_idx].custom_categories.push(2);
         $("#cats" + cardID).append("<div id=\"orange-label" + cardID + "\" class=\"card-label orange-label\"></div>");
+        $("#card" + cardID).addClass("orange");
     }
     else if (catID == 3) {
         pinnedCards[pin_idx].custom_categories.push(3);
         $("#cats" + cardID).append("<div id=\"purple-label" + cardID + "\" class=\"card-label purple-label\"></div>");
+        $("#card" + cardID).addClass("purple");
     }
     else if (catID == 4) {
         pinnedCards[pin_idx].custom_categories.push(4);
         $("#cats" + cardID).append("<div id=\"red-label" + cardID + "\" class=\"card-label red-label\"></div>");
+        $("#card" + cardID).addClass("red");
     }
     else if (catID == 5) {
         pinnedCards[pin_idx].custom_categories.push(5);
         $("#cats" + cardID).append("<div id=\"blue-label" + cardID + "\" class=\"card-label blue-label\"></div>");
+        $("#card" + cardID).addClass("blue");
     }
     else {
         alert("catID not found -> " + catID.toString());
@@ -197,22 +225,27 @@ function removeCategory(cardID, catID) {
     if (catID == 1) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(1, pinnedCards[pin_idx].custom_categories), 1 );
         $("#green-label" + cardID).remove();
+        $("#card" + cardID).removeClass("green");
     }
     else if (catID == 2) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(2, pinnedCards[pin_idx].custom_categories), 1 );
         $("#orange-label" + cardID).remove();
+        $("#card" + cardID).removeClass("orange");
     }
     else if (catID == 3) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(3, pinnedCards[pin_idx].custom_categories), 1 );
         $("#purple-label" + cardID).remove();
+        $("#card" + cardID).removeClass("purple");
     }
     else if (catID == 4) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(4, pinnedCards[pin_idx].custom_categories), 1 );
         $("#red-label" + cardID).remove();
+        $("#card" + cardID).removeClass("red");
     }
     else if (catID == 5) {
         pinnedCards[pin_idx].custom_categories.splice( $.inArray(5, pinnedCards[pin_idx].custom_categories), 1 );
         $("#blue-label" + cardID).remove();
+        $("#card" + cardID).removeClass("blue");
     }
     else {
         alert("catId not found -> " + catID.toString());
