@@ -51,7 +51,7 @@
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sort <b class="caret"></b></a>
                                 <ul class="dropdown-menu option-set" id="sort-by" data-option-key="sortBy">
-                                  <li><a href="#sortBy=weight" data-option-value="name">Name</a></li>
+                                  <li><a href="#sortBy=name" data-option-value="name">Name</a></li>
                                   <li><a href="#sortBy=rating" data-option-value="rating">Rating</a></li>
                                   <li><a href="#sortBy=popularity" data-option-value="popularity">Popularity</a></li>
                                 </ul>
@@ -59,9 +59,9 @@
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Filter <b class="caret"></b></a>
                                 <ul class="dropdown-menu option-set" id="filter-by" data-option-key="sortBy">
-                                  <li><a href="#filterBy=weight" data-option-value="name">Name</a></li>
-                                  <li><a href="#filterBy=rating" data-option-value="rating">Rating</a></li>
-                                  <li><a href="#filterBy=popularity" data-option-value="popularity">Popularity</a></li>
+                                  <li><a href="#filterBy=weight" data-option-value="name"><input type="checkbox"> Name</a></li>
+                                  <li><a href="#filterBy=rating" data-option-value="rating"><input type="checkbox"> Rating</a></li>
+                                  <li><a href="#filterBy=popularity" data-option-value="popularity"><input type="checkbox"> Popularity</a></li>
                                 </ul>
                             </li>
                             <li class="divider-vertical"></li>
@@ -178,8 +178,14 @@
                     $optionSet.find('.selected').removeClass('selected');
                     $this.addClass('selected');
 
+                    if( $this.find("input[type='checkbox']") )
+                        $this.find("input[type='checkbox'] :first").attr("checked", "1");
+
+                    sortAscending = false;
+                    if( $this.attr('data-option-value') == "name" )
+                        sortAscending = true;
                     // make option object dynamically, i.e. { filter: '.my-filter-class' }
-                    var options = {'sortAscending' : false},
+                    var options = {'sortAscending' : sortAscending},
                         key = $optionSet.attr('data-option-key'),
                         value = $this.attr('data-option-value');
                     // parse 'false' as false boolean

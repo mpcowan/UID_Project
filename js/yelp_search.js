@@ -549,7 +549,8 @@ function getResults(query, zipcode) {
             }
           }
         } else {
-          alert("No results");
+          var n = noty({ text: "No results found", type: 'error', layout: 'bottom', theme: 'defaultTheme'});
+          setTimeout(function(){n.close(); }, 3000);
         }
       //console.log(data);
       //var output = prettyPrint(data);
