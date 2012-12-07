@@ -121,6 +121,16 @@ textarea {
           border-radius: 4px;
 }
 
+.mini-label-cube {
+    float: left;
+    height: 20px;
+    padding: 1px 5px;
+    width: 14px;
+    -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
 .card-label {
     display: block;
     float: right;
@@ -151,6 +161,66 @@ textarea {
 }
 
 .blue-label {
+    background-color: rgb(77,119,203);
+}
+
+#allFilter {
+    color: #ffffff;
+    background-color: rgb(40,40,40);
+}
+
+#allFilter:hover {
+    margin-left: 10px;
+    color: #ffffff;
+    background-color: rgb(40,40,40);
+}
+
+#greenFilter {
+    color: #ffffff;
+    background-color: rgb(52,178,125);
+}
+
+#greenFilter:hover {
+    margin-left: 10px;
+    color: #ffffff;
+    background-color: rgb(52,178,125);
+}
+
+#orangeFilter {
+    color: #ffffff;
+    background-color: rgb(224,153,82);
+}
+
+#orangeFilter:hover {
+    margin-left: 10px;
+}
+
+#purpleFilter {
+    color: #ffffff;
+    background-color: rgb(153,51,204);
+}
+
+#purpleFilter:hover {
+    margin-left: 10px;
+}
+
+#redFilter {
+    color: #ffffff;
+    background-color: rgb(203,77,77);
+}
+
+#redFilter:hover {
+    margin-left: 10px;
+}
+
+#blueFilter {
+    color: #ffffff;
+    background-color: rgb(77,119,203);
+}
+
+#blueFilter:hover {
+    margin-left: 10px;
+    color: #ffffff;
     background-color: rgb(77,119,203);
 }
 

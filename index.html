@@ -43,7 +43,7 @@
                                 <input type="text" class="search-query span3 zip-search" id="locale" placeholder="Enter Zipcode or City..." style="margin-right: 7px;">
                                 <span style="color: #06f; font-size: 20px; padding: 10px 3px; position:relative; top: 3px;">&</span>
                                 <input type="text" id="query" class="search-query span3" placeholder="Enter terms, Ex: food or italian" style="margin-left: 7px; margin-right: 20px;">
-                                <button type="submit" class="btn btn-primary" id="search">Search Yelp</button>
+                                <button class="btn btn-primary" id="search">Search Yelp</button>
                             </div>
                         </form>
 
@@ -51,15 +51,15 @@
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Sort <b class="caret"></b></a>
                                 <ul class="dropdown-menu option-set" id="sort-by" data-option-key="sortBy">
-                                  <li><a href="#sortBy=name" data-option-value="name">Name</a></li>
-                                  <li><a href="#sortBy=rating" data-option-value="rating">Rating</a></li>
-                                  <li><a href="#sortBy=popularity" data-option-value="popularity">Popularity</a></li>
+                                  <li><a href="#sortBy=name" id="allFilter" data-option-value="name">Name</a></li>
+                                  <li><a href="#sortBy=rating" id="allFilter" data-option-value="rating">Rating</a></li>
+                                  <li><a href="#sortBy=popularity" id="allFilter" data-option-value="popularity">Popularity</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">Filter <b class="caret"></b></a>
                                 <ul class="dropdown-menu option-set" id="filter-by" data-option-key="sortBy">
-                                    <li><a href="#" data-filter="*">Show All</a></li>
+                                    <li><a href="#" id="allFilter" data-filter="*">Show All</a></li>
                                     <li><a href="#" id="greenFilter" data-filter=".green">Green Label</a></li>
                                     <li><a href="#" id="orangeFilter" data-filter=".orange">Orange Label</a></li>
                                     <li><a href="#" id="purpleFilter" data-filter=".purple">Purple Label</a></li>
@@ -154,6 +154,7 @@
                 var $container = $('.isotope');
                 $container.isotope({
                     itemSelector : '.card',
+                    sortAscending : false,
                     getSortData : {
                         rating : function( $elem ) {
                             return parseFloat($elem.attr('rating'));
