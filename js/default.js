@@ -12,6 +12,12 @@ function unPin(pinNum) {
         "callback": function() {
             var str_pin_idx = $('#card' + pinNum.toString()).attr("pinindex");
             var pin_idx = parseInt(str_pin_idx);
+            var toLower = pin_idx+1;
+            while(toLower < pinnedCards.length) {
+                var newaddress = toLower - 1;
+                $("[pinindex=" + toLower.toString() + "]").attr("pinindex", newaddress);
+                toLower = toLower + 1;
+            }
             pinnedCards.splice(pin_idx, 1);
             savePinnedCards();
             var elem = $('#card' + pinNum.toString());
