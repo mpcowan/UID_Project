@@ -46,7 +46,7 @@ function YelpListing () {
       cardString += "<div  class=\"popover top pin-align\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
-      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" title=\"Unpin this business\"/></div>\n";
       cardString += "<div id=\"cats" + this.id + "\" class=\"card-categories\">\n"
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
@@ -89,7 +89,7 @@ function YelpListing () {
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + this.id + "\">\n";
       cardString += "<div id=\"pin" + this.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + this.id + "')\"";
-      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" title=\"Unpin this business\"/></div>\n";
       cardString += "<div id=\"cats" + this.id + "\" class=\"card-categories\">\n"
       if (this.custom_categories.length > 0) {
         for (var ind = 0; ind < this.custom_categories.length; ind++) {
@@ -166,7 +166,7 @@ function toSearchResult(yelp_listing, num) {
       cardString += "<div  class=\"popover top pin-align\" id=\"card" + yelp_listing.id + "\">\n";
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in pin-out pin-hidden\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
-      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" title=\"Unpin this business\"/></div>\n";
       cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
@@ -210,7 +210,7 @@ function toCard(yelp_listing) {
       cardString += "<div  class=\"popover top pin-align\" >\n"; //used to include id=\"card" + yelp_listing.id + "\"
       cardString += "<div id=\"pin" + yelp_listing.id + "\" class=\"show-hand pin-in\"";
       cardString += " onClick=\"unPin('" + yelp_listing.id + "')\"";
-      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" /></div>\n";
+      cardString += "><img src=\"imgs/pin_blue.png\" alt=\"Pin overlay\" title=\"Unpin this business\"/></div>\n";
       cardString += "<div id=\"cats" + yelp_listing.id + "\" class=\"card-categories\">\n"
       if (yelp_listing.custom_categories.length > 0) {
         for (var ind = 0; ind < yelp_listing.custom_categories.length; ind++) {
