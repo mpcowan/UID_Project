@@ -167,8 +167,8 @@ textarea {
 }
 
 #allFilter {
-    color: #ffffff;
-    background-color: rgb(40,40,40);
+    color: rgb(40,40,40);
+    background-color: #ffffff;
 }
 
 #allFilter:hover {
