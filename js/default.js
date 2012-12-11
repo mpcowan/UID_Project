@@ -331,6 +331,9 @@ function pin(pinID, mapUnique, lat, lon) {
 }
 
 function isPinned(yelp_id) {
+    if (yelp_id == undefined) {
+        return false;
+    }
     for (var i = 0; i < pinnedCards.length; i++) {
         if (pinnedCards[i].id == yelp_id) {
             return true;

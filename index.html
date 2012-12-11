@@ -117,29 +117,31 @@
                     activeClass: "ui-state-hover",
                     hoverClass: "ui-state-active",
                     drop: function( event, ui ) {
-                        ui.helper.fadeOut();
                         var elem = globalElement.detach().draggable( "disable" );
                         var yelp_id = $(elem).attr("yelpid");
-                        if (!isPinned(yelp_id)) {
-                            var pinID = parseInt($(elem).attr("searchind"));
-                            var mapUnique = $(elem).attr("mapid");
-                            var lat = parseFloat($(elem).attr("lat"));
-                            var lon = parseFloat($(elem).attr("lon"));
-                            var pinindex = pin(pinID, mapUnique, lat, lon);
-                            $(".isotope").isotope( 'insert', elem);
-                            $(elem).find(".pin-hidden").removeClass("pin-hidden");
-                            var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
-                            $(elem).find(".pin-out").removeClass( "pin-out", 2000);
-                            var pinindex = $(elem).attr("pinindex", pinindex);
-                            setTimeout(function(){n.close(); }, 3000);
-                            // $("mediacon" + yelp_id).remove();
-                            // alert("Removed: mediacon" + yelp_id);
-                        }
-                        else {
-                            bootbox.dialog("This business card had already been pinned.", [{
-                                "label" : "OK",
-                                "class" : "btn-primary",
-                            }]);
+                        if (yelp_id != undefined) {
+                            ui.helper.fadeOut();
+                            if (!isPinned(yelp_id)) {
+                                var pinID = parseInt($(elem).attr("searchind"));
+                                var mapUnique = $(elem).attr("mapid");
+                                var lat = parseFloat($(elem).attr("lat"));
+                                var lon = parseFloat($(elem).attr("lon"));
+                                var pinindex = pin(pinID, mapUnique, lat, lon);
+                                $(".isotope").isotope( 'insert', elem);
+                                $(elem).find(".pin-hidden").removeClass("pin-hidden");
+                                var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
+                                $(elem).find(".pin-out").removeClass( "pin-out", 2000);
+                                var pinindex = $(elem).attr("pinindex", pinindex);
+                                setTimeout(function(){n.close(); }, 3000);
+                                // $("mediacon" + yelp_id).remove();
+                                // alert("Removed: mediacon" + yelp_id);
+                            }
+                            else {
+                                bootbox.dialog("This business card had already been pinned.", [{
+                                    "label" : "OK",
+                                    "class" : "btn-primary",
+                                }]);
+                            }
                         }
                     }
                 });
