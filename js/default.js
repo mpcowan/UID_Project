@@ -318,6 +318,9 @@ function pin(pinID, mapUnique, lat, lon) {
         });
     var marker = new nokia.maps.map.StandardMarker([lat, lon]);
     map.objects.add(marker);
+    map.addComponent(new nokia.maps.map.component.zoom.DoubleClick());
+    map.addComponent(new nokia.maps.map.component.panning.Drag());
+    map.addComponent(new nokia.maps.map.component.panning.Kinetic());
     //add the card to the isotope class with pin in
 
     //$(".isotope").append(toAdd_Cards[pinID]);
