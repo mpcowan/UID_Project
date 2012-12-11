@@ -40,6 +40,91 @@ function getPinIndex(cardID) {
     return pin_idx;
 }
 
+function closeModal(cardID) {
+    var pin_idx = getPinIndex(cardID);
+    if (pin_idx == undefined) {
+        bootbox.dialog("Could not determine pin index of: " + cardID, [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+        bootbox.dialog("Changes can not be saved. Try refreshing the page and trying again.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+        return;
+    }
+    var changed = false;
+    //check for changes with the note
+    if (pinnedCards[pin_idx].note != $("#note" + cardID).val()) {
+        changed = true;
+    }
+    //check to see if any category names were changed
+    var green = $("#greenTitle"+cardID).val();
+    var orange = $("#orangeTitle"+cardID).val();
+    var purple = $("#purpleTitle"+cardID).val();
+    var red = $("#redTitle"+cardID).val();
+    var blue = $("#blueTitle"+cardID).val();
+    if (custom_cats.length == 5) {
+        if (custom_cats[0] != green) {
+            if (green == "" && custom_cats[0] != "Green Label") {
+                changed = true;
+            }
+            else {
+                changed = true;
+            }
+        }
+        if (custom_cats[1] != orange) {
+            if (orange == "" && custom_cats[1] != "Orange Label") {
+                changed = true;
+            }
+            else {
+                changed = true;
+            }
+        }
+        if (custom_cats[2] != purple) {
+            if (purple == "" && custom_cats[2] != "Purple Label") {
+                changed = true;
+            }
+            else {
+                changed = true;
+            }
+        }
+        if (custom_cats[3] != red) {
+            if (red == "" && custom_cats[3] != "Red Label") {
+                changed = true;
+            }
+            else {
+                changed = true;
+            }
+        }
+        if (custom_cats[4] != blue) {
+            if (blue == "" && custom_cats[4] != "Blue Label") {
+                changed = true;
+            }
+            else {
+                changed = true;
+            }
+        }
+    }
+    //display a success message
+    if (changed) {
+        bootbox.dialog("Data has been changed. Close and discard?", [{
+            "label" : "Yes",
+            "class" : "btn-primary",
+            "callback": function() {
+                //dismiss the modal
+                $('#modal' + cardID).modal('hide');
+            }
+        }, {
+            "label" : "Cancel",
+            "class" : "btn-danger",
+            "callback": function() {
+                return;
+            }
+        }]);
+    }
+}
+
 function saveModal(cardID) {
     var pin_idx = getPinIndex(cardID);
     if (pin_idx == undefined) {

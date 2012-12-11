@@ -122,7 +122,7 @@ function YelpListing () {
     };
     this.toModal = function() {
       var modalString = "<div id=\"modal" + this.id + "\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
-      modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + this.name + "</h3>\n</div>\n";
+      modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" onClick=\"closeModal('" + this.id + "')\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + this.name + "</h3>\n</div>\n";
       modalString += "<div class=\"modal-body\">\n<div class=\"clearfix\">\n<div class=\"modal-main-col\">\n<div class=\"modal-card-content\">\n<table>\n<tr>\n<td>\n";
       modalString += "<img src=\"" + this.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
       modalString += "<td style=\"padding-left: 5px;\">\n<p>" + this.address1 + "</p>\n<p>" + this.address2 + "</p>\n<p>Phone: " + this.phone + "</p>\n</td>\n</tr>\n";
@@ -149,7 +149,7 @@ function YelpListing () {
       if ($.inArray(5, this.custom_categories) == -1) { modalString += "<a href=\"#\" id=\"cat-but5" + this.id + "\" class=\"btn btn-success btn-small\" onClick=\"toggleCategory('" + this.id + "',5)\"><i id=\"but5icon" + this.id + "\" class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
       else { modalString += "<a href=\"#\" id=\"cat-but5" + this.id + "\" class=\"btn btn-danger btn-small\" onClick=\"toggleCategory('" + this.id + "',5)\"><i id=\"but5icon" + this.id + "\" class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
       modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 640px; height: 400px;\"></div>\n</div>\n";
-      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
+      modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" onClick=\"closeModal('" + this.id + "')\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
       return modalString;
     };
 }
@@ -244,7 +244,7 @@ function toCard(yelp_listing) {
 
 function toModal(yelp_listing) {
   var modalString = "<div id=\"modal" + yelp_listing.id + "\" class=\"modal hide fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n";
-  modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + yelp_listing.name + "</h3>\n</div>\n";
+  modalString += "<div class=\"modal-header\">\n<button type=\"button\" class=\"close\" onclick=\"closeModal('" + yelp_listing.id + "')\" aria-hidden=\"true\">×</button>\n<h3 id=\"myModalLabel\">" + yelp_listing.name + "</h3>\n</div>\n";
   modalString += "<div class=\"modal-body\">\n<div class=\"clearfix\">\n<div class=\"modal-main-col\">\n<div class=\"modal-card-content\">\n<table>\n<tr>\n<td>\n";
   modalString += "<img src=\"" + yelp_listing.img_url + "\" alt=\"Business Picture\" />\n</td>\n";
   modalString += "<td style=\"padding-left: 5px;\">\n<p>" + yelp_listing.address1 + "</p>\n<p>" + yelp_listing.address2 + "</p>\n<p>Phone: " + yelp_listing.phone + "</p>\n</td>\n</tr>\n";
@@ -271,7 +271,7 @@ function toModal(yelp_listing) {
   if ($.inArray(5, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" id=\"cat-but5" + yelp_listing.id + "\" class=\"btn btn-success btn-small\" onClick=\"toggleCategory('" + yelp_listing.id + "',5)\"><i id=\"but5icon" + yelp_listing.id + "\" class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
   else { modalString += "<a href=\"#\" id=\"cat-but5" + yelp_listing.id + "\" class=\"btn btn-danger btn-small\" onClick=\"toggleCategory('" + yelp_listing.id + "',5)\"><i id=\"but5icon" + yelp_listing.id + "\" class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
   modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 640px; height: 400px;\"></div>\n</div>\n";
-  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
+  modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" onClick=\"closeModal('" + yelp_listing.id + "')\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
   return modalString;
 }
 
