@@ -67,23 +67,23 @@ function closeModal(cardID) {
     if (custom_cats.length == 5) {
         if (custom_cats[0] != green) {
             if (custom_cats[0] == "Green Label" && green != "") { changed = true; }
-            else if (green != custom_cats[0]) { changed = true; }
+            else if (custom_cats[0] != "Green Label" && green != custom_cats[0]) { changed = true; }
         }
         if (custom_cats[1] != orange) {
             if (orange != "" && custom_cats[1] == "Orange Label") { changed = true; }
-            else if (orange != custom_cats[1]) { changed = true; }
+            else if (custom_cats[1] != "Orange Label" && orange != custom_cats[1]) { changed = true; }
         }
         if (custom_cats[2] != purple) {
             if (purple != "" && custom_cats[2] == "Purple Label") { changed = true; }
-            else if (purple != custom_cats[2]) { changed = true; }
+            else if (custom_cats[2] != "Purple Label" && purple != custom_cats[2]) { changed = true; }
         }
         if (custom_cats[3] != red) {
             if (red != "" && custom_cats[3] == "Red Label") { changed = true; }
-            else if (red != custom_cats[3]) { changed = true; }
+            else if (custom_cats[3] != "Red Label" && red != custom_cats[3]) { changed = true; }
         }
         if (custom_cats[4] != blue) {
             if (blue != "" && custom_cats[4] == "Blue Label") { changed = true; }
-            else if (blue != custom_cats[4]) { changed = true; }
+            else if (custom_cats[4] != "Blue Label" && blue != custom_cats[4]) { changed = true; }
         }
     }
     //display a success message
@@ -95,11 +95,13 @@ function closeModal(cardID) {
             $("#note" + cardID).val(pinnedCards[pin_idx].note);
             undoChanges(cardID);
             $("#modal" + cardID).modal('hide');
+            return;
         }
         else {
             return;
         }
     }
+    else { $("#modal" + cardID).modal('hide'); }
 }
 
 function saveModal(cardID) {
