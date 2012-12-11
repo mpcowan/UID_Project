@@ -580,7 +580,7 @@ function getResults(query, zipcode) {
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
 
       for (var tmp in search_cards)
-        $("#results_panel").append("<div class='media-container'>" + search_cards[tmp] + "</div>");
+        $("#results_panel").append("<div id='mediacon" + search_results[tmp].id + "' class='media-container'>" + search_cards[tmp] + "</div>");
 
       var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
       $("[draggable]").draggable(draggableArguments);
@@ -686,6 +686,32 @@ function loadCategories() {
   updateFilters();
 }
 
+function yelpSearchForm() {
+    var query = $("input#query").val();
+    var zipcode = $("input#locale").val();
+    if (zipcode == "") {
+      bootbox.dialog("Please enter a city or zipcode first.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+      //e.preventDefault();
+      return false;
+    }
+    if (query == "") {
+      bootbox.dialog("Please enter a search query first.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+      //e.preventDefault();
+      return false;
+    }
+    $("#results_panel").html("<br/><br/><h4 style='text-align:center;'>Loading results from Yelp...&nbsp; <img src='imgs/load.gif'></h4>");
+    getResults(query, zipcode);
+    if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
+    //e.preventDefault();
+    return false;
+}
+
 $(document).ready(function(){
   custom_cats = [];
   pinnedCards = [];
@@ -715,6 +741,7 @@ $(document).ready(function(){
   // $(".isotope").html(loadCards());
   loadCards(pinnedCards);
 
+  /*
   $("button#search").click(function(e) {
     e.preventDefault();
     var query = $("input#query").val();
@@ -738,6 +765,7 @@ $(document).ready(function(){
     if (! $("#extruderRight[isopened]").length) { $(".flap").click(); }
     return false;
   });
+  */
 
     $(".flap").click(function() {
       $(".content").css("overflow-y", "scroll");
