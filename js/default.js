@@ -119,6 +119,7 @@ function closeModal(cardID) {
             "label" : "Cancel",
             "class" : "btn-danger",
             "callback": function() {
+                $("#note" + cardID).text(pinnedCards[pin_idx].note);
                 return;
             }
         }]);
