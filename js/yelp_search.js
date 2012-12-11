@@ -276,7 +276,7 @@ function toModal(yelp_listing) {
 }
 
 //our authentication info from yelp, Matt's Keys
-var auth = {
+var auth_backup = {
   consumerKey: "oa8kg9SqZxyLkHbwd6W9rg",
   consumerSecret: "Tr7k1th2pJRCL8QOh686DkVlSqk",
   accessToken: "7ZC4hwGaez9yL9Bm4tZyNHBDlgzQIfnU",
@@ -287,7 +287,7 @@ var auth = {
 };
 
 //secondary api keys, courtesy of Matt
-var auth_backup = {
+var auth = {
   consumerKey: "ZQwbb6QQQjtFZ2NvhK9Q6A",
   consumerSecret: "W8SNS0IyuIbHSTq5bS7KXG7teKc",
   accessToken: "lGb7sPwLntAFArfsMSXA7Ame6vmR3nOx",
