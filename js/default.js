@@ -66,63 +66,39 @@ function closeModal(cardID) {
     var blue = $("#blueTitle"+cardID).val();
     if (custom_cats.length == 5) {
         if (custom_cats[0] != green) {
-            if (green == "" && custom_cats[0] != "Green Label") {
-                changed = true;
-            }
-            else {
-                changed = true;
-            }
+            if (custom_cats[0] == "Green Label" && green != "") { changed = true; }
+            else if (green != custom_cats[0]) { changed = true; }
         }
         if (custom_cats[1] != orange) {
-            if (orange == "" && custom_cats[1] != "Orange Label") {
-                changed = true;
-            }
-            else {
-                changed = true;
-            }
+            if (orange != "" && custom_cats[1] == "Orange Label") { changed = true; }
+            else if (orange != custom_cats[1]) { changed = true; }
         }
         if (custom_cats[2] != purple) {
-            if (purple == "" && custom_cats[2] != "Purple Label") {
-                changed = true;
-            }
-            else {
-                changed = true;
-            }
+            if (purple != "" && custom_cats[2] == "Purple Label") { changed = true; }
+            else if (purple != custom_cats[2]) { changed = true; }
         }
         if (custom_cats[3] != red) {
-            if (red == "" && custom_cats[3] != "Red Label") {
-                changed = true;
-            }
-            else {
-                changed = true;
-            }
+            if (red != "" && custom_cats[3] == "Red Label") { changed = true; }
+            else if (red != custom_cats[3]) { changed = true; }
         }
         if (custom_cats[4] != blue) {
-            if (blue == "" && custom_cats[4] != "Blue Label") {
-                changed = true;
-            }
-            else {
-                changed = true;
-            }
+            if (blue != "" && custom_cats[4] == "Blue Label") { changed = true; }
+            else if (blue != custom_cats[4]) { changed = true; }
         }
     }
     //display a success message
     if (changed) {
-        bootbox.dialog("Data has been changed. Close and discard?", [{
-            "label" : "Yes",
-            "class" : "btn-primary",
-            "callback": function() {
-                //dismiss the modal
-                $('#modal' + cardID).modal('hide');
-            }
-        }, {
-            "label" : "Cancel",
-            "class" : "btn-danger",
-            "callback": function() {
-                $("#note" + cardID).text(pinnedCards[pin_idx].note);
-                return;
-            }
-        }]);
+        //can't use bootbox because of a bug that causes infinite recursion, darn
+        var res=confirm("Data has been changed. Close and discard?");
+        if (res == true) {
+            //dismiss the modal
+            $("#note" + cardID).val(pinnedCards[pin_idx].note);
+            undoChanges(cardID);
+            $("#modal" + cardID).modal('hide');
+        }
+        else {
+            return;
+        }
     }
 }
 
@@ -209,6 +185,24 @@ function saveModal(cardID) {
     }
     //dismiss the modal
     $('#modal' + cardID).modal('hide');
+}
+
+function undoChanges(cardID) {
+    var greenName = "green" + cardID;
+    var orangeName = "orange" + cardID;
+    var purpleName = "purple" + cardID;
+    var redName = "red" + cardID;
+    var blueName = "blue" + cardID;
+    if (custom_cats[0] != "Green Label") { $('input:text[name=' + greenName + ']').val(custom_cats[0]); }
+    else { $('input:text[name=' + greenName + ']').val(""); }
+    if (custom_cats[1] != "Orange Label") { $('input:text[name=' + orangeName + ']').val(custom_cats[1]); }
+    else { $('input:text[name=' + orangeName + ']').val(""); }
+    if (custom_cats[2] != "Purple Label") { $('input:text[name=' + purpleName + ']').val(custom_cats[2]); }
+    else { $('input:text[name=' + purpleName + ']').val(""); }
+    if (custom_cats[3] != "Red Label") { $('input:text[name=' + redName + ']').val(custom_cats[3]); }
+    else { $('input:text[name=' + redName + ']').val(""); }
+    if (custom_cats[4] != "Blue Label") { $('input:text[name=' + blueName + ']').val(custom_cats[4]); }
+    else { $('input:text[name=' + blueName + ']').val(""); }
 }
 
 function updateModals() {
