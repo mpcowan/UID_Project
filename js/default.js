@@ -9,7 +9,7 @@ function helpPrompt() {
         "label" : "Yes",
         "class" : "btn-primary",
         "callback": function() {
-            window.open("http://www.bing.com");
+            window.open("https://www.dropbox.com/s/cm7pt0oesu816vd/UIProject-UserManual.pdf");
         }
     }, {
         "label" : "Cancel",
