@@ -114,21 +114,9 @@ function saveModal(cardID) {
     if (changed) {
         updateModals();
         updateFilters();
-        /*
-        bootbox.dialog("Your modifications have been saved.", [{
-                                "label" : "OK",
-                                "class" : "btn-success",
-                            }]);
-        */
     }
-    /*
-    else {
-        bootbox.dialog("No modifications to save.", [{
-                                    "label" : "OK",
-                                    "class" : "btn-warning",
-                                }]);
-    }
-    */
+    //dismiss the modal
+    $('#modal' + cardID).modal('hide');
 }
 
 function updateModals() {
