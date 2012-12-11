@@ -142,20 +142,20 @@
                                 var lat = parseFloat($(elem).attr("lat"));
                                 var lon = parseFloat($(elem).attr("lon"));
                                 var pinindex = pin(pinID, mapUnique, lat, lon);
+                                $("#mediacon" + mapUnique.substring(3)).remove()
                                 $(".isotope").isotope( 'insert', elem);
                                 $(elem).find(".pin-hidden").removeClass("pin-hidden");
                                 var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                                 $(elem).find(".pin-out").removeClass( "pin-out", 2000);
                                 var pinindex = $(elem).attr("pinindex", pinindex);
                                 setTimeout(function(){n.close(); }, 3000);
-                                // $("mediacon" + yelp_id).remove();
-                                // alert("Removed: mediacon" + yelp_id);
                             }
                             else {
                                 bootbox.dialog("This business card had already been pinned.", [{
                                     "label" : "OK",
                                     "class" : "btn-primary",
                                 }]);
+                                $("#mediacon" + yelp_id).remove()
                             }
                         }
                     }
