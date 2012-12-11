@@ -433,7 +433,10 @@ function handleResults(data) {
     console.log(data);
     if(data !== undefined) {
         if (data.businesses.length == 0) {
-            alert("Error: No businesses were found near that location");
+            bootbox.dialog("Error: No businesses were found near that location.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
             return;
         }
         for(var i=0; i<data.businesses.length; i++) {
@@ -443,7 +446,10 @@ function handleResults(data) {
         }
     }
     else {
-        alert("Error: " + data.message.text);
+        bootbox.dialog("Error: " + data.message.text, [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
     }
 }
 

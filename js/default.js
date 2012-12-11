@@ -43,8 +43,14 @@ function getPinIndex(cardID) {
 function saveModal(cardID) {
     var pin_idx = getPinIndex(cardID);
     if (pin_idx == undefined) {
-        alert("Could not determine pin index of: " + cardID);
-        alert("Changes can not be saved. Try refreshing the page and trying again.");
+        bootbox.dialog("Could not determine pin index of: " + cardID, [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
+        bootbox.dialog("Changes can not be saved. Try refreshing the page and trying again.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
         return;
     }
     var changed = false;
@@ -198,7 +204,7 @@ function addCategory(cardID, catID) {
         $("#card" + cardID).addClass("blue");
     }
     else {
-        alert("catID not found -> " + catID.toString());
+        return;
     }
     $("#but" + catID.toString() + "icon" + cardID).addClass("icon-minus");
     $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-plus");
@@ -235,7 +241,7 @@ function removeCategory(cardID, catID) {
         $("#card" + cardID).removeClass("blue");
     }
     else {
-        alert("catId not found -> " + catID.toString());
+        return;
     }
     $("#but" + catID.toString() + "icon" + cardID).removeClass("icon-minus");
     $("#but" + catID.toString() + "icon" + cardID).addClass("icon-plus");
@@ -247,7 +253,10 @@ function removeCategory(cardID, catID) {
 function toggleCategory(cardID, catID) {
     var pin_idx = getPinIndex(cardID);
     if (pin_idx == undefined) {
-        alert("Unable to locate card in storage, a page refresh usually solves this issue. :(");
+        bootbox.dialog("Unable to locate card in storage, a page refresh usually solves this issue.", [{
+                                "label" : "OK",
+                                "class" : "btn-warning",
+                            }]);
         return;
     }
     if ($.inArray(parseInt(catID), pinnedCards[pin_idx].custom_categories) != -1) {
