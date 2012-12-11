@@ -148,7 +148,7 @@ function YelpListing () {
       modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + this.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + this.id + "\">\n</td>\n<td>\n";
       if ($.inArray(5, this.custom_categories) == -1) { modalString += "<a href=\"#\" id=\"cat-but5" + this.id + "\" class=\"btn btn-success btn-small\" onClick=\"toggleCategory('" + this.id + "',5)\"><i id=\"but5icon" + this.id + "\" class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
       else { modalString += "<a href=\"#\" id=\"cat-but5" + this.id + "\" class=\"btn btn-danger btn-small\" onClick=\"toggleCategory('" + this.id + "',5)\"><i id=\"but5icon" + this.id + "\" class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
-      modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
+      modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + this.id + "\" style=\"z-index: -1; width: 640px; height: 400px;\"></div>\n</div>\n";
       modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + this.id + "')\">Save changes</button>\n</div>\n</div>\n";
       return modalString;
     };
@@ -270,7 +270,7 @@ function toModal(yelp_listing) {
   modalString += "<div class=\"editable-label\">\n<table>\n<tr>\n<td>\n<div class=\"blue-label custom-label-cube\"></div>\n</td>\n<td>\n<input class=\"label-title\" id=\"blueTitle" + yelp_listing.id + "\" type=\"text\" placeholder=\"No name\" name=\"blue" + yelp_listing.id + "\">\n</td>\n<td>\n";
   if ($.inArray(5, yelp_listing.custom_categories) == -1) { modalString += "<a href=\"#\" id=\"cat-but5" + yelp_listing.id + "\" class=\"btn btn-success btn-small\" onClick=\"toggleCategory('" + yelp_listing.id + "',5)\"><i id=\"but5icon" + yelp_listing.id + "\" class=\"icon-white icon-plus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
   else { modalString += "<a href=\"#\" id=\"cat-but5" + yelp_listing.id + "\" class=\"btn btn-danger btn-small\" onClick=\"toggleCategory('" + yelp_listing.id + "',5)\"><i id=\"but5icon" + yelp_listing.id + "\" class=\"icon-white icon-minus\"></i></a>\n</td>\n</tr>\n</table>\n</div>\n</div>\n"; }
-  modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 630px; height: 400px;\"></div>\n</div>\n";
+  modalString += "</div>\n<div style=\"clear: both;\"></div>\n</div>\n<div align=\"center\" id=\"map" + yelp_listing.id + "\" style=\"z-index: -1; width: 640px; height: 400px;\"></div>\n</div>\n";
   modalString += "<div class=\"modal-footer\">\n<button class=\"btn\" data-dismiss=\"modal\" aria-hidden=\"true\">Close</button>\n<button class=\"btn btn-primary\" onClick=\"saveModal('" + yelp_listing.id + "')\">Save changes</button>\n</div>\n</div>\n";
   return modalString;
 }
@@ -386,10 +386,10 @@ function testRead() {
       }
       reader.readAsText(file);
     }, onError);
-
-
 }
 */
+
+
 function searchYelp(query, location) {
     var accessor = {
       consumerSecret: auth.consumerSecret,
