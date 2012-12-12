@@ -98,7 +98,7 @@
             $("#extruderRight").buildMbExtruder({
 
                         position:"right",
-                        width:350,
+                        width:360,
                         extruderOpacity:.8,
 
                         hidePanelsOnClose:true,
@@ -119,6 +119,8 @@
                     drop: function( event, ui ) {
                         var elem = globalElement.detach().draggable( "disable" );
                         var yelp_id = $(elem).attr("yelpid");
+
+                        
                         if (yelp_id != undefined) {
                             ui.helper.fadeOut();
                             if (!isPinned(yelp_id)) {
@@ -143,6 +145,7 @@
                                 }]);
                             }
                         }
+
                     }
                 });
             });
@@ -151,12 +154,7 @@
             var geocoder;
 
             $("#locale_button").click(function(){
-                if (navigator.geolocation ) {
-                    initialize();
-                    navigator.geolocation.getCurrentPosition(successFunction, handle_errors);
-                }
-                else
-                    yqlgeo.get('visitor', normalize_yql_response);
+                retrieve_zip("example_callback"); // Get the User's Zipcode
             });
 
             $(function(){
@@ -174,6 +172,17 @@
                         name : function ( $elem ) {
                             return $elem.attr('name');
                         }
+                    },
+                    masonryHorizontal : {
+                        rowHeight: 120
+                    },
+                    cellsByRow : {
+                        columnWidth : 240,
+                        rowHeight : 240
+                    },
+                    cellsByColumn : {
+                        columnWidth : 240,
+                        rowHeight : 240
                     }
                 });
 

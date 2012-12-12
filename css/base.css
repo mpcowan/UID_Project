@@ -108,10 +108,10 @@ textarea {
     width: 190px;
 }
 
-.media-container {
+#results_panel .card {
 	margin-bottom: 20px;
     min-height: 20px;
-    padding: 19px;
+    padding: 9px 10px 2px 17px;
 }
 
 .custom-label-cube {
@@ -167,8 +167,8 @@ textarea {
 }
 
 #allFilter {
-    color: #ffffff;
-    background-color: rgb(40,40,40);
+    #color: #ffffff;
+    #background-color: rgb(40,40,40);
 }
 
 #allFilter:hover {

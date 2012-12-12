@@ -586,7 +586,7 @@ function getResults(query, zipcode) {
       $("#results_panel").append("<br /><br /><h3 style=\"margin-left: 20px;\">Results From Yelp:</h3><br />");
 
       for (var tmp in search_cards)
-        $("#results_panel").append("<div id='mediacon" + search_results[tmp].id + "' class='media-container'>" + search_cards[tmp] + "</div>");
+        $("#results_panel").append(search_cards[tmp]);
 
       var draggableArguments={ helper:'clone', appendTo: '#content', containment: 'DOM', snap: true, zIndex: 1500, addClasses: true, start:function(event, ui) { globalElement = $(this); }, stop:function(event, ui) { globalElement = null; } };
       $("[draggable]").draggable(draggableArguments);
