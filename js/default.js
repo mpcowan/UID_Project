@@ -4,6 +4,20 @@ function showModal(cardID) {
     $('#modal' + cardID.toString()).modal('show');
 }
 
+function helpPrompt() {
+    bootbox.dialog("View the user manual?", [{
+        "label" : "Yes",
+        "class" : "btn-primary",
+        "callback": function() {
+            window.open("https://www.dropbox.com/s/cm7pt0oesu816vd/UIProject-UserManual.pdf");
+        }
+    }, {
+        "label" : "Cancel",
+        "class" : "btn-danger",
+        "callback": function() { }
+    }]);
+}
+
 function unPin(pinNum) {
     $('#pin' + pinNum.toString()).addClass("pin-out");
     bootbox.dialog("Unpin this business?", [{

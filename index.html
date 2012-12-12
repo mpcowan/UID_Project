@@ -40,7 +40,7 @@
             <div class="navbar-inner">
                 <div class="container-fluid">
 
-                    <a style="color:#0088CC;" class="brand" href="/">Good <span style="color: #06f;">Eats</span></a>
+                    <div onClick="helpPrompt()" rel="tooltip" title="Open documentation?"><a style="color:#0088CC;" class="brand" href="/">Good <span style="color: #06f;">Eats</span></a></div>
                     <div class="nav-collapse collapse">
 
 
@@ -74,6 +74,21 @@
                                     <li><a href="#" id="blueFilter" data-filter=".blue">Blue Label</a></li>
                                 </ul>
                             </li>
+                            <!--
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">Re-Layout <b class="caret"></b></a>
+                                    <ul id="layouts" class="dropdown-menu option-set" data-option-key="layoutMode">
+                                      <li><a href="#masonry" id="allFilter" data-option-value="masonry" class="selected">masonry</a></li>
+                                      <li><a href="#fitRows" id="allFilter" data-option-value="fitRows">fitRows</a></li>
+                                      <li><a href="#cellsByRow" id="allFilter" data-option-value="cellsByRow">cellsByRow</a></li>
+                                      <li><a href="#straightDown" id="allFilter" data-option-value="straightDown">straightDown</a></li>
+                                      <li><a href="#masonryHorizontal" id="allFilter" data-option-value="masonryHorizontal" class="horizontal">masonryHorizontal</a></li>
+                                      <li><a href="#fitColumns" id="allFilter" data-option-value="fitColumns" class="horizontal">fitColumns</a></li>
+                                      <li><a href="#cellsByColumn" id="allFilter" data-option-value="cellsByColumn" class="horizontal">cellsByColumn</a></li>
+                                      <li><a href="#straightAcross" id="allFilter" data-option-value="straightAcross" class="horizontal">straightAcross</a></li>
+                                    </ul>
+                            </li>
+                            -->
                             <li class="divider-vertical"></li>
                         </ul>
 
@@ -129,20 +144,20 @@
                                 var lat = parseFloat($(elem).attr("lat"));
                                 var lon = parseFloat($(elem).attr("lon"));
                                 var pinindex = pin(pinID, mapUnique, lat, lon);
+                                $("#mediacon" + mapUnique.substring(3)).remove()
                                 $(".isotope").isotope( 'insert', elem);
                                 $(elem).find(".pin-hidden").removeClass("pin-hidden");
                                 var n = noty({ text: "Bookmark added successfully", type: 'information', layout: 'bottom', theme: 'defaultTheme'});
                                 $(elem).find(".pin-out").removeClass( "pin-out", 2000);
                                 var pinindex = $(elem).attr("pinindex", pinindex);
                                 setTimeout(function(){n.close(); }, 3000);
-                                // $("mediacon" + yelp_id).remove();
-                                // alert("Removed: mediacon" + yelp_id);
                             }
                             else {
                                 bootbox.dialog("This business card had already been pinned.", [{
                                     "label" : "OK",
                                     "class" : "btn-primary",
                                 }]);
+                                $("#mediacon" + yelp_id).remove()
                             }
                         }
 
